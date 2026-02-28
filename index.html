@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Técnicos | Estudiante como tu</title>
+    <title>Servicios Técnicos | Estudiante como vos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #00d9ff;
             --secondary: #ff2e63;
-            --accent: #ffd700;
             --dark: #0a0e27;
             --card: rgba(20, 25, 45, 0.9);
             --text: #ffffff;
-            --gray: #b8c1ec;
+            --gray: #d4d4e8;
             --green: #25D366;
             --red: #ff4757;
         }
@@ -24,12 +23,17 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
             background-attachment: fixed;
             color: var(--text);
             line-height: 1.5;
+            padding-bottom: 80px;
         }
 
         .container {
@@ -38,7 +42,36 @@
             padding: 0 20px;
         }
 
-        /* HEADER IMPACTANTE CON URGENCIA */
+        /* BOTÓN FLOTANTE WHATSAPP */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float a {
+            color: white;
+            font-size: 28px;
+            text-decoration: none;
+        }
+
+        /* HEADER */
         header {
             text-align: center;
             padding: 40px 0 20px;
@@ -70,7 +103,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 8px;
-            letter-spacing: -0.02em;
         }
 
         .hero-text {
@@ -87,7 +119,7 @@
             margin: 0 auto;
         }
 
-        /* SOCIAL PROOF AGRESIVO */
+        /* SOCIAL PROOF */
         .proof {
             display: flex;
             justify-content: center;
@@ -117,7 +149,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* SERVICIOS - CARDS PERSUASIVOS */
+        /* SERVICIOS */
         .service-section {
             margin-bottom: 35px;
         }
@@ -172,6 +204,11 @@
             opacity: 1;
         }
 
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
         .card-top {
             display: flex;
             justify-content: space-between;
@@ -183,7 +220,7 @@
             font-size: 1.15rem;
             font-weight: 800;
             color: var(--text);
-            max-width: 70%;
+            max-width: 65%;
         }
 
         .price {
@@ -194,13 +231,6 @@
             font-weight: 900;
             font-size: 1rem;
             white-space: nowrap;
-        }
-
-        .price-old {
-            text-decoration: line-through;
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-right: 8px;
         }
 
         .card-desc {
@@ -217,7 +247,7 @@
             color: var(--primary);
             font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .card-benefit::before {
@@ -227,12 +257,12 @@
         }
 
         .guarantee {
-            background: rgba(37, 211, 102, 0.1);
+            background: rgba(37, 211, 102, 0.15);
             border-left: 3px solid var(--green);
             padding: 10px 12px;
             border-radius: 4px;
             font-size: 0.85rem;
-            color: var(--green);
+            color: #2ecc71;
             margin-bottom: 14px;
             font-weight: 600;
         }
@@ -261,7 +291,7 @@
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
         }
 
-        /* BANNER URGENCIA FUERTE */
+        /* URGENCIA BANNER */
         .urgency-banner {
             background: linear-gradient(135deg, rgba(255, 46, 99, 0.15), rgba(0, 217, 255, 0.15));
             border: 2px solid var(--red);
@@ -269,17 +299,6 @@
             padding: 25px;
             text-align: center;
             margin: 35px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .urgency-banner::before {
-            content: '⚡';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 100px;
-            opacity: 0.1;
         }
 
         .urgency-banner h3 {
@@ -301,7 +320,7 @@
             font-weight: 700;
         }
 
-        /* HOW TO SECTION */
+        /* HOW TO */
         .how-section {
             background: var(--card);
             border: 1px solid rgba(0, 217, 255, 0.1);
@@ -341,7 +360,6 @@
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 1.2rem;
             margin: 0 auto 10px;
         }
 
@@ -354,6 +372,110 @@
         .step-box p {
             color: var(--gray);
             font-size: 0.85rem;
+        }
+
+        /* FAQ */
+        .faq-section {
+            margin: 35px 0;
+        }
+
+        .faq-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        /* TIPS SECTION */
+        .tips-section {
+            margin: 35px 0;
+            background: var(--card);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .tips-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .tip h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .tip p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* FOOTER */
@@ -382,6 +504,10 @@
         }
 
         @media (max-width: 640px) {
+            body {
+                padding-bottom: 100px;
+            }
+
             .card-top {
                 flex-direction: column;
                 gap: 8px;
@@ -393,29 +519,59 @@
 
             .proof {
                 gap: 15px;
+                padding: 15px;
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .section-title {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
 
             .cards-grid {
                 grid-template-columns: 1fr;
             }
 
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
             .steps-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 15px;
+            }
+
+            .faq-answer {
+                font-size: 0.9rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-float a {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20conocer%20tus%20servicios" target="_blank" title="Contactame por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
     <div class="container">
-        <!-- HEADER CON URGENCIA -->
+        <!-- HEADER -->
         <header>
             <div class="urgency-badge">⏰ PRIMEROS 10 CLIENTES - DESCUENTOS ESPECIALES</div>
             <div class="hero-text">💻 Servicios Técnicos</div>
@@ -423,39 +579,42 @@
             <p class="hero-subtext">Lo que funciona. Sin vaina rara. Dinero de vuelta si no quedás satisfecho.</p>
         </header>
 
-        <!-- SOCIAL PROOF AGRESIVO -->
+        <!-- SOCIAL PROOF -->
         <div class="proof">
             <div class="proof-item">
-
+                <div class="proof-number">7/24</div>
+                <div class="proof-label">Respondo rápido</div>
             </div>
             <div class="proof-item">
                 <div class="proof-number">100%</div>
                 <div class="proof-label">Funciona o reembolso</div>
             </div>
             <div class="proof-item">
-                <div class="proof-number">24h</div>
-                <div class="proof-label">Respuesta WhatsApp</div>
+                <div class="proof-number">∞</div>
+                <div class="proof-label">Garantía vitalicia</div>
             </div>
         </div>
 
-        <!-- SERVICIOS PC -->
+        <!-- PC GAMING -->
         <div class="service-section">
             <h2 class="section-title"><i class="fas fa-desktop"></i> Tu PC para jugar</h2>
             <div class="cards-grid">
                 <div class="card">
+                    <div class="card-icon">🎮</div>
                     <div class="card-top">
                         <h3 class="card-title">PC para gaming (incluso viejas)</h3>
                         <span class="price">RD$280</span>
                     </div>
-                    <p class="card-desc">Windows optimizado + juegos sin lag. Incluso si tu PC tiene 5 años.</p>
-                    <div class="card-benefit">Juegas Fortnite/Roblox sin lag</div>
-                    <div class="guarantee">✓ 48h para instalar o dinero de vuelta</div>
+                    <p class="card-desc">Windows optimizado + juegos light sin lag. Incluso si tu PC tiene 5 años.</p>
+                    <div class="card-benefit">Jugas Fortnite/Roblox sin lag</div>
+                    <div class="guarantee">✓ Garantía 48h o dinero de vuelta</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20PC%20para%20gaming" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Tirame ahora
+                        <i class="fab fa-whatsapp"></i> Escribeme ahora
                     </a>
                 </div>
 
                 <div class="card">
+                    <div class="card-icon">📥</div>
                     <div class="card-top">
                         <h3 class="card-title">Instala tu juego favorito</h3>
                         <span class="price">RD$120</span>
@@ -469,6 +628,7 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-icon">🪟</div>
                     <div class="card-top">
                         <h3 class="card-title">Windows nuevo</h3>
                         <span class="price">RD$250</span>
@@ -483,11 +643,12 @@
             </div>
         </div>
 
-        <!-- SERVICIOS ANDROID -->
+        <!-- ANDROID -->
         <div class="service-section">
             <h2 class="section-title"><i class="fas fa-mobile-alt"></i> Tu celular seguro</h2>
             <div class="cards-grid">
                 <div class="card">
+                    <div class="card-icon">🛡️</div>
                     <div class="card-top">
                         <h3 class="card-title">Privacidad Android</h3>
                         <span class="price">RD$220</span>
@@ -501,11 +662,12 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-icon">🧹</div>
                     <div class="card-top">
                         <h3 class="card-title">Limpiar apps basura</h3>
                         <span class="price">RD$120</span>
                     </div>
-                    <p class="card-desc">bloatware que no usas = celular lento. Las elimino. Vuelve a volar.</p>
+                    <p class="card-desc">Bloatware que no usas = celular lento. Lo elimino. Vuelve a volar.</p>
                     <div class="card-benefit">Celular como nuevo</div>
                     <div class="guarantee">✓ 20 min máximo</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20limpiar%20apps" class="btn-whatsapp" target="_blank">
@@ -514,6 +676,7 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-icon">▶️</div>
                     <div class="card-top">
                         <h3 class="card-title">YouTube sin anuncios</h3>
                         <span class="price">RD$180</span>
@@ -528,11 +691,12 @@
             </div>
         </div>
 
-        <!-- SERVICIOS ACADÉMICOS -->
+        <!-- ACADÉMICO -->
         <div class="service-section">
             <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Para pasar los exámenes</h2>
             <div class="cards-grid">
                 <div class="card">
+                    <div class="card-icon">📚</div>
                     <div class="card-top">
                         <h3 class="card-title">Apuntes digitales</h3>
                         <span class="price">RD$180-220</span>
@@ -547,14 +711,14 @@
             </div>
         </div>
 
-        <!-- URGENCIA Y ESCASEZ -->
+        <!-- URGENCIA -->
         <div class="urgency-banner">
             <h3>⏰ SOLO ESTA SEMANA - PRIMEROS 10 CLIENTES</h3>
             <p>Después suben los precios. Ahora mismo hay slots disponibles.</p>
-            <p class="slots">📍 Disponibles: 7 de 10 slots | Apúrate antes que cierren</p>
+            <p class="slots">📍 Disponibles: 7 de 10 slots | Apúrata antes que cierren</p>
         </div>
 
-        <!-- CÓMO FUNCIONA -->
+        <!-- HOW TO -->
         <div class="how-section">
             <h2>3 pasos = Listo</h2>
             <div class="steps-grid">
@@ -576,20 +740,139 @@
             </div>
         </div>
 
+        <!-- TIPS -->
+        <div class="tips-section">
+            <h2 class="tips-title">💡 Tips para tu dispositivo</h2>
+            <div class="tips-grid">
+                <div class="tip">
+                    <div class="tip-icon">🦠</div>
+                    <h3>¿Tiene virus tu PC?</h3>
+                    <p>Si abre pestañas solas, está lenta o ves anuncios raros = tiene malware. ¡Avísame!</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">📱</div>
+                    <h3>Celular lento?</h3>
+                    <p>No siempre es necesario cambiar batería. A veces es solo apps basura comiendo RAM.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">🎮</div>
+                    <h3>Juego con lag?</h3>
+                    <p>Muchas veces es Windows mal optimizado, no falta de gráficos. Se arregla.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">🔒</div>
+                    <h3>Privacidad</h3>
+                    <p>Cuanto menos apps instales, más seguro estás. Descarga solo lo que necesites.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">💾</div>
+                    <h3>Copia tus datos</h3>
+                    <p>Nunca sabes cuándo va a fallar. Tener backup en USB = vida salvada.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">⚡</div>
+                    <h3>Actualizar = seguridad</h3>
+                    <p>Los updates no son publicidad. Cierran agujeros de seguridad. Actualiza.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2 class="faq-title">❓ Preguntas Frecuentes</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cómo pago?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    En efectivo. Te lo dejo en la escuela y pagas cuando veas que funciona. Si no funciona, no pagas.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué pasa si algo sale mal?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Cada servicio tiene garantía. Si tu PC tiene virus de nuevo en 48h (gaming) o tu celular se daña, me avísas sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Atiendes fines de semana?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Depende. Escribime por WhatsApp y coordinamos. Preferiblemente lunes a viernes en la escuela.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Haces servicios a domicilio?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sí, pero prefiero en la escuela. A domicilio es más caro o debes venir a buscar luego. Coordinamos.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Es legal lo que haces?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Todo funciona. No me preocupa. El servicio es configuración y instalación, no venta de licencias piratas. Es 100% seguro.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cuánto tiempo demora cada servicio?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Limpiar apps: 20 min | YouTube sin anuncios: 15 min | Windows: 2-3 horas | PC gaming: 3-4 horas | Apuntes: depende del volumen.
+                </div>
+            </div>
+        </div>
+
         <!-- FOOTER -->
         <footer>
             <div class="contact-line">
                 <span><i class="fab fa-whatsapp"></i> WhatsApp: 1 (829) 277-8758</span>
                 <span><i class="fas fa-map-marker-alt"></i> En tu escuela</span>
-                <span><i class="far fa-clock"></i> Lunes a Domingo</span>
+                <span><i class="far fa-clock"></i> Lunes a Viernes</span>
             </div>
             <p>© 2026 Servicios Técnicos Express | Estudiante Emprendedor</p>
             <p style="margin-top: 10px; font-size: 0.8rem;">Pagás solo si funciona 100%. Sin sorpresas. Dinero de vuelta garantizado.</p>
         </footer>
     </div>
+
     <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+
+        // Smooth anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) el.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
     </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
