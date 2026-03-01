@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Técnicos | Estudiante como vos</title>
+    <meta name="description" content="Servicios técnicos profesionales para estudiantes: PC gaming, Android seguro, entretenimiento digital">
+    <title>Servicios Técnicos | Estudiante como tu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -54,10 +55,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             z-index: 999;
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .whatsapp-float:hover {
@@ -214,13 +214,14 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 12px;
+            gap: 10px;
         }
 
         .card-title {
             font-size: 1.15rem;
             font-weight: 800;
             color: var(--text);
-            max-width: 65%;
+            flex: 1;
         }
 
         .price {
@@ -231,6 +232,7 @@
             font-weight: 900;
             font-size: 1rem;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .card-desc {
@@ -253,7 +255,6 @@
         .card-benefit::before {
             content: '✓';
             font-weight: 900;
-            font-size: 1.1rem;
         }
 
         .guarantee {
@@ -503,6 +504,7 @@
             gap: 6px;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 640px) {
             body {
                 padding-bottom: 100px;
@@ -530,11 +532,7 @@
                 font-size: 1.3rem;
             }
 
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tips-grid {
+            .cards-grid, .tips-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -547,8 +545,8 @@
                 padding: 15px;
             }
 
-            .faq-answer {
-                font-size: 0.9rem;
+            .how-section {
+                padding: 20px;
             }
 
             .whatsapp-float {
@@ -563,7 +561,7 @@
     </style>
 </head>
 <body>
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <!-- BOTÓN FLOTANTE -->
     <div class="whatsapp-float">
         <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20conocer%20tus%20servicios" target="_blank" title="Contactame por WhatsApp">
             <i class="fab fa-whatsapp"></i>
@@ -573,10 +571,10 @@
     <div class="container">
         <!-- HEADER -->
         <header>
-            <div class="urgency-badge">⏰ PRIMEROS 10 CLIENTES - DESCUENTOS ESPECIALES</div>
+            <div class="urgency-badge">⏰ LOS PRIMEROS 10 - PRECIO ESPECIAL</div>
             <div class="hero-text">💻 Servicios Técnicos</div>
             <h1>Por alguien de tu escuela</h1>
-            <p class="hero-subtext">Lo que funciona. Sin vaina rara. Dinero de vuelta si no quedás satisfecho.</p>
+            <p class="hero-subtext">Lo que funciona, de verdá. Sin vaina rara. Dinero de vuelta si no quedás satisfecho.</p>
         </header>
 
         <!-- SOCIAL PROOF -->
@@ -590,12 +588,12 @@
                 <div class="proof-label">Funciona o reembolso</div>
             </div>
             <div class="proof-item">
-                <div class="proof-number">∞</div>
-                <div class="proof-label">Garantía vitalicia</div>
+                <div class="proof-number">🔥</div>
+                <div class="proof-label">Calidad garantizada</div>
             </div>
         </div>
 
-        <!-- PC GAMING -->
+        <!-- PC -->
         <div class="service-section">
             <h2 class="section-title"><i class="fas fa-desktop"></i> Tu PC para jugar</h2>
             <div class="cards-grid">
@@ -633,9 +631,9 @@
                         <h3 class="card-title">Windows nuevo</h3>
                         <span class="price">RD$240</span>
                     </div>
-                    <p class="card-desc">PC como nueva. Sin virus, sin lag, todo actualizado. Listo en 2 horas.</p>
-                    <div class="card-benefit">PC vuela de nuevo</div>
-                    <div class="guarantee">✓ Garantía 1 mes funcionamiento</div>
+                    <p class="card-desc">PC como nueva. Sin virus, sin lag, listo para lo que sea. En 2 horas.</p>
+                    <div class="card-benefit">PC vuela nuevamente</div>
+                    <div class="guarantee">✓ Funciona sin problemas</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20Windows%20nuevo" class="btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> Escribeme ahora
                     </a>
@@ -667,7 +665,7 @@
                         <h3 class="card-title">Limpiar apps basura</h3>
                         <span class="price">RD$110</span>
                     </div>
-                    <p class="card-desc">Bloatware que no usas = celular lento. Lo elimino. Vuelve a volar.</p>
+                    <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
                     <div class="card-benefit">Celular como nuevo</div>
                     <div class="guarantee">✓ 20 min máximo</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20limpiar%20apps" class="btn-whatsapp" target="_blank">
@@ -681,7 +679,7 @@
                         <h3 class="card-title">YouTube sin anuncios</h3>
                         <span class="price">RD$170</span>
                     </div>
-                    <p class="card-desc">YouTube/Spotify/todo premium. Sin publicidad. Todo desbloqueado para siempre.</p>
+                    <p class="card-desc">YouTube, Spotify, todo premium sin ads. Desbloqueado pa'siempre.</p>
                     <div class="card-benefit">Streaming sin interrupciones</div>
                     <div class="guarantee">✓ Funciona de por vida</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20apps%20premium" class="btn-whatsapp" target="_blank">
@@ -701,7 +699,7 @@
                         <h3 class="card-title">Apuntes digitales</h3>
                         <span class="price">RD$170-210</span>
                     </div>
-                    <p class="card-desc">Tus cuadernos → PDF que podés buscar. Repasa en el celular en clase.</p>
+                    <p class="card-desc">Tus cuadernos → PDF que puedes buscar. Repasa en el celular en clase.</p>
                     <div class="card-benefit">Exámenes sin estrés</div>
                     <div class="guarantee">✓ Listo antes del examen</div>
                     <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20digitalizar%20apuntes" class="btn-whatsapp" target="_blank">
@@ -711,31 +709,93 @@
             </div>
         </div>
 
+        <!-- ENTRETENIMIENTO -->
+        <div class="service-section">
+            <h2 class="section-title"><i class="fas fa-film"></i> Tu entretenimiento</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎬</div>
+                    <div class="card-top">
+                        <h3 class="card-title">Películas, Series y Anime</h3>
+                        <span class="price">RD$140</span>
+                    </div>
+                    <p class="card-desc">Me dices qué película, serie o anime quieres. Te la bajo sin Internet, sin ads, listo pa'ver.</p>
+                    <div class="card-benefit">Mira lo que quieras sin conexión</div>
+                    <div class="guarantee">✓ Catálogo actualizado siempre</div>
+                    <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20películas%20y%20anime" class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Escribeme ahora
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📖</div>
+                    <div class="card-top">
+                        <h3 class="card-title">Biblioteca digital completa</h3>
+                        <span class="price">RD$110-140</span>
+                    </div>
+                    <p class="card-desc">Ebooks, audiolibros, novelas, light novels, manga. Lo que necesites leer o escuchar.</p>
+                    <div class="card-benefit">Lees en cualquier lado sin peso</div>
+                    <div class="guarantee">✓ Actualizaciones gratis 2 semanas</div>
+                    <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20libros%20y%20audiolibros" class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Escribeme ahora
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🕹️</div>
+                    <div class="card-top">
+                        <h3 class="card-title">Emuladores + juegos clásicos</h3>
+                        <span class="price">RD$140-230</span>
+                    </div>
+                    <p class="card-desc">Pokémon, Super Mario, Final Fantasy en tu celular/PC. Clásicos que no envejecen. Tú dices qué.</p>
+                    <div class="card-benefit">Juega clásicos cuando quieras</div>
+                    <div class="guarantee">✓ Funciona de por vida</div>
+                    <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20emuladores%20y%20juegos" class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Escribeme ahora
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">✨</div>
+                    <div class="card-top">
+                        <h3 class="card-title">Presentaciones profesionales</h3>
+                        <span class="price">RD$130-180</span>
+                    </div>
+                    <p class="card-desc">Te hago la presentación de tu exposición. Con diseño atractivo y moderno, animaciones y todo.</p>
+                    <div class="card-benefit">Sacas nota sin hacer nada (jeje)</div>
+                    <div class="guarantee">✓ Revisiones gratis hasta que quede bien</div>
+                    <a href="https://wa.me/18292778758?text=¡Hola!%20Quiero%20una%20presentación%20profesional" class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Escribeme ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- URGENCIA -->
         <div class="urgency-banner">
-            <h3>⏰ SOLO ESTA SEMANA - PRIMEROS 10 CLIENTES</h3>
-            <p class="urgency-banner">Después suben los precios. Ahora mismo hay cupos disponibles.</p>
-            <p class="urgency-banner">📍 Disponibles: 7 de 10 cupos | Apúrata antes que cierren</p>
+            <h3>⏰ ESTA SEMANA - PRIMEROS 10 CLIENTES NOMAS</h3>
+            <p class="urgency-banner">Después se sube. Ahora hay cupo todavía.</p>
+            <p class="slots">📍 Quedan: 7 de 10 cupos | Dale antes que se cierren</p>
         </div>
 
         <!-- HOW TO -->
         <div class="how-section">
-            <h2>3 pasos = Listo</h2>
+            <h2>3 vainas = Listo</h2>
             <div class="steps-grid">
                 <div class="step-box">
                     <div class="step-num">1</div>
-                    <h3>Escribeme</h3>
-                    <p>WhatsApp (en serio, es rápido)</p>
+                    <h3>Tírame un WhatsApp</h3>
+                    <p>Dime qué quieres (de verdá, es rápido)</p>
                 </div>
                 <div class="step-box">
                     <div class="step-num">2</div>
-                    <h3>Coordina</h3>
-                    <p>Lugar/hora en tu escuela</p>
+                    <h3>Coordinamos</h3>
+                    <p>Nos vemos en la escuela cuando pueda</p>
                 </div>
                 <div class="step-box">
                     <div class="step-num">3</div>
-                    <h3>Listo</h3>
-                    <p>Pagás solo si funciona</p>
+                    <h3>Se hace</h3>
+                    <p>Pagas cuando ves que funciona</p>
                 </div>
             </div>
         </div>
@@ -747,12 +807,12 @@
                 <div class="tip">
                     <div class="tip-icon">🦠</div>
                     <h3>¿Tiene virus tu PC?</h3>
-                    <p>Si abre pestañas solas, está lenta o ves anuncios raros = tiene malware. ¡Avísame!</p>
+                    <p>Si abre pestañas solas, está lenta o ves anuncios raros = tiene virus malicioso. ¡Avísame!</p>
                 </div>
                 <div class="tip">
                     <div class="tip-icon">📱</div>
                     <h3>Celular lento?</h3>
-                    <p>No siempre es necesario cambiar batería. A veces es solo apps basura comiendo RAM.</p>
+                    <p>No siempre es necesario cambiar batería. A veces es solo aplicaciones basura comiendo memoria.</p>
                 </div>
                 <div class="tip">
                     <div class="tip-icon">🎮</div>
@@ -767,12 +827,22 @@
                 <div class="tip">
                     <div class="tip-icon">💾</div>
                     <h3>Copia tus datos</h3>
-                    <p>Nunca sabes cuándo va a fallar. Tener backup en USB = vida salvada.</p>
+                    <p>Nunca sabes cuándo va a fallar. Tener copia de seguridad en USB = vida salvada.</p>
                 </div>
                 <div class="tip">
                     <div class="tip-icon">⚡</div>
                     <h3>Actualizar = seguridad</h3>
-                    <p>Los updates no son publicidad. Cierran agujeros de seguridad. Actualiza.</p>
+                    <p>Las actualizaciones no son publicidad. Cierran agujeros de seguridad. Actualiza.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">🎬</div>
+                    <h3>Ver sin Internet</h3>
+                    <p>Descarga películas/series antes de viajar. No necesitas conexión en el bus/avión.</p>
+                </div>
+                <div class="tip">
+                    <div class="tip-icon">📖</div>
+                    <h3>Leer donde sea</h3>
+                    <p>Audiolibros en el bus = lees sin leer. Perfecto si no tienes tiempo.</p>
                 </div>
             </div>
         </div>
@@ -797,7 +867,7 @@
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Cada servicio tiene garantía. Si tu PC tiene virus de nuevo en 48h (gaming) o tu celular se daña, me avísas sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.
+                    Cada servicio tiene garantía. Me avísas si hay problemas sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.
                 </div>
             </div>
 
@@ -827,7 +897,7 @@
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Todo funciona. No me preocupa. El servicio es configuración y instalación, no venta de licencias piratas. Es 100% seguro.
+                    Todo funciona. No me preocupa. El servicio es configuración e instalación, no venta de licencias piratas. Es 100% seguro.
                 </div>
             </div>
 
@@ -837,7 +907,27 @@
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Limpiar apps: 20 min | YouTube sin anuncios: 15 min | Windows: 2-3 horas | PC gaming: 3-4 horas | Apuntes: depende del volumen.
+                    Limpiar apps: 20 min | YouTube sin anuncios: 15 min | Windows: 2-3 horas | PC gaming: 3-4 horas | Películas: 30-45 min | Libros: 25-40 min | Emuladores: 45-90 min | Presentaciones: 1-2 horas | Apuntes: depende del volumen.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué película/anime/juego puedo pedir?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Lo que quieras. Avatar, Dune, Marvel, anime completo (Dragon Ball, Naruto, Jujutsu Kaisen, etc). Para emuladores: Pokémon, Super Mario, Final Fantasy, lo clásico. Me dices y yo lo consigo.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Los libros y películas caben en mi celular?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sí. Las películas las comprimo si es necesario. Los libros pesan casi nada y caben tranquilo.
                 </div>
             </div>
         </div>
@@ -846,11 +936,11 @@
         <footer>
             <div class="contact-line">
                 <span><i class="fab fa-whatsapp"></i> WhatsApp: 1 (829) 277-8758</span>
-                <span><i class="fas fa-map-marker-alt"></i> En tu escuela</span>
+                <span><i class="fas fa-map-marker-alt"></i> En tu escuela (RD)</span>
                 <span><i class="far fa-clock"></i> Lunes a Viernes</span>
             </div>
-            <p>© 2026 Servicios Técnicos Express | Estudiante Emprendedor</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Pagás solo si funciona 100%. Sin sorpresas. Dinero de vuelta garantizado.</p>
+            <p>© 2026 Servicios Técnicos Express | Un estudiante de RD como vos</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Funciona o no pagas. Sin vueltas. De verdá.</p>
         </footer>
     </div>
 
