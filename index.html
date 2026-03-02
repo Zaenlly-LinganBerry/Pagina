@@ -1,968 +1,1035 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Servicios técnicos profesionales para estudiantes: PC jugar, Android seguro, entretenimiento digital">
-    <title>Servicios Técnicos | Estudiante como tu</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #00d9ff;
-            --secondary: #ff2e63;
-            --dark: #0a0e27;
-            --card: rgba(20, 25, 45, 0.9);
-            --text: #ffffff;
-            --gray: #d4d4e8;
-            --green: #25D366;
-            --red: #ff4757;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.5;
-            padding-bottom: 80px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* BOTÓN FLOTANTE WHATSAPP */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: var(--green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-        }
-
-        .whatsapp-float a {
-            color: white;
-            font-size: 28px;
-            text-decoration: none;
-        }
-
-        /* HEADER */
-        header {
-            text-align: center;
-            padding: 40px 0 20px;
-            margin-bottom: 20px;
-        }
-
-        .urgency-badge {
-            background: var(--red);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 15px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        h1 {
-            font-size: clamp(2.2rem, 6vw, 3.2rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-
-        .hero-text {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .hero-subtext {
-            color: var(--gray);
-            font-size: 0.95rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* SOCIAL PROOF */
-        .proof {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 25px 0 20px;
-            flex-wrap: wrap;
-            padding: 20px;
-            background: rgba(0, 217, 255, 0.08);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            border-radius: 12px;
-        }
-
-        .proof-item {
-            text-align: center;
-        }
-
-        .proof-number {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .proof-label {
-            font-size: 0.85rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* SERVICIOS */
-        .service-section {
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 14px;
-        }
-
-        .card {
-            background: var(--card);
-            border: 2px solid rgba(0, 217, 255, 0.1);
-            border-radius: 12px;
-            padding: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            background: rgba(20, 25, 45, 0.95);
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            gap: 10px;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text);
-            flex: 1;
-        }
-
-        .price {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 900;
-            font-size: 1rem;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .card-desc {
-            color: var(--gray);
-            font-size: 0.95rem;
-            margin-bottom: 14px;
-            line-height: 1.4;
-        }
-
-        .card-benefit {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .card-benefit::before {
-            content: '✓';
-            font-weight: 900;
-        }
-
-        .guarantee {
-            background: rgba(37, 211, 102, 0.15);
-            border-left: 3px solid var(--green);
-            padding: 10px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: #2ecc71;
-            margin-bottom: 14px;
-            font-weight: 600;
-        }
-
-        .btn-whatsapp {
-            width: 100%;
-            background: var(--green);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-whatsapp:hover {
-            background: #1faa50;
-            transform: scale(1.02);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-        }
-
-        /* URGENCIA BANNER */
-        .urgency-banner {
-            background: linear-gradient(135deg, rgba(255, 46, 99, 0.15), rgba(0, 217, 255, 0.15));
-            border: 2px solid var(--red);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            margin: 35px 0;
-        }
-
-        .urgency-banner h3 {
-            color: var(--red);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            font-weight: 900;
-        }
-
-        .urgency-banner p {
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 12px;
-        }
-
-        .slots {
-            font-size: 0.9rem;
-            color: var(--red);
-            font-weight: 700;
-        }
-
-        /* HOW TO */
-        .how-section {
-            background: var(--card);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 12px;
-            padding: 35px;
-            margin: 35px 0;
-        }
-
-        .how-section h2 {
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
-        }
-
-        .step-box {
-            text-align: center;
-            padding: 20px;
-            background: rgba(10, 14, 39, 0.6);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .step-num {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: var(--dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            margin: 0 auto 10px;
-        }
-
-        .step-box h3 {
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 8px;
-        }
-
-        .step-box p {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-
-        /* FAQ */
-        .faq-section {
-            margin: 35px 0;
-        }
-
-        .faq-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .faq-item {
-            background: var(--card);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--primary);
-            transition: background 0.3s;
-        }
-
-        .faq-question:hover {
-            background: rgba(0, 217, 255, 0.1);
-        }
-
-        .faq-toggle {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 500px;
-        }
-
-        /* TIPS SECTION */
-        .tips-section {
-            margin: 35px 0;
-            background: var(--card);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        .tips-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .tip {
-            background: rgba(10, 14, 39, 0.6);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .tip-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .tip h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .tip p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* FOOTER */
-        footer {
-            background: rgba(0, 217, 255, 0.05);
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-            padding: 25px 0;
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-top: 50px;
-        }
-
-        .contact-line {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .contact-line span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 640px) {
-            body {
-                padding-bottom: 100px;
-            }
-
-            .card-top {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .price {
-                align-self: flex-start;
-            }
-
-            .proof {
-                gap: 15px;
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 1.3rem;
-            }
-
-            .cards-grid, .tips-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .faq-question {
-                font-size: 0.95rem;
-                padding: 15px;
-            }
-
-            .how-section {
-                padding: 20px;
-            }
-
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-float a {
-                font-size: 24px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Servicios técnicos para estudiantes: gaming, Android, entretenimiento digital. Funciona o no pagas."/>
+  <title>ServiciosGG | Técnico en tu escuela</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
+    :root {
+      --bg:        #08080f;
+      --surface:   #101018;
+      --surface2:  #16161f;
+      --border:    #1e1e2e;
+      --border2:   #2a2a3d;
+      --accent:    #7c3aed;
+      --accent2:   #a78bfa;
+      --accentRGB: 124,58,237;
+      --pink:      #ec4899;
+      --green:     #22c55e;
+      --greenRGB:  34,197,94;
+      --amber:     #f59e0b;
+      --red:       #ef4444;
+      --cyan:      #06b6d4;
+      --text:      #f0f0f8;
+      --muted:     #6b6b8a;
+      --gray:      #9999bb;
+      --r:         14px;
+      --r2:        10px;
+    }
+
+    /* ══════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ══════════════════════════════════════════
+       NOISE TEXTURE OVERLAY
+    ══════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 22px; position: relative; }
+    section { padding: 70px 0; position: relative; }
+
+    /* ══════════════════════════════════════════
+       A — STICKY WHATSAPP FLOAT
+    ══════════════════════════════════════════ */
+    .wa-float {
+      position: fixed; bottom: 22px; right: 22px; z-index: 9000;
+      width: 62px; height: 62px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(var(--greenRGB),.4);
+      animation: waPulse 2.8s ease-in-out infinite;
+      transition: transform .2s;
+      text-decoration: none;
+    }
+    .wa-float:hover { transform: scale(1.12); }
+    .wa-float i { color: #fff; font-size: 28px; }
+    @keyframes waPulse {
+      0%,100% { box-shadow: 0 4px 24px rgba(var(--greenRGB),.4), 0 0 0 0 rgba(var(--greenRGB),.5); }
+      55%      { box-shadow: 0 4px 24px rgba(var(--greenRGB),.4), 0 0 0 18px rgba(var(--greenRGB),0); }
+    }
+
+    /* ══════════════════════════════════════════
+       RIBBON (reemplaza urgency-badge estático)
+    ══════════════════════════════════════════ */
+    .ribbon {
+      background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber), var(--pink), var(--accent));
+      background-size: 300% auto;
+      animation: ribbonFlow 4s linear infinite;
+      padding: 10px 18px;
+      text-align: center;
+      font-size: .82rem; font-weight: 800;
+      letter-spacing: .5px; color: #fff;
+      position: relative; z-index: 10;
+    }
+    @keyframes ribbonFlow { 0%{background-position:0% center;} 100%{background-position:300% center;} }
+    .ribbon .fire { display: inline-block; animation: fireRock .85s ease-in-out infinite alternate; }
+    @keyframes fireRock { from{transform:rotate(-9deg) scale(1);} to{transform:rotate(9deg) scale(1.2);} }
+
+    /* ══════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════ */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,8,15,.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border2);
+      padding: 13px 22px;
+    }
+    .navbar-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-weight: 900; font-size: 1.08rem; display: flex; align-items: center; gap: 8px; }
+    .logo-accent { color: var(--accent2); }
+    .logo-badge {
+      background: rgba(var(--accentRGB),.15);
+      border: 1px solid rgba(var(--accentRGB),.35);
+      color: var(--accent2); font-size: .65rem; font-weight: 800;
+      padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .nav-cta {
+      background: var(--green); color: #000;
+      font-weight: 800; font-size: .83rem;
+      padding: 9px 20px; border-radius: 30px;
+      display: flex; align-items: center; gap: 7px;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(var(--greenRGB),.4); }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      padding: 90px 0 72px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse at 50% 40%,
+        rgba(var(--accentRGB),.22) 0%,
+        rgba(var(--accentRGB),.06) 40%,
+        transparent 70%);
+      pointer-events: none;
+    }
+    .hero-orb2 {
+      position: absolute; bottom: -60px; right: -80px;
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(236,72,153,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(var(--accentRGB),.1);
+      border: 1px solid rgba(var(--accentRGB),.35);
+      color: var(--accent2); font-size: .76rem; font-weight: 800;
+      padding: 5px 14px; border-radius: 30px;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 22px; position: relative;
+    }
+    .hero-pill .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: dotBlink 1.5s ease-in-out infinite;
+    }
+    @keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+
+    h1 {
+      font-size: clamp(2.2rem,5.5vw,3.4rem);
+      font-weight: 900; line-height: 1.07;
+      margin-bottom: 18px; position: relative;
+    }
+    .h1-grad {
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--pink) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      color: var(--gray); font-size: 1.1rem;
+      max-width: 520px; margin: 0 auto 38px;
+      position: relative;
+    }
+    .hero-sub strong { color: var(--text); }
+    .hero-actions { display: flex; gap: 13px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 800; font-size: 1rem;
+      padding: 15px 34px; border-radius: 30px;
+      display: inline-flex; align-items: center; gap: 9px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(var(--accentRGB),.35);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(var(--accentRGB),.45); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border2); color: var(--text);
+      font-weight: 700; font-size: .97rem;
+      padding: 15px 30px; border-radius: 30px;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); background: rgba(var(--accentRGB),.08); }
+
+    /* ══════════════════════════════════════════
+       STATS STRIP
+    ══════════════════════════════════════════ */
+    .stats-strip {
+      display: flex; flex-wrap: wrap;
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+    .stat {
+      flex: 1; min-width: 110px;
+      padding: 22px 20px; text-align: center;
+      border-right: 1px solid var(--border2);
+      transition: background .2s;
+    }
+    .stat:last-child { border-right: none; }
+    .stat:hover { background: var(--surface2); }
+    .stat-n { font-size: 1.55rem; font-weight: 900; color: var(--accent2); }
+    .stat-l { font-size: .71rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 3px; }
+
+    /* ══════════════════════════════════════════
+       SECTION HEADERS
+    ══════════════════════════════════════════ */
+    .sec-head {
+      display: flex; align-items: center; gap: 13px;
+      margin-bottom: 26px;
+    }
+    .sec-head h2 {
+      font-size: clamp(1.2rem,2.5vw,1.6rem); font-weight: 800;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .sec-line { flex: 1; height: 1px; background: var(--border2); }
+
+    /* ══════════════════════════════════════════
+       PROMO BOX (reemplaza el contador estático)
+    ══════════════════════════════════════════ */
+    .promo-box {
+      position: relative; overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      padding: 30px 28px;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .promo-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(var(--accentRGB),.08) 0%,
+        rgba(236,72,153,.07) 50%,
+        rgba(245,158,11,.05) 100%);
+      pointer-events: none;
+    }
+    .promo-box::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber));
+    }
+    .promo-emoji {
+      font-size: 2.8rem; line-height: 1;
+      display: inline-block; position: relative;
+      animation: emojiShake .8s ease-in-out infinite alternate;
+    }
+    @keyframes emojiShake {
+      from { transform: rotate(-8deg) scale(1); }
+      to   { transform: rotate(8deg)  scale(1.15); }
+    }
+    .promo-title {
+      font-size: clamp(1.15rem,3vw,1.5rem);
+      font-weight: 900; margin: 12px 0 7px; position: relative;
+    }
+    .promo-title .hot {
+      background: linear-gradient(135deg, var(--amber), var(--red));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .promo-sub { color: var(--muted); font-size: .88rem; position: relative; }
+    .promo-countdown {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px; position: relative;
+      background: rgba(245,158,11,.1);
+      border: 1px solid rgba(245,158,11,.3);
+      color: #fbbf24; font-weight: 800; font-size: .84rem;
+      padding: 7px 20px; border-radius: 30px;
+      animation: countdownGlow 2s ease-in-out infinite;
+    }
+    @keyframes countdownGlow {
+      0%,100% { box-shadow: none; }
+      50%      { box-shadow: 0 0 20px rgba(245,158,11,.3); }
+    }
+
+    /* ══════════════════════════════════════════
+       GRID
+    ══════════════════════════════════════════ */
+    .service-section { margin-bottom: 60px; }
+    .cards-grid { display: grid; gap: 16px; }
+    .cols-3 { grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
+    .cols-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+    .cols-4 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+    /* ══════════════════════════════════════════
+       D — SERVICE CARD
+    ══════════════════════════════════════════ */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      padding: 24px;
+      display: flex; flex-direction: column; gap: 13px;
+      position: relative; overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      cursor: pointer;
+    }
+    .card-top-stripe {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--pink));
+      opacity: 0; transition: opacity .22s;
+    }
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 54px rgba(var(--accentRGB),.22);
+      border-color: rgba(var(--accentRGB),.5);
+    }
+    .card:hover .card-top-stripe { opacity: 1; }
+
+    .card-icon { font-size: 2rem; line-height: 1; }
+
+    /* hot badge */
+    .hot-label {
+      position: absolute; top: 14px; right: 14px;
+      background: linear-gradient(135deg, var(--amber), var(--red));
+      color: #fff; font-size: .63rem; font-weight: 900;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: .4px;
+    }
+
+    .card-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 10px;
+    }
+    .card-title { font-size: 1.05rem; font-weight: 800; flex: 1; }
+
+    /* B — PRICE ANCHORING */
+    .price-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+    .price-was { font-size: .78rem; color: var(--muted); text-decoration: line-through; }
+    .price-now {
+      background: var(--accent2); color: var(--bg);
+      padding: 7px 13px; border-radius: var(--r2);
+      font-weight: 900; font-size: .97rem; white-space: nowrap;
+    }
+    .price-off {
+      font-size: .65rem; font-weight: 900;
+      background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3);
+      color: #fca5a5; padding: 1px 7px; border-radius: 20px;
+      text-transform: uppercase; align-self: flex-end;
+    }
+
+    .card-desc { color: var(--gray); font-size: .92rem; line-height: 1.5; }
+
+    .card-benefit {
+      display: flex; align-items: center; gap: 7px;
+      color: var(--accent2); font-size: .88rem; font-weight: 700;
+    }
+    .card-benefit i { color: var(--green); font-size: .8rem; }
+
+    .card-guarantee {
+      background: rgba(var(--greenRGB),.1);
+      border-left: 3px solid var(--green);
+      padding: 9px 12px; border-radius: 4px;
+      font-size: .83rem; color: #4ade80; font-weight: 600;
+    }
+
+    .btn-wa {
+      margin-top: auto;
+      width: 100%; background: var(--green); color: #000;
+      border: none; padding: 13px;
+      border-radius: var(--r2);
+      font-weight: 800; font-size: .95rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none;
+      transition: background .18s, transform .18s, box-shadow .18s;
+    }
+    .btn-wa:hover {
+      background: #16a34a; transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(var(--greenRGB),.35);
+    }
+
+    /* ══════════════════════════════════════════
+       PROCESO
+    ══════════════════════════════════════════ */
+    .steps-wrap {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 18px; }
+    .step-box {
+      text-align: center; padding: 28px 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border2); border-radius: var(--r);
+      transition: border-color .2s, transform .2s;
+    }
+    .step-box:hover { border-color: rgba(var(--accentRGB),.4); transform: translateY(-4px); }
+    .step-num {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: #fff;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 16px rgba(var(--accentRGB),.4);
+    }
+    .step-box h3 { font-size: 1rem; margin-bottom: 7px; }
+    .step-box p  { color: var(--muted); font-size: .87rem; }
+
+    /* ══════════════════════════════════════════
+       TIPS
+    ══════════════════════════════════════════ */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; }
+    .tip-card {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--r); padding: 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: border-color .2s, transform .2s;
+    }
+    .tip-card:hover { border-color: rgba(var(--accentRGB),.4); transform: translateY(-3px); }
+    .tip-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-t { font-weight: 700; font-size: .93rem; color: var(--accent2); margin-bottom: 4px; }
+    .tip-d { color: var(--muted); font-size: .84rem; line-height: 1.5; }
+
+    /* ══════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════ */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--r); overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: rgba(var(--accentRGB),.3); }
+    .faq-q {
+      padding: 18px 22px; font-weight: 700; font-size: .97rem;
+      cursor: pointer; user-select: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      color: var(--accent2);
+      transition: background .2s;
+    }
+    .faq-q:hover { background: rgba(var(--accentRGB),.06); }
+    .faq-icon { font-size: .75rem; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .38s ease, padding .38s ease;
+      color: var(--gray); font-size: .92rem; line-height: 1.65;
+      padding: 0 22px;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 22px 20px; }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      padding: 50px 22px 32px;
+      text-align: center;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+    }
+    .footer-tagline { font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
+    .footer-tagline .hl { color: var(--accent2); }
+    .footer-sub { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+    .footer-meta {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 18px;
+      color: var(--gray); font-size: .87rem; margin: 0 0 28px;
+    }
+    .footer-meta span { display: flex; align-items: center; gap: 7px; }
+    .footer-copy { color: var(--muted); font-size: .76rem; margin-top: 18px; }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 50px; }
+      .stat { padding: 17px 14px; }
+      .stat-n { font-size: 1.3rem; }
+      .wa-float { width: 54px; height: 54px; }
+      .wa-float i { font-size: 24px; }
+      .card-head { flex-direction: column; gap: 10px; }
+      .price-block { align-items: flex-start; flex-direction: row; align-items: center; gap: 8px; }
+      .price-block .price-was { display: none; }
+      body { padding-bottom: 90px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- BOTÓN FLOTANTE -->
-    <div class="whatsapp-float">
-        <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20conocer%20tus%20servicios" target="_blank" title="Contactame por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
+
+<!-- ═══════════════════════════════
+     STICKY WHATSAPP  (A)
+═══════════════════════════════ -->
+<a class="wa-float"
+   href="https://wa.me/18292776696?text=¡Hola!%20Vi%20tu%20página%20y%20quiero%20un%20servicio"
+   target="_blank" rel="noopener" title="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ═══════════════════════════════
+     RIBBON ANIMADO
+═══════════════════════════════ -->
+<div class="ribbon">
+  <span class="fire">🔥</span>
+  &nbsp;PRECIO ESPECIAL ESTA SEMANA — Solo para estudiantes de tu escuela&nbsp;
+  <span class="fire">🔥</span>
+</div>
+
+<!-- ═══════════════════════════════
+     NAVBAR
+═══════════════════════════════ -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="logo">
+      <span>💻 Servicios<span class="logo-accent">GG</span></span>
+      <span class="logo-badge">Tu escuela · RD</span>
+    </div>
+    <a class="nav-cta"
+       href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
+       target="_blank" rel="noopener">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="container">
+    <div class="hero-pill">
+      <span class="dot"></span>
+      Por alguien de tu escuela
+    </div>
+    <h1>
+      Tu PC, tu celular.<br>
+      <span class="h1-grad">Funcionando de verdá.</span>
+    </h1>
+    <p class="hero-sub">
+      Sin virus, sin lag, sin anuncios.<br>
+      <strong>Pagas cuando ves que funciona.</strong> Sin vaina rara.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary"
+         href="https://wa.me/18292776696?text=¡Hola!%20Vi%20tu%20página%20y%20quiero%20un%20servicio"
+         target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Escribeme ahora
+      </a>
+      <a class="btn-outline" href="#servicios">Ver servicios ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     STATS
+═══════════════════════════════ -->
+<div class="stats-strip">
+  <div class="stat"><div class="stat-n">7/24</div><div class="stat-l">Respondo rápido</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Funciona o reembolso</div></div>
+  <div class="stat"><div class="stat-n">2h</div><div class="stat-l">Entrega promedio</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">Excusas</div></div>
+</div>
+
+<!-- ═══════════════════════════════
+     SERVICIOS
+═══════════════════════════════ -->
+<section id="servicios">
+  <div class="container">
+
+    <!-- PROMO BOX ANIMADO -->
+    <div class="promo-box">
+      <div class="promo-emoji">🔥</div>
+      <div class="promo-title">Precio especial <span class="hot">esta semana</span></div>
+      <div class="promo-sub">Solo pa' estudiantes de la escuela · Se sube la próxima semana</div>
+      <div class="promo-countdown" id="countdown">⏰ Calculando...</div>
     </div>
 
+    <!-- PC GAMING -->
+    <div class="service-section">
+      <div class="sec-head">
+        <h2><i class="fas fa-desktop" style="color:var(--accent2)"></i> Tu PC para jugar</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-grid cols-3">
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <span class="hot-label">🔥 Más pedido</span>
+          <div class="card-icon">🎮</div>
+          <div class="card-head">
+            <h3 class="card-title">PC para gaming (incluso viejas)</h3>
+            <div class="price-block">
+              <span class="price-was">RD$400</span>
+              <span class="price-now">RD$270</span>
+              <span class="price-off">-33%</span>
+            </div>
+          </div>
+          <p class="card-desc">Windows optimizado + juegos ligeros sin lag. Incluso si tu PC tiene 5 años.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Fortnite/Roblox sin lag garantizado</div>
+          <div class="card-guarantee">✓ Garantía 48h o dinero de vuelta</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20PC%20para%20gaming" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">📥</div>
+          <div class="card-head">
+            <h3 class="card-title">Instala tu juego favorito</h3>
+            <div class="price-block">
+              <span class="price-was">RD$180</span>
+              <span class="price-now">RD$110</span>
+              <span class="price-off">-39%</span>
+            </div>
+          </div>
+          <p class="card-desc">GTA, Valorant, lo que quieras. Lo busco, instalo y listo para jugar.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Dentro de 24h jugando</div>
+          <div class="card-guarantee">✓ Funciona perfecto o gratis</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20instalar%20un%20juego" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">🪟</div>
+          <div class="card-head">
+            <h3 class="card-title">Windows nuevo</h3>
+            <div class="price-block">
+              <span class="price-was">RD$380</span>
+              <span class="price-now">RD$240</span>
+              <span class="price-off">-37%</span>
+            </div>
+          </div>
+          <p class="card-desc">PC como nueva. Sin virus, sin lag, listo para lo que sea. En 2 horas.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> PC vuela nuevamente</div>
+          <div class="card-guarantee">✓ Funciona sin problemas</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20Windows%20nuevo" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+      </div>
+    </div><!-- /PC -->
+
+    <!-- CELULAR -->
+    <div class="service-section">
+      <div class="sec-head">
+        <h2><i class="fas fa-mobile-alt" style="color:var(--accent2)"></i> Tu celular seguro</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-grid cols-3">
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <span class="hot-label">⚡ Top semana</span>
+          <div class="card-icon">▶️</div>
+          <div class="card-head">
+            <h3 class="card-title">YouTube sin anuncios</h3>
+            <div class="price-block">
+              <span class="price-was">RD$280</span>
+              <span class="price-now">RD$170</span>
+              <span class="price-off">-39%</span>
+            </div>
+          </div>
+          <p class="card-desc">YouTube, Spotify, todo premium sin anuncios. Desbloqueado pa'siempre.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Streaming sin interrupciones</div>
+          <div class="card-guarantee">✓ Funciona de por vida</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20apps%20premium" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">🧹</div>
+          <div class="card-head">
+            <h3 class="card-title">Limpiar apps basura</h3>
+            <div class="price-block">
+              <span class="price-was">RD$180</span>
+              <span class="price-now">RD$110</span>
+              <span class="price-off">-39%</span>
+            </div>
+          </div>
+          <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Celular como nuevo</div>
+          <div class="card-guarantee">✓ 20 min máximo</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20limpiar%20apps" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">🛡️</div>
+          <div class="card-head">
+            <h3 class="card-title">Privacidad Android</h3>
+            <div class="price-block">
+              <span class="price-was">RD$330</span>
+              <span class="price-now">RD$210</span>
+              <span class="price-off">-36%</span>
+            </div>
+          </div>
+          <p class="card-desc">VPN + contraseñas fuertes + cero rastreo. TikTok/Instagram dejan de perseguirte.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Tus datos son tuyos</div>
+          <div class="card-guarantee">✓ 30 días garantizados</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20privacidad%20en%20Android" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+      </div>
+    </div><!-- /Celular -->
+
+    <!-- ACADÉMICO -->
+    <div class="service-section">
+      <div class="sec-head">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--accent2)"></i> Para pasar los exámenes</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-grid cols-2">
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">📚</div>
+          <div class="card-head">
+            <h3 class="card-title">Apuntes digitales</h3>
+            <div class="price-block">
+              <span class="price-was">RD$300</span>
+              <span class="price-now">RD$170–210</span>
+              <span class="price-off">Oferta</span>
+            </div>
+          </div>
+          <p class="card-desc">Tus cuadernos → PDF buscable. Repasa en el celular cuando quieras, incluso en clase.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Exámenes sin estrés</div>
+          <div class="card-guarantee">✓ Listo antes del examen</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20digitalizar%20apuntes" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <span class="hot-label">⭐ Favorita</span>
+          <div class="card-icon">✨</div>
+          <div class="card-head">
+            <h3 class="card-title">Presentaciones profesionales</h3>
+            <div class="price-block">
+              <span class="price-was">RD$280</span>
+              <span class="price-now">RD$130–180</span>
+              <span class="price-off">Oferta</span>
+            </div>
+          </div>
+          <p class="card-desc">Te hago la presentación de tu exposición. Diseño moderno, animaciones y todo.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Sacas nota sin hacer nada (jeje)</div>
+          <div class="card-guarantee">✓ Revisiones gratis hasta quedar bien</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20una%20presentación%20profesional" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+      </div>
+    </div><!-- /Académico -->
+
+    <!-- ENTRETENIMIENTO -->
+    <div class="service-section">
+      <div class="sec-head">
+        <h2><i class="fas fa-film" style="color:var(--accent2)"></i> Tu entretenimiento</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-grid cols-4">
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">🎬</div>
+          <div class="card-head">
+            <h3 class="card-title">Películas, Series y Anime</h3>
+            <div class="price-block">
+              <span class="price-was">RD$220</span>
+              <span class="price-now">RD$140</span>
+              <span class="price-off">-36%</span>
+            </div>
+          </div>
+          <p class="card-desc">Me dices qué quieres. Te la bajo sin Internet, sin anuncios, listo para ver.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Mira lo que quieras sin conexión</div>
+          <div class="card-guarantee">✓ Catálogo actualizado siempre</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20películas%20y%20anime" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">📖</div>
+          <div class="card-head">
+            <h3 class="card-title">Biblioteca digital completa</h3>
+            <div class="price-block">
+              <span class="price-was">RD$220</span>
+              <span class="price-now">RD$110–140</span>
+              <span class="price-off">Oferta</span>
+            </div>
+          </div>
+          <p class="card-desc">Ebooks, audiolibros, novelas, manga. Lo que necesites leer o escuchar.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Lees en cualquier lado sin peso</div>
+          <div class="card-guarantee">✓ Actualizaciones gratis 2 semanas</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20libros%20y%20audiolibros" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-top-stripe"></div>
+          <div class="card-icon">🕹️</div>
+          <div class="card-head">
+            <h3 class="card-title">Emuladores + juegos clásicos</h3>
+            <div class="price-block">
+              <span class="price-was">RD$320</span>
+              <span class="price-now">RD$140–230</span>
+              <span class="price-off">Oferta</span>
+            </div>
+          </div>
+          <p class="card-desc">Pokémon, Super Mario, Final Fantasy en tu celular/PC. Clásicos que no envejecen.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Juega clásicos cuando quieras</div>
+          <div class="card-guarantee">✓ Funciona de por vida</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20emuladores%20y%20juegos" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card" style="border-color: rgba(124,58,237,.3);">
+          <div class="card-top-stripe" style="opacity:1;"></div>
+          <div class="card-icon">🎯</div>
+          <div class="card-head">
+            <h3 class="card-title">¿No ves lo que buscas?</h3>
+          </div>
+          <p class="card-desc">Dime qué necesitas. Si está en mis manos, te lo consigo. Sin compromiso.</p>
+          <div class="card-benefit"><i class="fas fa-check-circle"></i> Respuesta en minutos</div>
+          <div class="card-guarantee">✓ Sin costo por consultar</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Tengo%20una%20consulta" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Preguntame
+          </a>
+        </div>
+
+      </div>
+    </div><!-- /Entretenimiento -->
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     PROCESO
+═══════════════════════════════ -->
+<div class="steps-wrap">
+  <section>
     <div class="container">
-        <!-- HEADER -->
-        <header>
-            <div class="urgency-badge">⏰ LOS PRIMEROS 10 - PRECIO ESPECIAL</div>
-            <div class="hero-text">💻 Servicios Técnicos</div>
-            <h1>Por alguien de tu escuela</h1>
-            <p class="hero-subtext">Lo que funciona, de verdá. Sin vaina rara. Dinero de vuelta si no quedás satisfecho.</p>
-        </header>
-
-        <!-- SOCIAL PROOF -->
-        <div class="proof">
-            <div class="proof-item">
-                <div class="proof-number">7/24</div>
-                <div class="proof-label">Respondo rápido</div>
-            </div>
-            <div class="proof-item">
-                <div class="proof-number">100%</div>
-                <div class="proof-label">Funciona o reembolso</div>
-            </div>
-            <div class="proof-item">
-                <div class="proof-number">🔥</div>
-                <div class="proof-label">Calidad garantizada</div>
-            </div>
+      <div class="sec-head">
+        <h2>3 pasos y listo</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="steps-grid">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <h3>Tírame un WhatsApp</h3>
+          <p>Dime qué quieres. Es rápido, no muerde.</p>
         </div>
-
-        <!-- PC -->
-        <div class="service-section">
-            <h2 class="section-title"><i class="fas fa-desktop"></i> Tu PC para jugar</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">🎮</div>
-                    <div class="card-top">
-                        <h3 class="card-title">PC para gaming (incluso viejas)</h3>
-                        <span class="price">RD$270</span>
-                    </div>
-                    <p class="card-desc">Windows optimizado + juegos ligeros sin lag. Incluso si tu PC tiene 5 años.</p>
-                    <div class="card-benefit">Juegas Fortnite/Roblox sin lag</div>
-                    <div class="guarantee">✓ Garantía 48h o dinero de vuelta</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20PC%20para%20gaming" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">📥</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Instala tu juego favorito</h3>
-                        <span class="price">RD$110</span>
-                    </div>
-                    <p class="card-desc">GTA, Valorant, lo que quieras. Lo busco, instalo y listo para jugar.</p>
-                    <div class="card-benefit">Dentro de 24h jugando</div>
-                    <div class="guarantee">✓ Funciona perfecto o gratis</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20instalar%20un%20juego" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🪟</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Windows nuevo</h3>
-                        <span class="price">RD$240</span>
-                    </div>
-                    <p class="card-desc">PC como nueva. Sin virus, sin lag, listo para lo que sea. En 2 horas.</p>
-                    <div class="card-benefit">PC vuela nuevamente</div>
-                    <div class="guarantee">✓ Funciona sin problemas</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20Windows%20nuevo" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-            </div>
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <h3>Coordinamos</h3>
+          <p>Nos vemos en la escuela cuando pueda.</p>
         </div>
-
-        <!-- ANDROID -->
-        <div class="service-section">
-            <h2 class="section-title"><i class="fas fa-mobile-alt"></i> Tu celular seguro</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">🛡️</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Privacidad Android</h3>
-                        <span class="price">RD$210</span>
-                    </div>
-                    <p class="card-desc">VPN + contraseñas fuertes + cero rastreo. TikTok/Instagram dejan de perseguirte.</p>
-                    <div class="card-benefit">Tus datos son tuyos</div>
-                    <div class="guarantee">✓ 30 días garantizados</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20privacidad%20en%20Android" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🧹</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Limpiar apps basura</h3>
-                        <span class="price">RD$110</span>
-                    </div>
-                    <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
-                    <div class="card-benefit">Celular como nuevo</div>
-                    <div class="guarantee">✓ 20 min máximo</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20limpiar%20apps" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">▶️</div>
-                    <div class="card-top">
-                        <h3 class="card-title">YouTube sin anuncios</h3>
-                        <span class="price">RD$170</span>
-                    </div>
-                    <p class="card-desc">YouTube, Spotify, todo premium sin anuncios. Desbloqueado pa'siempre.</p>
-                    <div class="card-benefit">Streaming sin interrupciones</div>
-                    <div class="guarantee">✓ Funciona de por vida</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20apps%20premium" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-            </div>
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <h3>Pagas cuando funciona</h3>
+          <p>Ves que jala — entonces pagas. Sin vueltas.</p>
         </div>
-
-        <!-- ACADÉMICO -->
-        <div class="service-section">
-            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Para pasar los exámenes</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">📚</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Apuntes digitales</h3>
-                        <span class="price">RD$170-210</span>
-                    </div>
-                    <p class="card-desc">Tus cuadernos → PDF que puedes buscar. Repasa en el celular en clase.</p>
-                    <div class="card-benefit">Exámenes sin estrés</div>
-                    <div class="guarantee">✓ Listo antes del examen</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20digitalizar%20apuntes" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ENTRETENIMIENTO -->
-        <div class="service-section">
-            <h2 class="section-title"><i class="fas fa-film"></i> Tu entretenimiento</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">🎬</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Películas, Series y Anime</h3>
-                        <span class="price">RD$140</span>
-                    </div>
-                    <p class="card-desc">Me dices qué película, serie o anime quieres. Te la bajo sin Internet, sin anuncios, listo para ver.</p>
-                    <div class="card-benefit">Mira lo que quieras sin conexión</div>
-                    <div class="guarantee">✓ Catálogo actualizado siempre</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20películas%20y%20anime" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">📖</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Biblioteca digital completa</h3>
-                        <span class="price">RD$110-140</span>
-                    </div>
-                    <p class="card-desc">Ebooks, audiolibros, novelas, novelas ligeras, manga. Lo que necesites leer o escuchar.</p>
-                    <div class="card-benefit">Lees en cualquier lado sin peso</div>
-                    <div class="guarantee">✓ Actualizaciones gratis 2 semanas</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20libros%20y%20audiolibros" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🕹️</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Emuladores + juegos clásicos</h3>
-                        <span class="price">RD$140-230</span>
-                    </div>
-                    <p class="card-desc">Pokémon, Super Mario, Final Fantasy en tu celular/PC. Clásicos que no envejecen. Tú dices qué.</p>
-                    <div class="card-benefit">Juega clásicos cuando quieras</div>
-                    <div class="guarantee">✓ Funciona de por vida</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20emuladores%20y%20juegos" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">✨</div>
-                    <div class="card-top">
-                        <h3 class="card-title">Presentaciones profesionales</h3>
-                        <span class="price">RD$130-180</span>
-                    </div>
-                    <p class="card-desc">Te hago la presentación de tu exposición. Con diseño atractivo y moderno, animaciones y todo.</p>
-                    <div class="card-benefit">Sacas nota sin hacer nada (jeje)</div>
-                    <div class="guarantee">✓ Revisiones gratis hasta que quede bien</div>
-                    <a href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20una%20presentación%20profesional" class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Escribeme ahora
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- URGENCIA -->
-        <div class="urgency-banner">
-            <h3>⏰ ESTA SEMANA - PRIMEROS 10 CLIENTES NOMAS</h3>
-            <p class="urgency-banner">Después se sube. Ahora hay cupo todavía.</p>
-            <p class="slots">📍 Quedan: 7 de 10 cupos | Dale antes que se cierren</p>
-        </div>
-
-        <!-- HOW TO -->
-        <div class="how-section">
-            <h2>3 vainas = Listo</h2>
-            <div class="steps-grid">
-                <div class="step-box">
-                    <div class="step-num">1</div>
-                    <h3>Tírame un WhatsApp</h3>
-                    <p>Dime qué quieres (de verdá, es rápido)</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">2</div>
-                    <h3>Coordinamos</h3>
-                    <p>Nos vemos en la escuela cuando pueda</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">3</div>
-                    <h3>Se hace</h3>
-                    <p>Pagas cuando ves que funciona</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TIPS -->
-        <div class="tips-section">
-            <h2 class="tips-title">💡 Tips para tu dispositivo</h2>
-            <div class="tips-grid">
-                <div class="tip">
-                    <div class="tip-icon">🦠</div>
-                    <h3>¿Tiene virus tu PC?</h3>
-                    <p>Si abre pestañas solas, está lenta o ves anuncios raros = tiene virus malicioso. ¡Avísame!</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">📱</div>
-                    <h3>Celular lento?</h3>
-                    <p>No siempre es necesario cambiar batería. A veces es solo aplicaciones basura comiendo memoria.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">🎮</div>
-                    <h3>Juego con lag?</h3>
-                    <p>Muchas veces es Windows mal optimizado, no falta de gráficos. Se arregla.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">🔒</div>
-                    <h3>Privacidad</h3>
-                    <p>Cuanto menos apps instales, más seguro estás. Descarga solo lo que necesites.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">💾</div>
-                    <h3>Copia tus datos</h3>
-                    <p>Nunca sabes cuándo va a fallar. Tener copia de seguridad en USB = vida salvada.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">⚡</div>
-                    <h3>Actualizar = seguridad</h3>
-                    <p>Las actualizaciones no son publicidad. Cierran agujeros de seguridad. Actualiza.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">🎬</div>
-                    <h3>Ver sin Internet</h3>
-                    <p>Descarga películas/series antes de viajar. No necesitas conexión en el bus/avión.</p>
-                </div>
-                <div class="tip">
-                    <div class="tip-icon">📖</div>
-                    <h3>Leer donde sea</h3>
-                    <p>Audiolibros en el bus = lees sin leer. Perfecto si no tienes tiempo.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="faq-section">
-            <h2 class="faq-title">❓ Preguntas Frecuentes</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Cómo pago?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    En efectivo. Te lo dejo en la escuela y pagas cuando veas que funciona. Si no funciona, no pagas.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Qué pasa si algo sale mal?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Cada servicio tiene garantía. Me avísas si hay problemas sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Atiendes fines de semana?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Depende. Escribime por WhatsApp y coordinamos. Preferiblemente lunes a viernes en la escuela.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Haces servicios a domicilio?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Sí, pero prefiero en la escuela. A domicilio es más caro o debes venir a buscar luego. Coordinamos.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Es legal lo que haces?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Todo funciona. No me preocupa. El servicio es configuración e instalación, no venta de licencias piratas. Es 100% seguro.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Cuánto tiempo demora cada servicio?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Limpiar apps: 20 min | YouTube sin anuncios: 15 min | Windows: 2-3 horas | PC gaming: 3-4 horas | Películas: 30-45 min | Libros: 25-40 min | Emuladores: 45-90 min | Presentaciones: 1-2 horas | Apuntes: depende del volumen.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Qué película/anime/juego puedo pedir?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Lo que quieras. Avatar, Dune, Marvel, anime completo (Dragon Ball, Naruto, Jujutsu Kaisen, etc). Para emuladores: Pokémon, Super Mario, Final Fantasy, lo clásico. Me dices y yo lo consigo.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Los libros y películas caben en mi celular?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    Sí. Las películas las comprimo si es necesario. Los libros pesan casi nada y caben tranquilo.
-                </div>
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        <footer>
-            <div class="contact-line">
-                <span><i class="fab fa-whatsapp"></i> WhatsApp: 1 (829) 277-6696</span>
-                <span><i class="fas fa-map-marker-alt"></i> En tu escuela (RD)</span>
-                <span><i class="far fa-clock"></i> Lunes a Viernes</span>
-            </div>
-            <p>© 2026 Servicios Técnicos Express | Un estudiante de RD como tu</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Funciona o no pagas. Sin vueltas. De verdá.</p>
-        </footer>
+      </div>
     </div>
+  </section>
+</div>
 
-    <script>
-        // FAQ Toggle
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', () => {
-                q.parentElement.classList.toggle('active');
-            });
-        });
+<!-- ═══════════════════════════════
+     TIPS
+═══════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <h2>💡 Tips para tu dispositivo</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card"><span class="tip-icon">🦠</span><div><div class="tip-t">¿Tiene virus tu PC?</div><div class="tip-d">Pestañas solas, lenta, anuncios raros = virus. Avísame antes que empeore.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">📱</span><div><div class="tip-t">Celular lento?</div><div class="tip-d">No siempre es la batería. A veces son apps basura comiendo memoria. Se arregla.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">🎮</span><div><div class="tip-t">Juego con lag?</div><div class="tip-d">Muchas veces es Windows mal optimizado, no falta de GPU. Tiene solución.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">🔒</span><div><div class="tip-t">Privacidad</div><div class="tip-d">Cuanto menos apps instales, más seguro estás. Solo lo que necesitas.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">💾</span><div><div class="tip-t">Copia tus datos</div><div class="tip-d">Nunca sabes cuándo falla. USB + copia de seguridad = vida salvada.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">⚡</span><div><div class="tip-t">Actualizar = seguridad</div><div class="tip-d">Las actualizaciones cierran agujeros. No son publicidad, son protección.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">🎬</span><div><div class="tip-t">Ver sin Internet</div><div class="tip-d">Descarga antes de salir. No necesitas WiFi en el bus o el avión.</div></div></div>
+      <div class="tip-card"><span class="tip-icon">📖</span><div><div class="tip-t">Leer donde sea</div><div class="tip-d">Audiolibros en el bus = lees sin leer. Perfecto si no tienes tiempo.</div></div></div>
+    </div>
+  </div>
+</section>
 
-        // Smooth anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', (e) => {
-                const href = a.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const el = document.querySelector(href);
-                    if (el) el.scrollIntoView({behavior: 'smooth'});
-                }
-            });
-        });
-    </script>
+<!-- ═══════════════════════════════
+     FAQ
+═══════════════════════════════ -->
+<section style="background:var(--surface); border-top:1px solid var(--border2);">
+  <div class="container">
+    <div class="sec-head">
+      <h2>❓ Preguntas frecuentes</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Cómo pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">En efectivo. Te lo entrego en la escuela y pagas cuando ves que funciona. Si no funciona, no pagas.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Qué pasa si algo sale mal?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Cada servicio tiene garantía. Me avisas, lo arreglo sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Atiendes fines de semana?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Depende. Escribime por WhatsApp y coordinamos. Preferiblemente lunes a viernes en la escuela.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Haces servicios a domicilio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Sí, pero prefiero en la escuela. A domicilio es más caro o debes venir a buscar luego. Coordinamos.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Cuánto tiempo demora cada servicio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Limpiar apps: 20 min · YouTube sin anuncios: 15 min · Windows: 2-3h · PC gaming: 3-4h · Películas: 30-45 min · Libros: 25-40 min · Emuladores: 45-90 min · Presentaciones: 1-2h · Apuntes: depende del volumen.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Qué película, anime o juego puedo pedir?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Lo que quieras. Avatar, Dune, Marvel, anime completo (Dragon Ball, Naruto, Jujutsu Kaisen). Para emuladores: Pokémon, Super Mario, Final Fantasy. Me dices y yo lo consigo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Los libros y películas caben en mi celular?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Sí. Las películas las comprimo si es necesario. Los libros pesan casi nada y caben tranquilo.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     FOOTER
+═══════════════════════════════ -->
+<footer>
+  <div class="footer-tagline">
+    <span class="hl">Funciona o no pagas.</span> Sin vueltas. De verdá.
+  </div>
+  <p class="footer-sub">Lo que funciona, de verdá. Sin vaina rara.</p>
+  <div class="footer-meta">
+    <span><i class="fab fa-whatsapp"></i> 1 (829) 277-6696</span>
+    <span><i class="fas fa-map-marker-alt"></i> Tu escuela · RD</span>
+    <span><i class="far fa-clock"></i> Lunes a Viernes</span>
+  </div>
+  <a class="btn-primary"
+     href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
+     target="_blank" rel="noopener"
+     style="display:inline-flex; margin-bottom:24px;">
+    <i class="fab fa-whatsapp"></i> Escribeme por WhatsApp
+  </a>
+  <div class="footer-copy">© 2026 Servicios Técnicos Express · Un estudiante de RD como tú</div>
+</footer>
+
+<script>
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── COUNTDOWN REAL hasta el próximo lunes 00:00 ── */
+  (function tick() {
+    const now   = new Date();
+    const day   = now.getDay(); // 0=dom, 1=lun...
+    const days  = day === 1 ? 7 : (8 - day) % 7 || 7;
+    const next  = new Date(now);
+    next.setDate(now.getDate() + days);
+    next.setHours(0, 0, 0, 0);
+    const diff = next - now;
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    const el = document.getElementById('countdown');
+    if (el) el.textContent = `⏰ Precio especial caduca en ${h}h ${m}m`;
+    setTimeout(tick, 30_000);
+  })();
+
+  /* ── CARD CLICK → WA (toda la card es clickeable) ── */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.btn-wa')) return; // no duplicar si click en botón
+      const btn = card.querySelector('.btn-wa');
+      if (btn) btn.click();
+    });
+  });
+</script>
 </body>
 </html>
