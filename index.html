@@ -18,13 +18,12 @@
       --border2:   #2a2a3d;
       --accent:    #7c3aed;
       --accent2:   #a78bfa;
-      --accentRGB: 124,58,237;
+      --aRGB:      124,58,237;
       --pink:      #ec4899;
       --green:     #22c55e;
-      --greenRGB:  34,197,94;
+      --gRGB:      34,197,94;
       --amber:     #f59e0b;
       --red:       #ef4444;
-      --cyan:      #06b6d4;
       --text:      #f0f0f8;
       --muted:     #6b6b8a;
       --gray:      #9999bb;
@@ -33,7 +32,7 @@
     }
 
     /* ══════════════════════════════════════════
-       RESET & BASE
+       RESET
     ══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -45,57 +44,42 @@
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+    section { padding: 60px 0; }
 
     /* ══════════════════════════════════════════
-       NOISE TEXTURE OVERLAY
-    ══════════════════════════════════════════ */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 22px; position: relative; }
-    section { padding: 70px 0; position: relative; }
-
-    /* ══════════════════════════════════════════
-       A — STICKY WHATSAPP FLOAT
+       A — STICKY WA FLOAT
     ══════════════════════════════════════════ */
     .wa-float {
-      position: fixed; bottom: 22px; right: 22px; z-index: 9000;
+      position: fixed; bottom: 20px; right: 20px; z-index: 9000;
       width: 62px; height: 62px;
-      background: var(--green);
-      border-radius: 50%;
+      background: var(--green); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 24px rgba(var(--greenRGB),.4);
+      box-shadow: 0 4px 24px rgba(var(--gRGB),.45);
       animation: waPulse 2.8s ease-in-out infinite;
       transition: transform .2s;
-      text-decoration: none;
     }
     .wa-float:hover { transform: scale(1.12); }
     .wa-float i { color: #fff; font-size: 28px; }
     @keyframes waPulse {
-      0%,100% { box-shadow: 0 4px 24px rgba(var(--greenRGB),.4), 0 0 0 0 rgba(var(--greenRGB),.5); }
-      55%      { box-shadow: 0 4px 24px rgba(var(--greenRGB),.4), 0 0 0 18px rgba(var(--greenRGB),0); }
+      0%,100% { box-shadow: 0 4px 24px rgba(var(--gRGB),.4), 0 0 0 0   rgba(var(--gRGB),.45); }
+      55%      { box-shadow: 0 4px 24px rgba(var(--gRGB),.4), 0 0 0 18px rgba(var(--gRGB),0);  }
     }
 
     /* ══════════════════════════════════════════
-       RIBBON (reemplaza urgency-badge estático)
+       RIBBON ANIMADO
     ══════════════════════════════════════════ */
     .ribbon {
       background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber), var(--pink), var(--accent));
       background-size: 300% auto;
       animation: ribbonFlow 4s linear infinite;
-      padding: 10px 18px;
-      text-align: center;
+      padding: 10px 18px; text-align: center;
       font-size: .82rem; font-weight: 800;
       letter-spacing: .5px; color: #fff;
-      position: relative; z-index: 10;
     }
     @keyframes ribbonFlow { 0%{background-position:0% center;} 100%{background-position:300% center;} }
-    .ribbon .fire { display: inline-block; animation: fireRock .85s ease-in-out infinite alternate; }
+    .ribbon .fire { display:inline-block; animation: fireRock .85s ease-in-out infinite alternate; }
     @keyframes fireRock { from{transform:rotate(-9deg) scale(1);} to{transform:rotate(9deg) scale(1.2);} }
 
     /* ══════════════════════════════════════════
@@ -103,75 +87,76 @@
     ══════════════════════════════════════════ */
     .navbar {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(8,8,15,.9);
+      background: rgba(8,8,15,.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border2);
-      padding: 13px 22px;
+      padding: 13px 18px;
     }
     .navbar-inner {
       max-width: 1100px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .logo { font-weight: 900; font-size: 1.08rem; display: flex; align-items: center; gap: 8px; }
+    .logo { font-weight: 900; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
     .logo-accent { color: var(--accent2); }
     .logo-badge {
-      background: rgba(var(--accentRGB),.15);
-      border: 1px solid rgba(var(--accentRGB),.35);
-      color: var(--accent2); font-size: .65rem; font-weight: 800;
-      padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
+      background: rgba(var(--aRGB),.14);
+      border: 1px solid rgba(var(--aRGB),.35);
+      color: var(--accent2); font-size: .62rem; font-weight: 800;
+      padding: 2px 8px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: .5px;
     }
     .nav-cta {
       background: var(--green); color: #000;
       font-weight: 800; font-size: .83rem;
-      padding: 9px 20px; border-radius: 30px;
+      padding: 9px 18px; border-radius: 30px;
       display: flex; align-items: center; gap: 7px;
       transition: transform .18s, box-shadow .18s;
+      white-space: nowrap;
     }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(var(--greenRGB),.4); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(var(--gRGB),.4); }
 
     /* ══════════════════════════════════════════
        HERO
     ══════════════════════════════════════════ */
     .hero {
-      padding: 90px 0 72px;
+      padding: 72px 0 56px;
       text-align: center;
       position: relative; overflow: hidden;
     }
     .hero-orb {
       position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 500px;
+      width: 700px; height: 480px;
       background: radial-gradient(ellipse at 50% 40%,
-        rgba(var(--accentRGB),.22) 0%,
-        rgba(var(--accentRGB),.06) 40%,
-        transparent 70%);
+        rgba(var(--aRGB),.22) 0%, rgba(var(--aRGB),.05) 45%, transparent 70%);
       pointer-events: none;
     }
     .hero-orb2 {
       position: absolute; bottom: -60px; right: -80px;
-      width: 400px; height: 300px;
+      width: 380px; height: 300px;
       background: radial-gradient(ellipse, rgba(236,72,153,.12) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-pill {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(var(--accentRGB),.1);
-      border: 1px solid rgba(var(--accentRGB),.35);
+      background: rgba(var(--aRGB),.1);
+      border: 1px solid rgba(var(--aRGB),.35);
       color: var(--accent2); font-size: .76rem; font-weight: 800;
       padding: 5px 14px; border-radius: 30px;
       text-transform: uppercase; letter-spacing: 1px;
-      margin-bottom: 22px; position: relative;
+      margin-bottom: 20px; position: relative;
     }
-    .hero-pill .dot {
-      width: 6px; height: 6px; border-radius: 50%;
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%;
       background: var(--green);
       animation: dotBlink 1.5s ease-in-out infinite;
+      flex-shrink: 0;
     }
     @keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
 
     h1 {
-      font-size: clamp(2.2rem,5.5vw,3.4rem);
+      font-size: clamp(2rem, 6vw, 3.4rem);
       font-weight: 900; line-height: 1.07;
-      margin-bottom: 18px; position: relative;
+      margin-bottom: 16px; position: relative;
     }
     .h1-grad {
       background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--pink) 100%);
@@ -179,30 +164,30 @@
       background-clip: text;
     }
     .hero-sub {
-      color: var(--gray); font-size: 1.1rem;
-      max-width: 520px; margin: 0 auto 38px;
+      color: var(--gray); font-size: 1.05rem;
+      max-width: 480px; margin: 0 auto 34px;
       position: relative;
     }
     .hero-sub strong { color: var(--text); }
-    .hero-actions { display: flex; gap: 13px; justify-content: center; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; font-weight: 800; font-size: 1rem;
-      padding: 15px 34px; border-radius: 30px;
-      display: inline-flex; align-items: center; gap: 9px;
+      color: #fff; font-weight: 800; font-size: .97rem;
+      padding: 14px 30px; border-radius: 30px;
+      display: inline-flex; align-items: center; gap: 8px;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(var(--accentRGB),.35);
+      box-shadow: 0 4px 20px rgba(var(--aRGB),.35);
     }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(var(--accentRGB),.45); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(var(--aRGB),.45); }
     .btn-outline {
       background: transparent;
       border: 1px solid var(--border2); color: var(--text);
-      font-weight: 700; font-size: .97rem;
-      padding: 15px 30px; border-radius: 30px;
+      font-weight: 700; font-size: .95rem;
+      padding: 14px 26px; border-radius: 30px;
       transition: border-color .2s, background .2s;
     }
-    .btn-outline:hover { border-color: var(--accent); background: rgba(var(--accentRGB),.08); }
+    .btn-outline:hover { border-color: var(--accent); background: rgba(var(--aRGB),.08); }
 
     /* ══════════════════════════════════════════
        STATS STRIP
@@ -214,49 +199,45 @@
       border-bottom: 1px solid var(--border2);
     }
     .stat {
-      flex: 1; min-width: 110px;
-      padding: 22px 20px; text-align: center;
+      flex: 1; min-width: 100px;
+      padding: 20px 14px; text-align: center;
       border-right: 1px solid var(--border2);
       transition: background .2s;
     }
     .stat:last-child { border-right: none; }
     .stat:hover { background: var(--surface2); }
-    .stat-n { font-size: 1.55rem; font-weight: 900; color: var(--accent2); }
-    .stat-l { font-size: .71rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 3px; }
+    .stat-n { font-size: 1.5rem; font-weight: 900; color: var(--accent2); }
+    .stat-l { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
 
     /* ══════════════════════════════════════════
-       SECTION HEADERS
+       SECTION HEADER
     ══════════════════════════════════════════ */
     .sec-head {
-      display: flex; align-items: center; gap: 13px;
-      margin-bottom: 26px;
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
     }
     .sec-head h2 {
-      font-size: clamp(1.2rem,2.5vw,1.6rem); font-weight: 800;
+      font-size: clamp(1.15rem,2.5vw,1.55rem); font-weight: 800;
       white-space: nowrap;
       display: flex; align-items: center; gap: 9px;
     }
     .sec-line { flex: 1; height: 1px; background: var(--border2); }
 
     /* ══════════════════════════════════════════
-       PROMO BOX (reemplaza el contador estático)
+       PROMO BOX (reemplaza contador estático)
     ══════════════════════════════════════════ */
     .promo-box {
       position: relative; overflow: hidden;
       background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: var(--r);
-      padding: 30px 28px;
-      text-align: center;
-      margin-bottom: 56px;
+      border: 1px solid var(--border2); border-radius: var(--r);
+      padding: 28px 22px; text-align: center;
+      margin-bottom: 52px;
     }
     .promo-box::before {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(135deg,
-        rgba(var(--accentRGB),.08) 0%,
-        rgba(236,72,153,.07) 50%,
-        rgba(245,158,11,.05) 100%);
+        rgba(var(--aRGB),.08) 0%, rgba(236,72,153,.07) 50%, rgba(245,158,11,.05) 100%);
       pointer-events: none;
     }
     .promo-box::after {
@@ -265,105 +246,115 @@
       background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber));
     }
     .promo-emoji {
-      font-size: 2.8rem; line-height: 1;
+      font-size: 2.6rem; line-height: 1;
       display: inline-block; position: relative;
       animation: emojiShake .8s ease-in-out infinite alternate;
     }
-    @keyframes emojiShake {
-      from { transform: rotate(-8deg) scale(1); }
-      to   { transform: rotate(8deg)  scale(1.15); }
-    }
+    @keyframes emojiShake { from{transform:rotate(-8deg) scale(1);} to{transform:rotate(8deg) scale(1.15);} }
     .promo-title {
-      font-size: clamp(1.15rem,3vw,1.5rem);
-      font-weight: 900; margin: 12px 0 7px; position: relative;
+      font-size: clamp(1.1rem,3.5vw,1.45rem);
+      font-weight: 900; margin: 10px 0 6px; position: relative;
     }
     .promo-title .hot {
       background: linear-gradient(135deg, var(--amber), var(--red));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .promo-sub { color: var(--muted); font-size: .88rem; position: relative; }
+    .promo-sub { color: var(--muted); font-size: .87rem; position: relative; }
     .promo-countdown {
       display: inline-flex; align-items: center; gap: 8px;
       margin-top: 14px; position: relative;
       background: rgba(245,158,11,.1);
       border: 1px solid rgba(245,158,11,.3);
-      color: #fbbf24; font-weight: 800; font-size: .84rem;
-      padding: 7px 20px; border-radius: 30px;
-      animation: countdownGlow 2s ease-in-out infinite;
+      color: #fbbf24; font-weight: 800; font-size: .83rem;
+      padding: 7px 18px; border-radius: 30px;
+      animation: countGlow 2s ease-in-out infinite;
     }
-    @keyframes countdownGlow {
+    @keyframes countGlow {
       0%,100% { box-shadow: none; }
       50%      { box-shadow: 0 0 20px rgba(245,158,11,.3); }
     }
 
     /* ══════════════════════════════════════════
-       GRID
+       GRIDS
     ══════════════════════════════════════════ */
-    .service-section { margin-bottom: 60px; }
-    .cards-grid { display: grid; gap: 16px; }
-    .cols-3 { grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
-    .cols-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-    .cols-4 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .service-section { margin-bottom: 56px; }
+    .cards-grid { display: grid; gap: 14px; }
+    .cols-3 { grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); }
+    .cols-2 { grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); }
+    .cols-4 { grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); }
 
     /* ══════════════════════════════════════════
-       D — SERVICE CARD
+       D — CARD (hover lift + top stripe)
     ══════════════════════════════════════════ */
     .card {
       background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--r);
-      padding: 24px;
+      border: 1px solid var(--border2); border-radius: var(--r);
+      padding: 22px;
       display: flex; flex-direction: column; gap: 13px;
       position: relative; overflow: hidden;
       transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
       cursor: pointer;
     }
-    .card-top-stripe {
+    .card-stripe {
       position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, var(--accent), var(--accent2), var(--pink));
       opacity: 0; transition: opacity .22s;
     }
-    .card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 20px 54px rgba(var(--accentRGB),.22);
-      border-color: rgba(var(--accentRGB),.5);
-    }
-    .card:hover .card-top-stripe { opacity: 1; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(var(--aRGB),.22); border-color: rgba(var(--aRGB),.5); }
+    .card:hover .card-stripe { opacity: 1; }
 
-    .card-icon { font-size: 2rem; line-height: 1; }
+    .card-icon { font-size: 1.9rem; line-height: 1; }
 
-    /* hot badge */
     .hot-label {
-      position: absolute; top: 14px; right: 14px;
+      position: absolute; top: 13px; right: 13px;
       background: linear-gradient(135deg, var(--amber), var(--red));
-      color: #fff; font-size: .63rem; font-weight: 900;
-      padding: 3px 10px; border-radius: 20px;
+      color: #fff; font-size: .62rem; font-weight: 900;
+      padding: 3px 9px; border-radius: 20px;
       text-transform: uppercase; letter-spacing: .4px;
     }
 
+    /* ── CARD HEADER: title + price side by side ── */
     .card-head {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; gap: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
     }
-    .card-title { font-size: 1.05rem; font-weight: 800; flex: 1; }
+    .card-title {
+      font-size: 1.02rem; font-weight: 800;
+      flex: 1; min-width: 0;
+    }
 
-    /* B — PRICE ANCHORING */
-    .price-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-    .price-was { font-size: .78rem; color: var(--muted); text-decoration: line-through; }
+    /* ── B — PRICE BLOCK (siempre visible) ── */
+    .price-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .price-was {
+      font-size: .78rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      line-height: 1;
+    }
     .price-now {
       background: var(--accent2); color: var(--bg);
-      padding: 7px 13px; border-radius: var(--r2);
-      font-weight: 900; font-size: .97rem; white-space: nowrap;
+      padding: 6px 12px; border-radius: var(--r2);
+      font-weight: 900; font-size: .95rem;
+      white-space: nowrap; line-height: 1.2;
     }
     .price-off {
-      font-size: .65rem; font-weight: 900;
-      background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3);
-      color: #fca5a5; padding: 1px 7px; border-radius: 20px;
-      text-transform: uppercase; align-self: flex-end;
+      font-size: .63rem; font-weight: 900;
+      background: rgba(239,68,68,.15);
+      border: 1px solid rgba(239,68,68,.3);
+      color: #fca5a5; padding: 2px 7px; border-radius: 20px;
+      text-transform: uppercase; white-space: nowrap;
     }
 
-    .card-desc { color: var(--gray); font-size: .92rem; line-height: 1.5; }
+    .card-desc { color: var(--gray); font-size: .91rem; line-height: 1.5; }
 
     .card-benefit {
       display: flex; align-items: center; gap: 7px;
@@ -372,97 +363,100 @@
     .card-benefit i { color: var(--green); font-size: .8rem; }
 
     .card-guarantee {
-      background: rgba(var(--greenRGB),.1);
+      background: rgba(var(--gRGB),.1);
       border-left: 3px solid var(--green);
       padding: 9px 12px; border-radius: 4px;
-      font-size: .83rem; color: #4ade80; font-weight: 600;
+      font-size: .82rem; color: #4ade80; font-weight: 600;
     }
 
     .btn-wa {
       margin-top: auto;
       width: 100%; background: var(--green); color: #000;
-      border: none; padding: 13px;
-      border-radius: var(--r2);
+      border: none; padding: 13px 16px; border-radius: var(--r2);
       font-weight: 800; font-size: .95rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       text-decoration: none;
       transition: background .18s, transform .18s, box-shadow .18s;
     }
-    .btn-wa:hover {
-      background: #16a34a; transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(var(--greenRGB),.35);
-    }
+    .btn-wa:hover { background: #16a34a; transform: scale(1.02); box-shadow: 0 8px 24px rgba(var(--gRGB),.35); }
 
     /* ══════════════════════════════════════════
-       PROCESO
+       PASOS
     ══════════════════════════════════════════ */
     .steps-wrap {
       background: var(--surface);
       border-top: 1px solid var(--border2);
       border-bottom: 1px solid var(--border2);
     }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 18px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+      gap: 16px;
+    }
     .step-box {
-      text-align: center; padding: 28px 20px;
+      text-align: center; padding: 26px 18px;
       background: var(--surface2);
       border: 1px solid var(--border2); border-radius: var(--r);
       transition: border-color .2s, transform .2s;
     }
-    .step-box:hover { border-color: rgba(var(--accentRGB),.4); transform: translateY(-4px); }
+    .step-box:hover { border-color: rgba(var(--aRGB),.4); transform: translateY(-4px); }
     .step-num {
-      width: 46px; height: 46px;
+      width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-weight: 900; font-size: 1.1rem; color: #fff;
-      margin: 0 auto 14px;
-      box-shadow: 0 4px 16px rgba(var(--accentRGB),.4);
+      margin: 0 auto 13px;
+      box-shadow: 0 4px 16px rgba(var(--aRGB),.4);
     }
-    .step-box h3 { font-size: 1rem; margin-bottom: 7px; }
-    .step-box p  { color: var(--muted); font-size: .87rem; }
+    .step-box h3 { font-size: .98rem; margin-bottom: 6px; }
+    .step-box p  { color: var(--muted); font-size: .86rem; }
 
     /* ══════════════════════════════════════════
        TIPS
     ══════════════════════════════════════════ */
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+      gap: 13px;
+    }
     .tip-card {
       background: var(--surface); border: 1px solid var(--border2);
-      border-radius: var(--r); padding: 20px;
-      display: flex; gap: 14px; align-items: flex-start;
+      border-radius: var(--r); padding: 18px;
+      display: flex; gap: 13px; align-items: flex-start;
       transition: border-color .2s, transform .2s;
     }
-    .tip-card:hover { border-color: rgba(var(--accentRGB),.4); transform: translateY(-3px); }
-    .tip-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
-    .tip-t { font-weight: 700; font-size: .93rem; color: var(--accent2); margin-bottom: 4px; }
-    .tip-d { color: var(--muted); font-size: .84rem; line-height: 1.5; }
+    .tip-card:hover { border-color: rgba(var(--aRGB),.4); transform: translateY(-3px); }
+    .tip-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-t { font-weight: 700; font-size: .91rem; color: var(--accent2); margin-bottom: 3px; }
+    .tip-d { color: var(--muted); font-size: .83rem; line-height: 1.5; }
 
     /* ══════════════════════════════════════════
        FAQ
     ══════════════════════════════════════════ */
-    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-list { display: flex; flex-direction: column; gap: 9px; }
     .faq-item {
       background: var(--surface); border: 1px solid var(--border2);
       border-radius: var(--r); overflow: hidden;
       transition: border-color .2s;
     }
-    .faq-item:hover { border-color: rgba(var(--accentRGB),.3); }
+    .faq-item:hover { border-color: rgba(var(--aRGB),.3); }
     .faq-q {
-      padding: 18px 22px; font-weight: 700; font-size: .97rem;
+      padding: 17px 20px; font-weight: 700; font-size: .96rem;
       cursor: pointer; user-select: none;
-      display: flex; justify-content: space-between; align-items: center; gap: 14px;
-      color: var(--accent2);
-      transition: background .2s;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      color: var(--accent2); transition: background .2s;
     }
-    .faq-q:hover { background: rgba(var(--accentRGB),.06); }
+    .faq-q:hover { background: rgba(var(--aRGB),.06); }
     .faq-icon { font-size: .75rem; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(180deg); }
     .faq-a {
       max-height: 0; overflow: hidden;
       transition: max-height .38s ease, padding .38s ease;
-      color: var(--gray); font-size: .92rem; line-height: 1.65;
-      padding: 0 22px;
+      color: var(--gray); font-size: .91rem; line-height: 1.65;
+      padding: 0 20px;
     }
-    .faq-item.open .faq-a { max-height: 400px; padding: 0 22px 20px; }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 20px 18px; }
 
     /* ══════════════════════════════════════════
        FOOTER
@@ -470,65 +464,101 @@
     footer {
       background: var(--surface);
       border-top: 1px solid var(--border2);
-      padding: 50px 22px 32px;
-      text-align: center;
-      position: relative;
+      padding: 48px 18px 30px;
+      text-align: center; position: relative;
     }
     footer::before {
       content: '';
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 300px; height: 1px;
+      width: 280px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent2), transparent);
     }
-    .footer-tagline { font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
+    .footer-tagline { font-size: 1.15rem; font-weight: 900; margin-bottom: 5px; }
     .footer-tagline .hl { color: var(--accent2); }
-    .footer-sub { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+    .footer-sub { color: var(--muted); font-size: .87rem; margin-bottom: 20px; }
     .footer-meta {
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 18px;
-      color: var(--gray); font-size: .87rem; margin: 0 0 28px;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;
+      color: var(--gray); font-size: .86rem; margin: 0 0 26px;
     }
-    .footer-meta span { display: flex; align-items: center; gap: 7px; }
-    .footer-copy { color: var(--muted); font-size: .76rem; margin-top: 18px; }
+    .footer-meta span { display: flex; align-items: center; gap: 6px; }
+    .footer-copy { color: var(--muted); font-size: .75rem; margin-top: 16px; }
 
     /* ══════════════════════════════════════════
-       RESPONSIVE
+       MOBILE — phone-first fixes
     ══════════════════════════════════════════ */
-    @media (max-width: 640px) {
-      .hero { padding: 60px 0 50px; }
-      .stat { padding: 17px 14px; }
-      .stat-n { font-size: 1.3rem; }
-      .wa-float { width: 54px; height: 54px; }
+    @media (max-width: 480px) {
+      /* hero */
+      .hero { padding: 52px 0 44px; }
+      h1 { font-size: 1.9rem; }
+      .hero-sub { font-size: .97rem; }
+      .btn-primary, .btn-outline { padding: 13px 22px; font-size: .92rem; }
+
+      /* stats */
+      .stat { padding: 16px 10px; }
+      .stat-n { font-size: 1.25rem; }
+
+      /* card: stack title + price vertically on very small screens */
+      .card-head {
+        flex-direction: column;
+        gap: 10px;
+      }
+      /* price block: horizontal on mobile for compactness */
+      .price-block {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      /* CRITICAL: price-was SIEMPRE visible */
+      .price-was {
+        display: inline !important;
+        font-size: .8rem;
+      }
+      .price-now { font-size: .92rem; padding: 5px 10px; }
+      .price-off { font-size: .62rem; }
+
+      /* wa float más pequeño */
+      .wa-float { width: 54px; height: 54px; bottom: 16px; right: 16px; }
       .wa-float i { font-size: 24px; }
-      .card-head { flex-direction: column; gap: 10px; }
-      .price-block { align-items: flex-start; flex-direction: row; align-items: center; gap: 8px; }
-      .price-block .price-was { display: none; }
-      body { padding-bottom: 90px; }
+
+      /* ribbon texto más corto */
+      .ribbon { font-size: .74rem; padding: 9px 10px; }
+
+      /* grid → 1 columna en móvil */
+      .cols-3, .cols-2, .cols-4 {
+        grid-template-columns: 1fr;
+      }
+
+      /* pasos → 2 columnas */
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* tips → 1 columna */
+      .tips-grid { grid-template-columns: 1fr; }
+
+      body { padding-bottom: 84px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .cols-3, .cols-4 { grid-template-columns: repeat(2, 1fr); }
+      .price-was { display: inline !important; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════
-     STICKY WHATSAPP  (A)
-═══════════════════════════════ -->
+<!-- STICKY WA -->
 <a class="wa-float"
    href="https://wa.me/18292776696?text=¡Hola!%20Vi%20tu%20página%20y%20quiero%20un%20servicio"
    target="_blank" rel="noopener" title="WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- ═══════════════════════════════
-     RIBBON ANIMADO
-═══════════════════════════════ -->
+<!-- RIBBON ANIMADO -->
 <div class="ribbon">
-  <span class="fire">🔥</span>
-  &nbsp;PRECIO ESPECIAL ESTA SEMANA — Solo para estudiantes de tu escuela&nbsp;
-  <span class="fire">🔥</span>
+  <span class="fire">🔥</span>&nbsp;PRECIO ESPECIAL ESTA SEMANA — Solo pa' estudiantes de tu escuela&nbsp;<span class="fire">🔥</span>
 </div>
 
-<!-- ═══════════════════════════════
-     NAVBAR
-═══════════════════════════════ -->
+<!-- NAVBAR -->
 <nav class="navbar">
   <div class="navbar-inner">
     <div class="logo">
@@ -543,9 +573,7 @@
   </div>
 </nav>
 
-<!-- ═══════════════════════════════
-     HERO
-═══════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-orb"></div>
   <div class="hero-orb2"></div>
@@ -573,9 +601,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════
-     STATS
-═══════════════════════════════ -->
+<!-- STATS -->
 <div class="stats-strip">
   <div class="stat"><div class="stat-n">7/24</div><div class="stat-l">Respondo rápido</div></div>
   <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Funciona o reembolso</div></div>
@@ -583,13 +609,11 @@
   <div class="stat"><div class="stat-n">0</div><div class="stat-l">Excusas</div></div>
 </div>
 
-<!-- ═══════════════════════════════
-     SERVICIOS
-═══════════════════════════════ -->
+<!-- ═══════════════ SERVICIOS ═══════════════ -->
 <section id="servicios">
   <div class="container">
 
-    <!-- PROMO BOX ANIMADO -->
+    <!-- PROMO BOX -->
     <div class="promo-box">
       <div class="promo-emoji">🔥</div>
       <div class="promo-title">Precio especial <span class="hot">esta semana</span></div>
@@ -606,7 +630,7 @@
       <div class="cards-grid cols-3">
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <span class="hot-label">🔥 Más pedido</span>
           <div class="card-icon">🎮</div>
           <div class="card-head">
@@ -626,7 +650,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">📥</div>
           <div class="card-head">
             <h3 class="card-title">Instala tu juego favorito</h3>
@@ -645,7 +669,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">🪟</div>
           <div class="card-head">
             <h3 class="card-title">Windows nuevo</h3>
@@ -664,7 +688,7 @@
         </div>
 
       </div>
-    </div><!-- /PC -->
+    </div>
 
     <!-- CELULAR -->
     <div class="service-section">
@@ -675,7 +699,7 @@
       <div class="cards-grid cols-3">
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <span class="hot-label">⚡ Top semana</span>
           <div class="card-icon">▶️</div>
           <div class="card-head">
@@ -695,7 +719,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">🧹</div>
           <div class="card-head">
             <h3 class="card-title">Limpiar apps basura</h3>
@@ -714,7 +738,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">🛡️</div>
           <div class="card-head">
             <h3 class="card-title">Privacidad Android</h3>
@@ -733,7 +757,7 @@
         </div>
 
       </div>
-    </div><!-- /Celular -->
+    </div>
 
     <!-- ACADÉMICO -->
     <div class="service-section">
@@ -744,7 +768,7 @@
       <div class="cards-grid cols-2">
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">📚</div>
           <div class="card-head">
             <h3 class="card-title">Apuntes digitales</h3>
@@ -763,7 +787,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <span class="hot-label">⭐ Favorita</span>
           <div class="card-icon">✨</div>
           <div class="card-head">
@@ -783,7 +807,7 @@
         </div>
 
       </div>
-    </div><!-- /Académico -->
+    </div>
 
     <!-- ENTRETENIMIENTO -->
     <div class="service-section">
@@ -794,7 +818,7 @@
       <div class="cards-grid cols-4">
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">🎬</div>
           <div class="card-head">
             <h3 class="card-title">Películas, Series y Anime</h3>
@@ -813,7 +837,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">📖</div>
           <div class="card-head">
             <h3 class="card-title">Biblioteca digital completa</h3>
@@ -832,7 +856,7 @@
         </div>
 
         <div class="card">
-          <div class="card-top-stripe"></div>
+          <div class="card-stripe"></div>
           <div class="card-icon">🕹️</div>
           <div class="card-head">
             <h3 class="card-title">Emuladores + juegos clásicos</h3>
@@ -850,13 +874,13 @@
           </a>
         </div>
 
-        <div class="card" style="border-color: rgba(124,58,237,.3);">
-          <div class="card-top-stripe" style="opacity:1;"></div>
+        <div class="card" style="border-color:rgba(124,58,237,.3);">
+          <div class="card-stripe" style="opacity:1;"></div>
           <div class="card-icon">🎯</div>
           <div class="card-head">
             <h3 class="card-title">¿No ves lo que buscas?</h3>
           </div>
-          <p class="card-desc">Dime qué necesitas. Si está en mis manos, te lo consigo. Sin compromiso.</p>
+          <p class="card-desc" style="margin-top:6px;">Dime qué necesitas. Si está en mis manos, te lo consigo. Sin compromiso.</p>
           <div class="card-benefit"><i class="fas fa-check-circle"></i> Respuesta en minutos</div>
           <div class="card-guarantee">✓ Sin costo por consultar</div>
           <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Tengo%20una%20consulta" target="_blank" rel="noopener">
@@ -865,14 +889,12 @@
         </div>
 
       </div>
-    </div><!-- /Entretenimiento -->
+    </div>
 
   </div>
 </section>
 
-<!-- ═══════════════════════════════
-     PROCESO
-═══════════════════════════════ -->
+<!-- PASOS -->
 <div class="steps-wrap">
   <section>
     <div class="container">
@@ -901,9 +923,7 @@
   </section>
 </div>
 
-<!-- ═══════════════════════════════
-     TIPS
-═══════════════════════════════ -->
+<!-- TIPS -->
 <section>
   <div class="container">
     <div class="sec-head">
@@ -923,63 +943,49 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════
-     FAQ
-═══════════════════════════════ -->
-<section style="background:var(--surface); border-top:1px solid var(--border2);">
+<!-- FAQ -->
+<section style="background:var(--surface);border-top:1px solid var(--border2);">
   <div class="container">
     <div class="sec-head">
       <h2>❓ Preguntas frecuentes</h2>
       <div class="sec-line"></div>
     </div>
     <div class="faq-list">
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Cómo pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">En efectivo. Te lo entrego en la escuela y pagas cuando ves que funciona. Si no funciona, no pagas.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Qué pasa si algo sale mal?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Cada servicio tiene garantía. Me avisas, lo arreglo sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Atiendes fines de semana?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Depende. Escribime por WhatsApp y coordinamos. Preferiblemente lunes a viernes en la escuela.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Haces servicios a domicilio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Sí, pero prefiero en la escuela. A domicilio es más caro o debes venir a buscar luego. Coordinamos.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Cuánto tiempo demora cada servicio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Limpiar apps: 20 min · YouTube sin anuncios: 15 min · Windows: 2-3h · PC gaming: 3-4h · Películas: 30-45 min · Libros: 25-40 min · Emuladores: 45-90 min · Presentaciones: 1-2h · Apuntes: depende del volumen.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Qué película, anime o juego puedo pedir?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Lo que quieras. Avatar, Dune, Marvel, anime completo (Dragon Ball, Naruto, Jujutsu Kaisen). Para emuladores: Pokémon, Super Mario, Final Fantasy. Me dices y yo lo consigo.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q"><span>¿Los libros y películas caben en mi celular?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">Sí. Las películas las comprimo si es necesario. Los libros pesan casi nada y caben tranquilo.</div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════
-     FOOTER
-═══════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-tagline">
-    <span class="hl">Funciona o no pagas.</span> Sin vueltas. De verdá.
-  </div>
+  <div class="footer-tagline"><span class="hl">Funciona o no pagas.</span> Sin vueltas. De verdá.</div>
   <p class="footer-sub">Lo que funciona, de verdá. Sin vaina rara.</p>
   <div class="footer-meta">
     <span><i class="fab fa-whatsapp"></i> 1 (829) 277-6696</span>
@@ -989,14 +995,14 @@
   <a class="btn-primary"
      href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
      target="_blank" rel="noopener"
-     style="display:inline-flex; margin-bottom:24px;">
+     style="display:inline-flex;margin-bottom:22px;">
     <i class="fab fa-whatsapp"></i> Escribeme por WhatsApp
   </a>
   <div class="footer-copy">© 2026 Servicios Técnicos Express · Un estudiante de RD como tú</div>
 </footer>
 
 <script>
-  /* ── FAQ ACCORDION ── */
+  /* FAQ */
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -1006,12 +1012,12 @@
     });
   });
 
-  /* ── COUNTDOWN REAL hasta el próximo lunes 00:00 ── */
+  /* COUNTDOWN real → próximo lunes 00:00 */
   (function tick() {
-    const now   = new Date();
-    const day   = now.getDay(); // 0=dom, 1=lun...
-    const days  = day === 1 ? 7 : (8 - day) % 7 || 7;
-    const next  = new Date(now);
+    const now  = new Date();
+    const day  = now.getDay();
+    const days = day === 1 ? 7 : (8 - day) % 7 || 7;
+    const next = new Date(now);
     next.setDate(now.getDate() + days);
     next.setHours(0, 0, 0, 0);
     const diff = next - now;
@@ -1022,10 +1028,10 @@
     setTimeout(tick, 30_000);
   })();
 
-  /* ── CARD CLICK → WA (toda la card es clickeable) ── */
+  /* Toda la card es clickeable */
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', e => {
-      if (e.target.closest('.btn-wa')) return; // no duplicar si click en botón
+      if (e.target.closest('.btn-wa')) return;
       const btn = card.querySelector('.btn-wa');
       if (btn) btn.click();
     });
