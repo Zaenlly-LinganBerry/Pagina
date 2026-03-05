@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#08080f"/>
+      <stop offset="100%" style="stop-color:#101018"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="50%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="50%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="50%" cy="30%" r="55%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="85%" cy="75%" r="35%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#orb1)"/>
+  <rect width="1200" height="630" fill="url(#orb2)"/>
+
+  <!-- Top accent bar -->
+  <rect width="1200" height="4" fill="url(#accent)"/>
+
+  <!-- Border subtle -->
+  <rect x="40" y="40" width="1120" height="550" rx="16" fill="none" stroke="#2a2a3d" stroke-width="1.5"/>
+
+  <!-- Logo area -->
+  <text x="80" y="118" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="900" fill="#f0f0f8">💻 Servicios<tspan fill="#a78bfa">GG</tspan></text>
+  <rect x="234" y="98" width="64" height="22" rx="11" fill="rgba(124,58,237,0.2)" stroke="rgba(124,58,237,0.4)" stroke-width="1"/>
+  <text x="266" y="113" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="800" fill="#a78bfa" text-anchor="middle" letter-spacing="0.8">TU ESCUELA</text>
+
+  <!-- Main headline -->
+  <text x="80" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="72" font-weight="900" fill="#ffffff" letter-spacing="-1">Lo que nadie te arregla</text>
+  <text x="80" y="318" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="72" font-weight="900" fill="url(#titleGrad)" letter-spacing="-1">en la escuela — yo sí.</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="388" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" fill="#9999bb">PC lenta · Celular lento · Pruebas Nacionales encima.</text>
+
+  <!-- Guarantee pill -->
+  <rect x="80" y="430" width="330" height="48" rx="24" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.35)" stroke-width="1.5"/>
+  <circle cx="114" cy="454" r="7" fill="#22c55e"/>
+  <text x="132" y="460" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#4ade80">Pagas cuando funciona</text>
+
+  <!-- Services tags -->
+  <rect x="80" y="505" width="158" height="40" rx="8" fill="#16161f" stroke="#2a2a3d" stroke-width="1"/>
+  <text x="159" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f0f0f8" text-anchor="middle">🎮 PC Gaming</text>
+
+  <rect x="250" y="505" width="158" height="40" rx="8" fill="#16161f" stroke="#2a2a3d" stroke-width="1"/>
+  <text x="329" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f0f0f8" text-anchor="middle">📱 Android</text>
+
+  <rect x="420" y="505" width="218" height="40" rx="8" fill="#16161f" stroke="#2a2a3d" stroke-width="1"/>
+  <text x="529" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#f0f0f8" text-anchor="middle">📚 Pruebas Nacionales</text>
+
+  <!-- Right side price card -->
+  <rect x="820" y="160" width="320" height="340" rx="16" fill="#16161f" stroke="rgba(124,58,237,0.4)" stroke-width="1.5"/>
+  <rect x="820" y="160" width="320" height="4" rx="2" fill="url(#accent)"/>
+
+  <text x="980" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#6b6b8a" text-anchor="middle" letter-spacing="1">DESDE</text>
+  <text x="980" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="68" font-weight="900" fill="#a78bfa" text-anchor="middle">RD$110</text>
+  <text x="980" y="335" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#6b6b8a" text-anchor="middle">Pago en efectivo · En persona</text>
+
+  <line x1="850" y1="365" x2="1110" y2="365" stroke="#2a2a3d" stroke-width="1"/>
+
+  <text x="980" y="400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#4ade80" text-anchor="middle">✓ Funciona o no pagas</text>
+  <text x="980" y="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#9999bb" text-anchor="middle">📍 Tu escuela · RD</text>
+  <text x="980" y="460" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#9999bb" text-anchor="middle">📞 1 (829) 277-6696</text>
+</svg>
