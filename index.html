@@ -381,6 +381,139 @@
     .btn-wa:hover { background: #16a34a; transform: scale(1.02); box-shadow: 0 8px 24px rgba(var(--gRGB),.35); }
 
     /* ══════════════════════════════════════════
+       GUÍA DE ESTUDIO — BUNDLE
+    ══════════════════════════════════════════ */
+    .guide-wrap {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+    .guide-hero-card {
+      position: relative; overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid rgba(var(--aRGB),.4);
+      border-radius: var(--r);
+      padding: 34px 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media(max-width:680px){ .guide-hero-card { grid-template-columns:1fr; } }
+    .guide-hero-card::before {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(135deg,
+        rgba(var(--aRGB),.1) 0%,
+        rgba(236,72,153,.07) 60%,
+        transparent 100%);
+      pointer-events:none;
+    }
+    .guide-hero-card::after {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber));
+    }
+    .guide-badge-new {
+      display:inline-flex; align-items:center; gap:6px;
+      background: linear-gradient(135deg, var(--amber), var(--red));
+      color:#fff; font-size:.65rem; font-weight:900;
+      padding:4px 12px; border-radius:20px;
+      text-transform:uppercase; letter-spacing:.6px;
+      margin-bottom:12px;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}60%{box-shadow:0 0 0 8px rgba(245,158,11,0);}}
+    .guide-title {
+      font-size: clamp(1.3rem,3.5vw,2rem);
+      font-weight:900; line-height:1.1;
+      margin-bottom:10px; position:relative;
+    }
+    .guide-title .ggrad {
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 55%, var(--pink) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .guide-subtitle {
+      color:var(--gray); font-size:.93rem; margin-bottom:18px; position:relative;
+    }
+    .guide-includes {
+      display:flex; flex-direction:column; gap:7px;
+      position:relative; margin-bottom:22px;
+    }
+    .guide-inc-row {
+      display:flex; align-items:center; gap:9px;
+      font-size:.88rem; color:var(--text);
+    }
+    .guide-inc-row i { color:var(--green); font-size:.78rem; flex-shrink:0; }
+    .guide-inc-row strong { color:var(--accent2); }
+    .guide-price-area {
+      position:relative;
+      background: rgba(var(--aRGB),.08);
+      border: 1px solid rgba(var(--aRGB),.25);
+      border-radius:var(--r2);
+      padding:20px 22px;
+      text-align:center;
+    }
+    .guide-value-label {
+      font-size:.72rem; color:var(--muted); text-transform:uppercase;
+      letter-spacing:.6px; margin-bottom:4px;
+    }
+    .guide-value-cross {
+      font-size:1rem; color:var(--muted);
+      text-decoration:line-through; margin-bottom:8px;
+    }
+    .guide-price-big {
+      font-size:clamp(2rem,5vw,2.8rem);
+      font-weight:900; color:var(--accent2); line-height:1;
+      margin-bottom:4px;
+    }
+    .guide-price-sub {
+      font-size:.78rem; color:var(--gray); margin-bottom:16px;
+    }
+    .guide-guarantee-row {
+      display:flex; justify-content:center; gap:10px;
+      flex-wrap:wrap; margin-bottom:18px;
+    }
+    .guide-gtag {
+      display:flex; align-items:center; gap:5px;
+      background:rgba(var(--gRGB),.1);
+      border:1px solid rgba(var(--gRGB),.25);
+      color:#4ade80; font-size:.75rem; font-weight:700;
+      padding:5px 10px; border-radius:20px;
+    }
+    .btn-guide-wa {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; background:var(--green); color:#000;
+      font-weight:900; font-size:1rem;
+      padding:15px; border-radius:var(--r2);
+      text-decoration:none;
+      transition:background .18s, transform .18s, box-shadow .18s;
+      box-shadow: 0 6px 24px rgba(var(--gRGB),.35);
+    }
+    .btn-guide-wa:hover { background:#16a34a; transform:translateY(-2px); box-shadow:0 10px 32px rgba(var(--gRGB),.45); }
+    .guide-subjects {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap:10px;
+      margin-top:28px;
+    }
+    .subject-pill {
+      background:var(--surface2);
+      border:1px solid var(--border2);
+      border-radius:var(--r2);
+      padding:12px 16px;
+      display:flex; align-items:center; gap:10px;
+      font-size:.88rem; font-weight:700;
+      transition:border-color .2s, transform .2s;
+    }
+    .subject-pill:hover { border-color:rgba(var(--aRGB),.4); transform:translateY(-2px); }
+    .subject-pill .sp-icon { font-size:1.3rem; flex-shrink:0; }
+    .subject-pill .sp-info { display:flex; flex-direction:column; gap:2px; }
+    .subject-pill .sp-name { color:var(--text); }
+    .subject-pill .sp-grades { font-size:.72rem; color:var(--muted); font-weight:600; }
+
+    /* ══════════════════════════════════════════
        PASOS
     ══════════════════════════════════════════ */
     .steps-wrap {
@@ -565,11 +698,14 @@
       <span>💻 Servicios<span class="logo-accent">GG</span></span>
       <span class="logo-badge">Tu escuela · RD</span>
     </div>
-    <a class="nav-cta"
-       href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
-       target="_blank" rel="noopener">
-      <i class="fab fa-whatsapp"></i> WhatsApp
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="#guia" style="font-size:.82rem;font-weight:800;color:var(--accent2);padding:8px 14px;border:1px solid rgba(124,58,237,.35);border-radius:30px;white-space:nowrap;">📚 Pruebas Nacionales</a>
+      <a class="nav-cta"
+         href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
+         target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -583,12 +719,12 @@
       Por alguien de tu escuela
     </div>
     <h1>
-      Tu PC, tu celular.<br>
-      <span class="h1-grad">Funcionando de verdá.</span>
+      Lo que nadie te arregla<br>
+      <span class="h1-grad">en la escuela — yo sí.</span>
     </h1>
     <p class="hero-sub">
-      Sin virus, sin lag, sin anuncios.<br>
-      <strong>Pagas cuando ves que funciona.</strong> Sin vaina rara.
+      PC lenta, celular lleno de basura, anuncios en todo.<br>
+      <strong>Nos vemos, lo arreglo, pagas si funciona.</strong>
     </p>
     <div class="hero-actions">
       <a class="btn-primary"
@@ -893,6 +1029,95 @@
 
   </div>
 </section>
+
+<!-- GUÍA DE ESTUDIO -->
+<div class="guide-wrap">
+  <section id="guia">
+    <div class="container">
+
+      <div class="sec-head">
+        <h2>📚 Guía para las Pruebas Nacionales</h2>
+        <div class="sec-line"></div>
+      </div>
+
+      <!-- HERO CARD -->
+      <div class="guide-hero-card">
+
+        <!-- LEFT: Info -->
+        <div>
+          <div class="guide-badge-new">🆕 Nuevo · Exclusivo</div>
+          <h2 class="guide-title">
+            <span class="ggrad">Guía Pruebas Nacionales</span><br>
+            4to · 5to · 6to
+          </h2>
+          <p class="guide-subtitle">
+            Preparada con los temas exactos que caen en las Pruebas Nacionales.<br>
+            Mate, Sociales, Naturales y Español. Todo en un PDF.
+          </p>
+          <div class="guide-includes">
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> <strong>Temas oficiales</strong> de las Pruebas Nacionales MINERD</div>
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> <strong>4 materias</strong> × 3 grados = 12 módulos de contenido</div>
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Organizada por materia y grado — cero tiempo perdido</div>
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> PDF buscable — encuentra cualquier tema en segundos</div>
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Funciona sin Internet una vez descargada</div>
+            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Te la paso en persona en la escuela — pago en efectivo</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Price + CTA -->
+        <div class="guide-price-area">
+          <div class="guide-value-label">Valor real</div>
+          <div class="guide-value-cross">RD$1,200+</div>
+          <div class="guide-price-big">RD$320</div>
+          <div class="guide-price-sub">Pago en efectivo · Te la paso en persona</div>
+          <div class="guide-guarantee-row">
+            <div class="guide-gtag"><i class="fas fa-shield-alt"></i> La lees o te devuelvo</div>
+            <div class="guide-gtag"><i class="fas fa-school"></i> En la escuela</div>
+          </div>
+          <a class="btn-guide-wa"
+             href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20la%20Guía%20para%20las%20Pruebas%20Nacionales%20(4to-6to).%20¿Cuándo%20nos%20vemos%20en%20la%20escuela?"
+             target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Coordinar en la escuela — RD$320
+          </a>
+        </div>
+
+      </div>
+
+      <!-- SUBJECT GRID -->
+      <div class="guide-subjects">
+        <div class="subject-pill">
+          <span class="sp-icon">🔢</span>
+          <div class="sp-info">
+            <span class="sp-name">Matemáticas</span>
+            <span class="sp-grades">4to · 5to · 6to</span>
+          </div>
+        </div>
+        <div class="subject-pill">
+          <span class="sp-icon">🌍</span>
+          <div class="sp-info">
+            <span class="sp-name">Sociales</span>
+            <span class="sp-grades">4to · 5to · 6to</span>
+          </div>
+        </div>
+        <div class="subject-pill">
+          <span class="sp-icon">🔬</span>
+          <div class="sp-info">
+            <span class="sp-name">Naturales</span>
+            <span class="sp-grades">4to · 5to · 6to</span>
+          </div>
+        </div>
+        <div class="subject-pill">
+          <span class="sp-icon">📖</span>
+          <div class="sp-info">
+            <span class="sp-name">Español</span>
+            <span class="sp-grades">4to · 5to · 6to</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
 
 <!-- PASOS -->
 <div class="steps-wrap">
