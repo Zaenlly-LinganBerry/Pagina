@@ -12,17 +12,17 @@
   <meta property="og:description" content="PC lenta, celular con basura, Pruebas Nacionales encima. Nos vemos, lo arreglo, pagas si funciona. Sin vaina rara."/>
   <!-- ⚠️ REEMPLAZA "TU_DOMINIO_VERCEL" con tu URL real, ej: https://serviciosgg.vercel.app -->
   <!-- ⚠️ og:image debe ser PNG/JPG — WhatsApp no renderiza SVG. Convierte og.svg a og.png primero -->
-  <meta property="og:image"       content="https://serviciosgg-ivory.vercel.app/og.png"/>
+  <meta property="og:image"       content="https://TU_DOMINIO_VERCEL/og.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-  <meta property="og:url"         content="https://serviciosgg-ivory.vercel.app/"/>
+  <meta property="og:url"         content="https://TU_DOMINIO_VERCEL"/>
   <meta property="og:locale"      content="es_DO"/>
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card"        content="summary_large_image"/>
   <meta name="twitter:title"       content="ServiciosGG — Lo que nadie te arregla en la escuela, yo sí."/>
   <meta name="twitter:description" content="PC lenta, celular con basura, Pruebas Nacionales encima. Nos vemos, lo arreglo, pagas si funciona."/>
-  <meta name="twitter:image"       content="https://serviciosgg-ivory.vercel.app/og.png"/>
+  <meta name="twitter:image"       content="https://TU_DOMINIO_VERCEL/og.png"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     /* ══════════════════════════════════════════
@@ -532,8 +532,97 @@
     .subject-pill .sp-grades { font-size:.72rem; color:var(--muted); font-weight:600; }
 
     /* ══════════════════════════════════════════
-       PASOS
+       DISPONIBLE INDICATOR
     ══════════════════════════════════════════ */
+    .avail-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0; display: inline-block;
+    }
+    .avail-dot.online  { background: var(--green); animation: dotBlink 1.5s ease-in-out infinite; }
+    .avail-dot.offline { background: var(--amber); }
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .72rem; font-weight: 800;
+      padding: 4px 11px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .avail-badge.online  { background: rgba(var(--gRGB),.12); border: 1px solid rgba(var(--gRGB),.3); color: #4ade80; }
+    .avail-badge.offline { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: #fbbf24; }
+
+    /* ══════════════════════════════════════════
+       SHARE BUTTON
+    ══════════════════════════════════════════ */
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(var(--gRGB),.1);
+      border: 1px solid rgba(var(--gRGB),.35);
+      color: #4ade80; font-weight: 800; font-size: .88rem;
+      padding: 11px 20px; border-radius: 30px;
+      cursor: pointer; transition: background .2s, transform .18s;
+      position: relative;
+    }
+    .btn-share:hover { background: rgba(var(--gRGB),.2); transform: translateY(-2px); }
+    .btn-share .copied-msg {
+      display: none; position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #000; font-size: .7rem; font-weight: 900;
+      padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .btn-share.copied .copied-msg { display: block; }
+
+    /* ══════════════════════════════════════════
+       REFERIDO BANNER
+    ══════════════════════════════════════════ */
+    .referido-banner {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-left: 4px solid var(--accent2);
+      border-radius: var(--r);
+      padding: 22px 24px;
+      display: flex; align-items: center; gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .referido-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .referido-body { flex: 1; min-width: 200px; }
+    .referido-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 4px; }
+    .referido-title span { color: var(--accent2); }
+    .referido-desc { color: var(--gray); font-size: .88rem; line-height: 1.5; }
+    .referido-cta {
+      background: var(--accent); color: #fff;
+      font-weight: 800; font-size: .88rem;
+      padding: 11px 20px; border-radius: 30px;
+      white-space: nowrap; flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .referido-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(var(--aRGB),.4); }
+
+    /* ══════════════════════════════════════════
+       FREE AUDIT STRIP
+    ══════════════════════════════════════════ */
+    .audit-strip {
+      background: linear-gradient(135deg, rgba(var(--aRGB),.08), rgba(236,72,153,.06));
+      border: 1px solid rgba(var(--aRGB),.2);
+      border-radius: var(--r);
+      padding: 20px 22px;
+      display: flex; align-items: center; gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .audit-text { flex: 1; min-width: 200px; }
+    .audit-text strong { color: var(--accent2); }
+    .audit-text p { color: var(--gray); font-size: .86rem; margin-top: 3px; }
+    .btn-audit {
+      background: transparent;
+      border: 1px solid rgba(var(--aRGB),.45);
+      color: var(--accent2); font-weight: 800; font-size: .88rem;
+      padding: 11px 20px; border-radius: 30px;
+      white-space: nowrap; flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: background .18s, transform .18s;
+    }
+    .btn-audit:hover { background: rgba(var(--aRGB),.1); transform: translateY(-2px); }
+
     .steps-wrap {
       background: var(--surface);
       border-top: 1px solid var(--border2);
@@ -706,7 +795,7 @@
 
 <!-- RIBBON ANIMADO -->
 <div class="ribbon">
-  <span class="fire">🔥</span>&nbsp;Precio especial esta semana · Sube el lunes&nbsp;<span class="fire">🔥</span>
+  <span class="fire">🔥</span>&nbsp;<span id="ribbonCountdown">Precio especial por tiempo limitado</span>&nbsp;· Pagas solo si funciona&nbsp;<span class="fire">🔥</span>
 </div>
 
 <!-- NAVBAR -->
@@ -715,6 +804,7 @@
     <div class="logo">
       <span>💻 Servicios<span class="logo-accent">GG</span></span>
       <span class="logo-badge">Tu escuela · RD</span>
+      <span class="avail-badge" id="availBadge"><span class="avail-dot" id="availDot"></span><span id="availText"></span></span>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <a href="#guia" style="font-size:.82rem;font-weight:800;color:var(--accent2);padding:8px 14px;border:1px solid rgba(124,58,237,.35);border-radius:30px;white-space:nowrap;">📚 Pruebas Nacionales</a>
@@ -734,7 +824,7 @@
   <div class="container">
     <div class="hero-pill">
       <span class="dot"></span>
-      Por alguien de tu escuela · RD
+      ✅ Pagas solo si funciona — 0 riesgo
     </div>
     <h1>
       PC lenta, celular lleno de basura,<br>
@@ -742,7 +832,7 @@
     </h1>
     <p class="hero-sub">
       Free Fire con lag, WhatsApp lleno, anuncios en todo.<br>
-      <strong>Nos vemos en la escuela, lo arreglo, pagas si funciona.</strong><br>
+      <strong>Nos vemos en la escuela. Lo arreglo. Ves que funciona. Entonces pagas.</strong><br>
       <span style="color:var(--green);font-weight:900;font-size:.95rem;">✓ Desde RD$110 · Sin riesgo</span>
     </p>
     <div class="hero-actions">
@@ -752,63 +842,16 @@
         <i class="fab fa-whatsapp"></i> Escribeme ahora
       </a>
       <a class="btn-outline" href="#servicios">Ver servicios ↓</a>
+      <button class="btn-share" id="shareBtn" onclick="shareLink()">
+        <span class="copied-msg">¡Copiado!</span>
+        <i class="fas fa-share-alt"></i> Compartir en grupo
+      </button>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-strip">
-  <div class="stat"><div class="stat-n">7/24</div><div class="stat-l">Respondo rápido</div></div>
-  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Funciona o reembolso</div></div>
-  <div class="stat"><div class="stat-n">2h</div><div class="stat-l">Entrega promedio</div></div>
-  <div class="stat"><div class="stat-n">0</div><div class="stat-l">Excusas</div></div>
-</div>
-
-<!-- TESTIMONIOS -->
-<div style="background:var(--surface);border-bottom:1px solid var(--border2);padding:32px 0;">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:20px;font-size:.7rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Lo que dicen en la escuela</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
-
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:18px 16px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:#fff;flex-shrink:0;">Y</div>
-          <div>
-            <div style="font-weight:800;font-size:.88rem;">Yolanda M.</div>
-            <div style="font-size:.7rem;color:var(--muted);">4to de bachillerato</div>
-          </div>
-          <div style="margin-left:auto;color:#fbbf24;font-size:.8rem;">★★★★★</div>
-        </div>
-        <p style="color:var(--gray);font-size:.84rem;line-height:1.5;">"Mi celular estaba muertooo, no le cabía nada. Lo limpió en 20 minutos y me quedó como nuevo. Y pagué cuando vi que jalaba 🙌"</p>
-      </div>
-
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:18px 16px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--green),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:#fff;flex-shrink:0;">R</div>
-          <div>
-            <div style="font-weight:800;font-size:.88rem;">Ramón D.</div>
-            <div style="font-size:.7rem;color:var(--muted);">5to de bachillerato</div>
-          </div>
-          <div style="margin-left:auto;color:#fbbf24;font-size:.8rem;">★★★★★</div>
-        </div>
-        <p style="color:var(--gray);font-size:.84rem;line-height:1.5;">"Tengo una PC del 2014 y ahora Free Fire le corre perfecto. Yo no creía pero funcionó. Me cobró RD$270 después de ver el resultado."</p>
-      </div>
-
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:18px 16px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--amber),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:#fff;flex-shrink:0;">K</div>
-          <div>
-            <div style="font-weight:800;font-size:.88rem;">Karla V.</div>
-            <div style="font-size:.7rem;color:var(--muted);">6to de bachillerato</div>
-          </div>
-          <div style="margin-left:auto;color:#fbbf24;font-size:.8rem;">★★★★★</div>
-        </div>
-        <p style="color:var(--gray);font-size:.84rem;line-height:1.5;">"Me hizo la presentación del proyecto pa' Naturales y el profe preguntó quién me ayudó lol. Quedó 10/10 sin mentira."</p>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 <!-- ═══════════════ SERVICIOS ═══════════════ -->
 <section id="servicios">
@@ -820,6 +863,33 @@
       <div class="promo-title">Precio especial <span class="hot">esta semana</span></div>
       <div class="promo-sub">Solo pa' estudiantes de la escuela · Se sube la próxima semana</div>
       <div class="promo-countdown" id="countdown">⏰ Calculando...</div>
+    </div>
+
+    <!-- REFERIDO BANNER -->
+    <div class="referido-banner">
+      <div class="referido-icon">👥</div>
+      <div class="referido-body">
+        <div class="referido-title">Tráeme un amigo → <span>RD$50 menos para los dos</span></div>
+        <div class="referido-desc">Dile que me escriba y mencione tu nombre. Automático, sin vueltas. Aplica a cualquier servicio.</div>
+      </div>
+      <a class="referido-cta"
+         href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20referir%20a%20un%20amigo%20para%20los%20dos%20tener%20RD%2450%20de%20descuento"
+         target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Referir amigo
+      </a>
+    </div>
+
+    <!-- FREE AUDIT -->
+    <div class="audit-strip">
+      <div class="audit-text">
+        <strong>¿No sabes si tiene solución?</strong>
+        <p>Descríbeme el problema → te digo gratis si lo arreglo, cuánto cuesta y cuánto tarda. Sin compromiso.</p>
+      </div>
+      <a class="btn-audit"
+         href="https://wa.me/18292776696?text=¡Hola!%20Tengo%20un%20problema%20con%20mi%20dispositivo%20y%20quiero%20saber%20si%20tiene%20solución%20(es%20gratis%20el%20diagnóstico%2C%20verdad%3F)"
+         target="_blank" rel="noopener">
+        🔍 Diagnóstico gratis
+      </a>
     </div>
 
     <!-- PC GAMING -->
@@ -845,6 +915,7 @@
           <p class="card-desc">Windows optimizado + juegos ligeros sin lag. Incluso si tu PC tiene 5 años.</p>
           <div class="card-benefit"><i class="fas fa-check-circle"></i> Free Fire/Roblox/Minecraft sin lag garantizado</div>
           <div class="card-guarantee">✓ Garantía 48h o dinero de vuelta</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:-4px;">💡 Combo con instalación de juego: <strong style="color:var(--accent2);">RD$50 menos</strong></div>
           <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20PC%20para%20gaming" target="_blank" rel="noopener">
             <i class="fab fa-whatsapp"></i> Escribeme ahora
           </a>
@@ -933,6 +1004,7 @@
           <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
           <div class="card-benefit"><i class="fas fa-check-circle"></i> Celular como nuevo</div>
           <div class="card-guarantee">✓ 20 min máximo</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:-4px;">💡 Combo con YouTube sin anuncios: <strong style="color:var(--accent2);">+RD$60 solamente</strong></div>
           <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20limpiar%20apps" target="_blank" rel="noopener">
             <i class="fab fa-whatsapp"></i> Escribeme ahora
           </a>
@@ -975,8 +1047,8 @@
             <h3 class="card-title">Apuntes digitales</h3>
             <div class="price-block">
               <span class="price-was">RD$300</span>
-              <span class="price-now">RD$170–210</span>
-              <span class="price-off">Oferta</span>
+              <span class="price-now">RD$170</span>
+              <span class="price-off">Desde</span>
             </div>
           </div>
           <p class="card-desc">Tus cuadernos → PDF buscable. Repasa en el celular cuando quieras, incluso en clase.</p>
@@ -995,8 +1067,8 @@
             <h3 class="card-title">Presentaciones profesionales</h3>
             <div class="price-block">
               <span class="price-was">RD$280</span>
-              <span class="price-now">RD$130–180</span>
-              <span class="price-off">Oferta</span>
+              <span class="price-now">RD$130</span>
+              <span class="price-off">Desde</span>
             </div>
           </div>
           <p class="card-desc">Te hago la presentación de tu exposición. Diseño moderno, animaciones y todo.</p>
@@ -1044,8 +1116,8 @@
             <h3 class="card-title">Biblioteca digital completa</h3>
             <div class="price-block">
               <span class="price-was">RD$220</span>
-              <span class="price-now">RD$110–140</span>
-              <span class="price-off">Oferta</span>
+              <span class="price-now">RD$110</span>
+              <span class="price-off">Desde</span>
             </div>
           </div>
           <p class="card-desc">Ebooks, audiolibros, novelas, manga. Lo que necesites leer o escuchar.</p>
@@ -1094,6 +1166,46 @@
 
   </div>
 </section>
+
+<!-- PROFESORES -->
+<div style="background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:48px 0;">
+  <div class="container">
+    <div class="sec-head">
+      <h2>👨‍🏫 ¿Eres profesor?</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:center;">
+      <div>
+        <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin-bottom:16px;">
+          Los mismos problemas que los estudiantes — PC lenta, presentaciones para clase, Windows con virus — pero con <strong style="color:var(--text);">más presupuesto y más confianza</strong>.<br><br>
+          Servicio a domicilio disponible. Factura si la necesitas. Sin vueltas.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.76rem;font-weight:800;padding:5px 12px;border-radius:20px;">🖥️ PC optimizada</span>
+          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.76rem;font-weight:800;padding:5px 12px;border-radius:20px;">📊 Presentaciones</span>
+          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.76rem;font-weight:800;padding:5px 12px;border-radius:20px;">🪟 Windows nuevo</span>
+          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.76rem;font-weight:800;padding:5px 12px;border-radius:20px;">🏠 A domicilio</span>
+        </div>
+        <a style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:800;font-size:.9rem;padding:13px 22px;border-radius:30px;transition:transform .18s,box-shadow .18s;"
+           href="https://wa.me/18292776696?text=Hola,%20soy%20profesor%20y%20quiero%20información%20sobre%20servicios%20técnicos"
+           target="_blank" rel="noopener"
+           onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <i class="fab fa-whatsapp"></i> Escribeme como profesor
+        </a>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border2);border-left:4px solid var(--accent2);border-radius:var(--r);padding:22px 24px;">
+        <div style="font-size:1.5rem;margin-bottom:10px;">💡</div>
+        <div style="font-weight:900;font-size:1rem;margin-bottom:8px;color:var(--accent2);">¿Por qué yo y no un técnico adulto?</div>
+        <ul style="color:var(--gray);font-size:.88rem;line-height:1.8;list-style:none;padding:0;">
+          <li>✓ Precio justo sin sobrecargar</li>
+          <li>✓ Pagas cuando ves que funciona</li>
+          <li>✓ Disponible en tu mismo centro</li>
+          <li>✓ Garantía escrita por WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- GUÍA DE ESTUDIO -->
 <div class="guide-wrap">
@@ -1213,6 +1325,22 @@
   </section>
 </div>
 
+<!-- LISTA DE DIFUSIÓN NUDGE -->
+<div style="background:var(--surface2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:22px 18px;text-align:center;">
+  <div class="container" style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
+    <span style="font-size:1.4rem;">📲</span>
+    <div style="text-align:left;">
+      <div style="font-weight:900;font-size:.92rem;">¿Quieres que te avise de ofertas y nuevos servicios?</div>
+      <div style="color:var(--muted);font-size:.8rem;">Escríbeme "LISTA" por WhatsApp y te agrego. Sin spam, solo lo que importa.</div>
+    </div>
+    <a href="https://wa.me/18292776696?text=LISTA"
+       target="_blank" rel="noopener"
+       style="background:var(--green);color:#000;font-weight:800;font-size:.85rem;padding:10px 18px;border-radius:30px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+      <i class="fab fa-whatsapp"></i> Unirme a la lista
+    </a>
+  </div>
+</div>
+
 <!-- TIPS -->
 <section>
   <div class="container">
@@ -1241,6 +1369,10 @@
       <div class="sec-line"></div>
     </div>
     <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span>¿Cómo sé que no me vas a dañar o robar el celular/PC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-a">Legítima. Primero: soy estudiante de la misma escuela — si te daño algo, me ves todos los días. Segundo: <strong>nunca toco el dispositivo sin que tú estés presente o des permiso explícito por WhatsApp</strong>. Tercero: el diagnóstico es gratis, así que puedes ver qué voy a hacer antes de decidir. Cuarto: si algo sale mal, lo arreglo o te devuelvo el dinero. Todo queda por escrito en el chat.</div>
+      </div>
       <div class="faq-item">
         <div class="faq-q"><span>¿Cómo pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
         <div class="faq-a">En efectivo. Te lo entrego en la escuela y pagas cuando ves que funciona. Si no funciona, no pagas.</div>
@@ -1278,7 +1410,6 @@
   <div class="footer-tagline"><span class="hl">Funciona o no pagas.</span> Sin vueltas. De verdá.</div>
   <p class="footer-sub">Lo que funciona, de verdá. Sin vaina rara.</p>
   <div class="footer-meta">
-    <span><i class="fab fa-whatsapp"></i> 1 (829) 277-6696</span>
     <span><i class="fas fa-map-marker-alt"></i> Tu escuela · RD</span>
     <span><i class="far fa-clock"></i> Lunes a Viernes</span>
   </div>
@@ -1302,7 +1433,35 @@
     });
   });
 
-  /* COUNTDOWN real → 48h desde primera visita */
+  /* DISPONIBLE INDICATOR */
+  (function() {
+    const day = new Date().getDay(); // 0=Dom, 6=Sab
+    const badge = document.getElementById('availBadge');
+    const dot   = document.getElementById('availDot');
+    const text  = document.getElementById('availText');
+    if (!badge) return;
+    const isWeekday = day >= 1 && day <= 5;
+    badge.classList.add(isWeekday ? 'online' : 'offline');
+    dot.classList.add(isWeekday ? 'online' : 'offline');
+    text.textContent = isWeekday ? 'Disponible hoy' : 'Respondo el lunes';
+  })();
+
+  /* SHARE BUTTON */
+  function shareLink() {
+    const url = window.location.href;
+    const msg = `🔧 *ServiciosGG* — El chamo que arregla PCs y celulares en la escuela\n✅ Pagas solo si funciona | Desde RD$110\n👉 ${url}`;
+    if (navigator.share) {
+      navigator.share({ title: 'ServiciosGG', text: msg, url });
+    } else {
+      navigator.clipboard.writeText(msg).then(() => {
+        const btn = document.getElementById('shareBtn');
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+      });
+    }
+  }
+
+
   (function tick() {
     const KEY = 'sgg_deadline';
     let deadline = localStorage.getItem(KEY);
@@ -1311,15 +1470,18 @@
       localStorage.setItem(KEY, deadline);
     }
     const diff = parseInt(deadline) - Date.now();
-    const el = document.getElementById('countdown');
-    if (!el) return;
+    const el  = document.getElementById('countdown');
+    const rib = document.getElementById('ribbonCountdown');
     if (diff <= 0) {
-      el.textContent = '⚡ Oferta activa — escríbeme hoy';
+      if (el)  el.textContent  = '⚡ Oferta activa — escríbeme hoy';
+      if (rib) rib.textContent = 'Oferta activa hoy';
       return;
     }
     const h = Math.floor(diff / 3_600_000);
     const m = Math.floor((diff % 3_600_000) / 60_000);
-    el.textContent = `⏰ Precio especial caduca en ${h}h ${m}m`;
+    const txt = `Precio especial caduca en ${h}h ${m}m`;
+    if (el)  el.textContent  = `⏰ ${txt}`;
+    if (rib) rib.textContent = txt;
     setTimeout(tick, 30_000);
   })();
 
