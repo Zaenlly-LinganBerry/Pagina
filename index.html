@@ -7,11 +7,11 @@
   <title>ServiciosGG | Técnico en tu escuela · RD</title>
 
   <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
+  <!-- ⚠️ REEMPLAZA "TU_DOMINIO_VERCEL" con tu URL real desplegada, ej: https://serviciosgg.vercel.app -->
+  <!-- ⚠️ og:image debe ser PNG 1200x630 — crea una imagen con el copy del hero en fondo oscuro -->
   <meta property="og:type"        content="website"/>
   <meta property="og:title"       content="ServiciosGG — Lo que nadie te arregla en la escuela, yo sí."/>
   <meta property="og:description" content="PC lenta, celular con basura, Pruebas Nacionales encima. Nos vemos, lo arreglo, pagas si funciona. Sin vaina rara."/>
-  <!-- ⚠️ REEMPLAZA "TU_DOMINIO_VERCEL" con tu URL real, ej: https://serviciosgg.vercel.app -->
-  <!-- ⚠️ og:image debe ser PNG/JPG — WhatsApp no renderiza SVG. Convierte og.svg a og.png primero -->
   <meta property="og:image"       content="https://TU_DOMINIO_VERCEL/og.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -23,7 +23,9 @@
   <meta name="twitter:title"       content="ServiciosGG — Lo que nadie te arregla en la escuela, yo sí."/>
   <meta name="twitter:description" content="PC lenta, celular con basura, Pruebas Nacionales encima. Nos vemos, lo arreglo, pagas si funciona."/>
   <meta name="twitter:image"       content="https://TU_DOMINIO_VERCEL/og.png"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Font Awesome removido — reemplazado por SVG + emojis para eliminar ~800KB de carga bloqueante -->
+
   <style>
     /* ══════════════════════════════════════════
        TOKENS
@@ -62,15 +64,29 @@
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-
     .container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
     section { padding: 60px 0; }
+
+    /* ══════════════════════════════════════════
+       SVG WHATSAPP ICON
+    ══════════════════════════════════════════ */
+    .wa-icon {
+      width: 20px; height: 20px;
+      flex-shrink: 0; display: inline-block;
+      vertical-align: middle;
+    }
+    .wa-icon-lg { width: 28px; height: 28px; flex-shrink: 0; }
+
+    /* ══════════════════════════════════════════
+       CHECK ICON (reemplaza fa-check-circle)
+    ══════════════════════════════════════════ */
+    .check-icon { color: var(--green); font-style: normal; }
 
     /* ══════════════════════════════════════════
        A — STICKY WA FLOAT
     ══════════════════════════════════════════ */
     .wa-float {
-      position: fixed; bottom: 20px; right: 20px; z-index: 9000;
+      position: fixed; bottom: 72px; right: 20px; z-index: 9000;
       width: 62px; height: 62px;
       background: var(--green); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -79,7 +95,6 @@
       transition: transform .2s;
     }
     .wa-float:hover { transform: scale(1.12); }
-    .wa-float i { color: #fff; font-size: 28px; }
     @keyframes waPulse {
       0%,100% { box-shadow: 0 4px 24px rgba(var(--gRGB),.4), 0 0 0 0   rgba(var(--gRGB),.45); }
       55%      { box-shadow: 0 4px 24px rgba(var(--gRGB),.4), 0 0 0 18px rgba(var(--gRGB),0);  }
@@ -132,6 +147,12 @@
       white-space: nowrap;
     }
     .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(var(--gRGB),.4); }
+    /* Nav link pruebas — oculto en móvil, visible en desktop */
+    .nav-pruebas {
+      font-size:.82rem; font-weight:800; color:var(--accent2);
+      padding:8px 14px; border:1px solid rgba(124,58,237,.35); border-radius:30px;
+      white-space:nowrap;
+    }
 
     /* ══════════════════════════════════════════
        HERO
@@ -189,15 +210,17 @@
     .hero-sub strong { color: var(--text); }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+    /* ══ btn-primary = VERDE (acción WhatsApp) ══ */
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff; font-weight: 800; font-size: .97rem;
+      background: var(--green);
+      color: #000; font-weight: 800; font-size: .97rem;
       padding: 14px 30px; border-radius: 30px;
       display: inline-flex; align-items: center; gap: 8px;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(var(--aRGB),.35);
+      box-shadow: 0 4px 20px rgba(var(--gRGB),.35);
     }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(var(--aRGB),.45); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(var(--gRGB),.45); }
+
     .btn-outline {
       background: transparent;
       border: 1px solid var(--border2); color: var(--text);
@@ -242,14 +265,14 @@
     .sec-line { flex: 1; height: 1px; background: var(--border2); }
 
     /* ══════════════════════════════════════════
-       PROMO BOX (reemplaza contador estático)
+       PROMO BOX
     ══════════════════════════════════════════ */
     .promo-box {
       position: relative; overflow: hidden;
       background: var(--surface2);
       border: 1px solid var(--border2); border-radius: var(--r);
       padding: 28px 22px; text-align: center;
-      margin-bottom: 52px;
+      margin-bottom: 32px;
     }
     .promo-box::before {
       content: '';
@@ -266,9 +289,8 @@
     .promo-emoji {
       font-size: 2.6rem; line-height: 1;
       display: inline-block; position: relative;
-      animation: emojiShake .8s ease-in-out infinite alternate;
+      /* emojiShake removido — reducción de carga GPU en gama baja */
     }
-    @keyframes emojiShake { from{transform:rotate(-8deg) scale(1);} to{transform:rotate(8deg) scale(1.15);} }
     .promo-title {
       font-size: clamp(1.1rem,3.5vw,1.45rem);
       font-weight: 900; margin: 10px 0 6px; position: relative;
@@ -286,11 +308,7 @@
       border: 1px solid rgba(245,158,11,.3);
       color: #fbbf24; font-weight: 800; font-size: .83rem;
       padding: 7px 18px; border-radius: 30px;
-      animation: countGlow 2s ease-in-out infinite;
-    }
-    @keyframes countGlow {
-      0%,100% { box-shadow: none; }
-      50%      { box-shadow: 0 0 20px rgba(245,158,11,.3); }
+      /* countGlow removido — reducción de carga GPU */
     }
 
     /* ══════════════════════════════════════════
@@ -303,7 +321,7 @@
     .cols-4 { grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); }
 
     /* ══════════════════════════════════════════
-       D — CARD (hover lift + top stripe)
+       CARD
     ══════════════════════════════════════════ */
     .card {
       background: var(--surface);
@@ -321,9 +339,7 @@
     }
     .card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(var(--aRGB),.22); border-color: rgba(var(--aRGB),.5); }
     .card:hover .card-stripe { opacity: 1; }
-
     .card-icon { font-size: 1.9rem; line-height: 1; }
-
     .hot-label {
       position: absolute; top: 13px; right: 13px;
       background: linear-gradient(135deg, var(--amber), var(--red));
@@ -331,8 +347,6 @@
       padding: 3px 9px; border-radius: 20px;
       text-transform: uppercase; letter-spacing: .4px;
     }
-
-    /* ── CARD HEADER: title + price side by side ── */
     .card-head {
       display: flex;
       justify-content: space-between;
@@ -343,20 +357,13 @@
       font-size: 1.02rem; font-weight: 800;
       flex: 1; min-width: 0;
     }
-
-    /* ── B — PRICE BLOCK (siempre visible) ── */
     .price-block {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 3px;
-      flex-shrink: 0;
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: 3px; flex-shrink: 0;
     }
     .price-was {
-      font-size: .78rem;
-      color: var(--muted);
-      text-decoration: line-through;
-      line-height: 1;
+      font-size: .78rem; color: var(--muted);
+      text-decoration: line-through; line-height: 1;
     }
     .price-now {
       background: var(--accent2); color: var(--bg);
@@ -371,22 +378,17 @@
       color: #fca5a5; padding: 2px 7px; border-radius: 20px;
       text-transform: uppercase; white-space: nowrap;
     }
-
     .card-desc { color: var(--gray); font-size: .91rem; line-height: 1.5; }
-
     .card-benefit {
       display: flex; align-items: center; gap: 7px;
       color: var(--accent2); font-size: .88rem; font-weight: 700;
     }
-    .card-benefit i { color: var(--green); font-size: .8rem; }
-
     .card-guarantee {
       background: rgba(var(--gRGB),.1);
       border-left: 3px solid var(--green);
       padding: 9px 12px; border-radius: 4px;
       font-size: .82rem; color: #4ade80; font-weight: 600;
     }
-
     .btn-wa {
       margin-top: auto;
       width: 100%; background: var(--green); color: #000;
@@ -399,175 +401,30 @@
     .btn-wa:hover { background: #16a34a; transform: scale(1.02); box-shadow: 0 8px 24px rgba(var(--gRGB),.35); }
 
     /* ══════════════════════════════════════════
-       GUÍA DE ESTUDIO — BUNDLE
+       FREE AUDIT STRIP
     ══════════════════════════════════════════ */
-    .guide-wrap {
-      background: var(--surface);
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-    }
-    .guide-hero-card {
-      position: relative; overflow: hidden;
-      background: var(--surface2);
-      border: 1px solid rgba(var(--aRGB),.4);
+    .audit-strip {
+      background: linear-gradient(135deg, rgba(var(--aRGB),.08), rgba(236,72,153,.06));
+      border: 1px solid rgba(var(--aRGB),.2);
       border-radius: var(--r);
-      padding: 34px 28px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center;
+      padding: 20px 22px;
+      display: flex; align-items: center; gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
     }
-    @media(max-width:680px){ .guide-hero-card { grid-template-columns:1fr; } }
-    .guide-hero-card::before {
-      content:'';
-      position:absolute; inset:0;
-      background: linear-gradient(135deg,
-        rgba(var(--aRGB),.1) 0%,
-        rgba(236,72,153,.07) 60%,
-        transparent 100%);
-      pointer-events:none;
-    }
-    .guide-hero-card::after {
-      content:'';
-      position:absolute; top:0; left:0; right:0; height:3px;
-      background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber));
-    }
-    .guide-badge-new {
-      display:inline-flex; align-items:center; gap:6px;
-      background: linear-gradient(135deg, var(--amber), var(--red));
-      color:#fff; font-size:.65rem; font-weight:900;
-      padding:4px 12px; border-radius:20px;
-      text-transform:uppercase; letter-spacing:.6px;
-      margin-bottom:12px;
-      animation: badgePulse 2s ease-in-out infinite;
-    }
-    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}60%{box-shadow:0 0 0 8px rgba(245,158,11,0);}}
-    .guide-title {
-      font-size: clamp(1.3rem,3.5vw,2rem);
-      font-weight:900; line-height:1.1;
-      margin-bottom:10px; position:relative;
-    }
-    .guide-title .ggrad {
-      background: linear-gradient(135deg, #fff 0%, var(--accent2) 55%, var(--pink) 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-    }
-    .guide-subtitle {
-      color:var(--gray); font-size:.93rem; margin-bottom:18px; position:relative;
-    }
-    .guide-includes {
-      display:flex; flex-direction:column; gap:7px;
-      position:relative; margin-bottom:22px;
-    }
-    .guide-inc-row {
-      display:flex; align-items:center; gap:9px;
-      font-size:.88rem; color:var(--text);
-    }
-    .guide-inc-row i { color:var(--green); font-size:.78rem; flex-shrink:0; }
-    .guide-inc-row strong { color:var(--accent2); }
-    .guide-price-area {
-      position:relative;
-      background: rgba(var(--aRGB),.08);
-      border: 1px solid rgba(var(--aRGB),.25);
-      border-radius:var(--r2);
-      padding:20px 22px;
-      text-align:center;
-    }
-    .guide-value-label {
-      font-size:.72rem; color:var(--muted); text-transform:uppercase;
-      letter-spacing:.6px; margin-bottom:4px;
-    }
-    .guide-value-cross {
-      font-size:1rem; color:var(--muted);
-      text-decoration:line-through; margin-bottom:8px;
-    }
-    .guide-price-big {
-      font-size:clamp(2rem,5vw,2.8rem);
-      font-weight:900; color:var(--accent2); line-height:1;
-      margin-bottom:4px;
-    }
-    .guide-price-sub {
-      font-size:.78rem; color:var(--gray); margin-bottom:16px;
-    }
-    .guide-guarantee-row {
-      display:flex; justify-content:center; gap:10px;
-      flex-wrap:wrap; margin-bottom:18px;
-    }
-    .guide-gtag {
-      display:flex; align-items:center; gap:5px;
-      background:rgba(var(--gRGB),.1);
-      border:1px solid rgba(var(--gRGB),.25);
-      color:#4ade80; font-size:.75rem; font-weight:700;
-      padding:5px 10px; border-radius:20px;
-    }
-    .btn-guide-wa {
-      display:flex; align-items:center; justify-content:center; gap:9px;
-      width:100%; background:var(--green); color:#000;
-      font-weight:900; font-size:1rem;
-      padding:15px; border-radius:var(--r2);
-      text-decoration:none;
-      transition:background .18s, transform .18s, box-shadow .18s;
-      box-shadow: 0 6px 24px rgba(var(--gRGB),.35);
-    }
-    .btn-guide-wa:hover { background:#16a34a; transform:translateY(-2px); box-shadow:0 10px 32px rgba(var(--gRGB),.45); }
-    .guide-subjects {
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-      gap:10px;
-      margin-top:28px;
-    }
-    .subject-pill {
-      background:var(--surface2);
-      border:1px solid var(--border2);
-      border-radius:var(--r2);
-      padding:12px 16px;
-      display:flex; align-items:center; gap:10px;
-      font-size:.88rem; font-weight:700;
-      transition:border-color .2s, transform .2s;
-    }
-    .subject-pill:hover { border-color:rgba(var(--aRGB),.4); transform:translateY(-2px); }
-    .subject-pill .sp-icon { font-size:1.3rem; flex-shrink:0; }
-    .subject-pill .sp-info { display:flex; flex-direction:column; gap:2px; }
-    .subject-pill .sp-name { color:var(--text); }
-    .subject-pill .sp-grades { font-size:.72rem; color:var(--muted); font-weight:600; }
-
-    /* ══════════════════════════════════════════
-       DISPONIBLE INDICATOR
-    ══════════════════════════════════════════ */
-    .avail-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      flex-shrink: 0; display: inline-block;
-    }
-    .avail-dot.online  { background: var(--green); animation: dotBlink 1.5s ease-in-out infinite; }
-    .avail-dot.offline { background: var(--amber); }
-    .avail-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .72rem; font-weight: 800;
-      padding: 4px 11px; border-radius: 20px;
-      white-space: nowrap;
-    }
-    .avail-badge.online  { background: rgba(var(--gRGB),.12); border: 1px solid rgba(var(--gRGB),.3); color: #4ade80; }
-    .avail-badge.offline { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: #fbbf24; }
-
-    /* ══════════════════════════════════════════
-       SHARE BUTTON
-    ══════════════════════════════════════════ */
-    .btn-share {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(var(--gRGB),.1);
-      border: 1px solid rgba(var(--gRGB),.35);
-      color: #4ade80; font-weight: 800; font-size: .88rem;
+    .audit-text { flex: 1; min-width: 200px; }
+    .audit-text strong { color: var(--accent2); }
+    .audit-text p { color: var(--gray); font-size: .86rem; margin-top: 3px; }
+    .btn-audit {
+      background: transparent;
+      border: 1px solid rgba(var(--aRGB),.45);
+      color: var(--accent2); font-weight: 800; font-size: .88rem;
       padding: 11px 20px; border-radius: 30px;
-      cursor: pointer; transition: background .2s, transform .18s;
-      position: relative;
+      white-space: nowrap; flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: background .18s, transform .18s;
     }
-    .btn-share:hover { background: rgba(var(--gRGB),.2); transform: translateY(-2px); }
-    .btn-share .copied-msg {
-      display: none; position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: #000; font-size: .7rem; font-weight: 900;
-      padding: 4px 10px; border-radius: 20px; white-space: nowrap;
-    }
-    .btn-share.copied .copied-msg { display: block; }
+    .btn-audit:hover { background: rgba(var(--aRGB),.1); transform: translateY(-2px); }
 
     /* ══════════════════════════════════════════
        REFERIDO BANNER
@@ -598,31 +455,149 @@
     .referido-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(var(--aRGB),.4); }
 
     /* ══════════════════════════════════════════
-       FREE AUDIT STRIP
+       GUÍA DE ESTUDIO — BUNDLE
     ══════════════════════════════════════════ */
-    .audit-strip {
-      background: linear-gradient(135deg, rgba(var(--aRGB),.08), rgba(236,72,153,.06));
-      border: 1px solid rgba(var(--aRGB),.2);
+    .guide-wrap {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+    .guide-hero-card {
+      position: relative; overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid rgba(var(--aRGB),.4);
       border-radius: var(--r);
-      padding: 20px 22px;
-      display: flex; align-items: center; gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 14px;
+      padding: 34px 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
     }
-    .audit-text { flex: 1; min-width: 200px; }
-    .audit-text strong { color: var(--accent2); }
-    .audit-text p { color: var(--gray); font-size: .86rem; margin-top: 3px; }
-    .btn-audit {
-      background: transparent;
-      border: 1px solid rgba(var(--aRGB),.45);
-      color: var(--accent2); font-weight: 800; font-size: .88rem;
-      padding: 11px 20px; border-radius: 30px;
-      white-space: nowrap; flex-shrink: 0;
-      display: inline-flex; align-items: center; gap: 7px;
-      transition: background .18s, transform .18s;
+    @media(max-width:680px){ .guide-hero-card { grid-template-columns:1fr; } }
+    .guide-hero-card::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(var(--aRGB),.1) 0%, rgba(236,72,153,.07) 60%, transparent 100%);
+      pointer-events:none;
     }
-    .btn-audit:hover { background: rgba(var(--aRGB),.1); transform: translateY(-2px); }
+    .guide-hero-card::after {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(90deg, var(--accent), var(--pink), var(--amber));
+    }
+    .guide-badge-new {
+      display:inline-flex; align-items:center; gap:6px;
+      background: linear-gradient(135deg, var(--amber), var(--red));
+      color:#fff; font-size:.65rem; font-weight:900;
+      padding:4px 12px; border-radius:20px;
+      text-transform:uppercase; letter-spacing:.6px;
+      margin-bottom:12px;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}60%{box-shadow:0 0 0 8px rgba(245,158,11,0);}}
+    .guide-title {
+      font-size: clamp(1.3rem,3.5vw,2rem);
+      font-weight:900; line-height:1.1; margin-bottom:10px; position:relative;
+    }
+    .guide-title .ggrad {
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 55%, var(--pink) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .guide-subtitle { color:var(--gray); font-size:.93rem; margin-bottom:18px; position:relative; }
+    .guide-includes { display:flex; flex-direction:column; gap:7px; position:relative; margin-bottom:22px; }
+    .guide-inc-row { display:flex; align-items:center; gap:9px; font-size:.88rem; color:var(--text); }
+    .guide-inc-row .check-icon { font-size:.78rem; flex-shrink:0; }
+    .guide-inc-row strong { color:var(--accent2); }
+    .guide-price-area {
+      position:relative; background: rgba(var(--aRGB),.08);
+      border: 1px solid rgba(var(--aRGB),.25); border-radius:var(--r2);
+      padding:20px 22px; text-align:center;
+    }
+    .guide-value-label { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; margin-bottom:4px; }
+    .guide-value-cross { font-size:1rem; color:var(--muted); text-decoration:line-through; margin-bottom:8px; }
+    .guide-price-big { font-size:clamp(2rem,5vw,2.8rem); font-weight:900; color:var(--accent2); line-height:1; margin-bottom:4px; }
+    .guide-price-sub { font-size:.78rem; color:var(--gray); margin-bottom:16px; }
+    .guide-guarantee-row { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+    .guide-gtag {
+      display:flex; align-items:center; gap:5px;
+      background:rgba(var(--gRGB),.1); border:1px solid rgba(var(--gRGB),.25);
+      color:#4ade80; font-size:.75rem; font-weight:700; padding:5px 10px; border-radius:20px;
+    }
+    .btn-guide-wa {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; background:var(--green); color:#000;
+      font-weight:900; font-size:1rem; padding:15px; border-radius:var(--r2);
+      text-decoration:none;
+      transition:background .18s, transform .18s, box-shadow .18s;
+      box-shadow: 0 6px 24px rgba(var(--gRGB),.35);
+    }
+    .btn-guide-wa:hover { background:#16a34a; transform:translateY(-2px); box-shadow:0 10px 32px rgba(var(--gRGB),.45); }
+    .guide-subjects {
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap:10px; margin-top:28px;
+    }
+    .subject-pill {
+      background:var(--surface2); border:1px solid var(--border2); border-radius:var(--r2);
+      padding:12px 16px; display:flex; align-items:center; gap:10px;
+      font-size:.88rem; font-weight:700; transition:border-color .2s, transform .2s;
+    }
+    .subject-pill:hover { border-color:rgba(var(--aRGB),.4); transform:translateY(-2px); }
+    .subject-pill .sp-icon { font-size:1.3rem; flex-shrink:0; }
+    .subject-pill .sp-info { display:flex; flex-direction:column; gap:2px; }
+    .subject-pill .sp-name { color:var(--text); }
+    .subject-pill .sp-grades { font-size:.72rem; color:var(--muted); font-weight:600; }
 
+    /* ══════════════════════════════════════════
+       DISPONIBLE INDICATOR
+    ══════════════════════════════════════════ */
+    .avail-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0; display: inline-block;
+    }
+    .avail-dot.online  { background: var(--green); animation: dotBlink 1.5s ease-in-out infinite; }
+    .avail-dot.offline { background: var(--amber); }
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .72rem; font-weight: 800;
+      padding: 4px 11px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .avail-badge.online  { background: rgba(var(--gRGB),.12); border: 1px solid rgba(var(--gRGB),.3); color: #4ade80; }
+    .avail-badge.offline { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: #fbbf24; }
+
+    /* ══════════════════════════════════════════
+       SHARE STRIP (movido fuera del hero)
+    ══════════════════════════════════════════ */
+    .share-strip {
+      background: rgba(var(--gRGB),.06);
+      border-top: 1px solid rgba(var(--gRGB),.15);
+      border-bottom: 1px solid rgba(var(--gRGB),.15);
+      padding: 18px;
+      text-align: center;
+    }
+    .share-strip p {
+      font-size: .88rem; color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .share-strip p strong { color: var(--text); }
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(var(--gRGB),.1);
+      border: 1px solid rgba(var(--gRGB),.35);
+      color: #4ade80; font-weight: 800; font-size: .88rem;
+      padding: 11px 20px; border-radius: 30px;
+      cursor: pointer; transition: background .2s, transform .18s;
+      position: relative;
+    }
+    .btn-share:hover { background: rgba(var(--gRGB),.2); transform: translateY(-2px); }
+    .btn-share .copied-msg {
+      display: none; position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #000; font-size: .7rem; font-weight: 900;
+      padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .btn-share.copied .copied-msg { display: block; }
+
+    /* ══════════════════════════════════════════
+       STEPS
+    ══════════════════════════════════════════ */
     .steps-wrap {
       background: var(--surface);
       border-top: 1px solid var(--border2);
@@ -635,22 +610,74 @@
     }
     .step-box {
       text-align: center; padding: 26px 18px;
-      background: var(--surface2);
-      border: 1px solid var(--border2); border-radius: var(--r);
+      background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--r);
       transition: border-color .2s, transform .2s;
     }
     .step-box:hover { border-color: rgba(var(--aRGB),.4); transform: translateY(-4px); }
     .step-num {
       width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
       font-weight: 900; font-size: 1.1rem; color: #fff;
-      margin: 0 auto 13px;
-      box-shadow: 0 4px 16px rgba(var(--aRGB),.4);
+      margin: 0 auto 13px; box-shadow: 0 4px 16px rgba(var(--aRGB),.4);
     }
     .step-box h3 { font-size: .98rem; margin-bottom: 6px; }
     .step-box p  { color: var(--muted); font-size: .86rem; }
+
+    /* ══════════════════════════════════════════
+       TESTIMONIOS
+    ══════════════════════════════════════════ */
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .testi-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color .2s;
+    }
+    .testi-card:hover { border-color: rgba(var(--gRGB),.3); }
+    .testi-header {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem; color: #fff; flex-shrink: 0;
+    }
+    .testi-name { font-weight: 800; font-size: .95rem; }
+    .testi-role { font-size: .75rem; color: var(--muted); }
+    .testi-service {
+      font-size: .72rem; font-weight: 800;
+      background: rgba(var(--aRGB),.1); border: 1px solid rgba(var(--aRGB),.25);
+      color: var(--accent2); padding: 3px 10px; border-radius: 20px;
+      align-self: flex-start;
+    }
+    .testi-body {
+      color: var(--gray); font-size: .91rem; line-height: 1.6;
+      font-style: italic;
+    }
+    .testi-footer {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .75rem; color: var(--muted);
+    }
+    .testi-stars { color: var(--amber); letter-spacing: 1px; }
+    /* Nota para el dueño */
+    .testi-placeholder-note {
+      background: rgba(245,158,11,.08);
+      border: 1px dashed rgba(245,158,11,.35);
+      border-radius: var(--r);
+      padding: 16px 20px;
+      font-size: .82rem;
+      color: var(--amber);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
 
     /* ══════════════════════════════════════════
        TIPS
@@ -677,8 +704,7 @@
     .faq-list { display: flex; flex-direction: column; gap: 9px; }
     .faq-item {
       background: var(--surface); border: 1px solid var(--border2);
-      border-radius: var(--r); overflow: hidden;
-      transition: border-color .2s;
+      border-radius: var(--r); overflow: hidden; transition: border-color .2s;
     }
     .faq-item:hover { border-color: rgba(var(--aRGB),.3); }
     .faq-q {
@@ -688,7 +714,10 @@
       color: var(--accent2); transition: background .2s;
     }
     .faq-q:hover { background: rgba(var(--aRGB),.06); }
-    .faq-icon { font-size: .75rem; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
+    .faq-icon {
+      font-size: .9rem; color: var(--muted); transition: transform .25s;
+      flex-shrink: 0; display: inline-block;
+    }
     .faq-item.open .faq-icon { transform: rotate(180deg); }
     .faq-a {
       max-height: 0; overflow: hidden;
@@ -708,14 +737,12 @@
       text-align: center; position: relative;
     }
     footer::before {
-      content: '';
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 280px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent2), transparent);
     }
-    .footer-tagline { font-size: 1.15rem; font-weight: 900; margin-bottom: 5px; }
+    .footer-tagline { font-size: 1.15rem; font-weight: 900; margin-bottom: 18px; }
     .footer-tagline .hl { color: var(--accent2); }
-    .footer-sub { color: var(--muted); font-size: .87rem; margin-bottom: 20px; }
     .footer-meta {
       display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;
       color: var(--gray); font-size: .86rem; margin: 0 0 26px;
@@ -737,37 +764,23 @@
       .stat { padding: 16px 10px; }
       .stat-n { font-size: 1.25rem; }
 
-      /* card: stack title + price vertically on very small screens */
-      .card-head {
-        flex-direction: column;
-        gap: 10px;
-      }
-      /* price block: horizontal on mobile for compactness */
-      .price-block {
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-      /* CRITICAL: price-was SIEMPRE visible */
-      .price-was {
-        display: inline !important;
-        font-size: .8rem;
-      }
+      /* card: stack title + price vertically en pantallas muy pequeñas */
+      .card-head { flex-direction: column; gap: 10px; }
+      /* price block: horizontal en móvil */
+      .price-block { flex-direction: row; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .price-was { display: inline !important; font-size: .8rem; }
       .price-now { font-size: .92rem; padding: 5px 10px; }
       .price-off { font-size: .62rem; }
 
-      /* wa float más pequeño */
-      .wa-float { width: 54px; height: 54px; bottom: 16px; right: 16px; }
-      .wa-float i { font-size: 24px; }
+      /* wa float — zona segura sobre gesture bar de Android */
+      .wa-float { width: 54px; height: 54px; bottom: 72px; right: 16px; }
+      .wa-float .wa-icon-lg { width: 24px; height: 24px; }
 
       /* ribbon texto más corto */
       .ribbon { font-size: .74rem; padding: 9px 10px; }
 
       /* grid → 1 columna en móvil */
-      .cols-3, .cols-2, .cols-4 {
-        grid-template-columns: 1fr;
-      }
+      .cols-3, .cols-2, .cols-4 { grid-template-columns: 1fr; }
 
       /* pasos → 2 columnas */
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
@@ -775,7 +788,11 @@
       /* tips → 1 columna */
       .tips-grid { grid-template-columns: 1fr; }
 
-      body { padding-bottom: 84px; }
+      /* Ocultar enlace pruebas en nav — no necesita estar en nav en móvil */
+      .nav-pruebas { display: none; }
+
+      /* safe area para la barra de Android */
+      body { padding-bottom: env(safe-area-inset-bottom, 84px); }
     }
 
     @media (min-width: 481px) and (max-width: 768px) {
@@ -786,16 +803,16 @@
 </head>
 <body>
 
-<!-- STICKY WA -->
+<!-- STICKY WA FLOAT -->
 <a class="wa-float"
    href="https://wa.me/18292776696?text=¡Hola!%20Vi%20tu%20página%20y%20quiero%20un%20servicio"
    target="_blank" rel="noopener" title="WhatsApp">
-  <i class="fab fa-whatsapp"></i>
+  <svg class="wa-icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- RIBBON ANIMADO -->
+<!-- RIBBON — solo countdown, sin redundancias -->
 <div class="ribbon">
-  <span class="fire">🔥</span>&nbsp;<span id="ribbonCountdown">Precio especial por tiempo limitado</span>&nbsp;· Pagas solo si funciona&nbsp;<span class="fire">🔥</span>
+  <span class="fire">🔥</span>&nbsp;<span id="ribbonCountdown">Precio especial por tiempo limitado</span>&nbsp;<span class="fire">🔥</span>
 </div>
 
 <!-- NAVBAR -->
@@ -807,11 +824,13 @@
       <span class="avail-badge" id="availBadge"><span class="avail-dot" id="availDot"></span><span id="availText"></span></span>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
-      <a href="#guia" style="font-size:.82rem;font-weight:800;color:var(--accent2);padding:8px 14px;border:1px solid rgba(124,58,237,.35);border-radius:30px;white-space:nowrap;">📚 Pruebas Nacionales</a>
+      <!-- Oculto en móvil via CSS — visible en desktop -->
+      <a href="#guia" class="nav-pruebas">📚 Pruebas Nacionales</a>
       <a class="nav-cta"
-         href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
+         href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20saber%20qué%20servicios%20tienes%20disponibles"
          target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i> WhatsApp
+        <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
       </a>
     </div>
   </div>
@@ -828,7 +847,7 @@
     </div>
     <h1>
       PC lenta, celular lleno de basura,<br>
-      <span class="h1-grad">yo te lo arreglo hoy.</span>
+      <span class="h1-grad">yo te lo arreglo <span id="heroTime">hoy.</span></span>
     </h1>
     <p class="hero-sub">
       Free Fire con lag, WhatsApp lleno, anuncios en todo.<br>
@@ -837,21 +856,35 @@
     </p>
     <div class="hero-actions">
       <a class="btn-primary"
-         href="https://wa.me/18292776696?text=¡Hola!%20Vi%20tu%20página%20y%20quiero%20un%20servicio"
+         href="https://wa.me/18292776696?text=Hola!%20Quiero%20saber%20qué%20servicios%20tienes%20disponibles"
          target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i> Escribeme ahora
+        <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribeme ahora
       </a>
       <a class="btn-outline" href="#servicios">Ver servicios ↓</a>
-      <button class="btn-share" id="shareBtn" onclick="shareLink()">
-        <span class="copied-msg">¡Copiado!</span>
-        <i class="fas fa-share-alt"></i> Compartir en grupo
-      </button>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
+<!-- STATS STRIP — prueba social inmediata -->
 <div class="stats-strip">
+  <div class="stat">
+    <div class="stat-n">47+</div>
+    <div class="stat-l">Chamos atendidos</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">100%</div>
+    <div class="stat-l">Pagaron al ver que funcionó</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">RD$110</div>
+    <div class="stat-l">Precio desde</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">48h</div>
+    <div class="stat-l">Garantía mínima</div>
+  </div>
+</div>
 
 <!-- ═══════════════ SERVICIOS ═══════════════ -->
 <section id="servicios">
@@ -865,37 +898,75 @@
       <div class="promo-countdown" id="countdown">⏰ Calculando...</div>
     </div>
 
-    <!-- REFERIDO BANNER -->
-    <div class="referido-banner">
-      <div class="referido-icon">👥</div>
-      <div class="referido-body">
-        <div class="referido-title">Tráeme un amigo → <span>RD$50 menos para los dos</span></div>
-        <div class="referido-desc">Dile que me escriba y mencione tu nombre. Automático, sin vueltas. Aplica a cualquier servicio.</div>
-      </div>
-      <a class="referido-cta"
-         href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20referir%20a%20un%20amigo%20para%20los%20dos%20tener%20RD%2450%20de%20descuento"
-         target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i> Referir amigo
-      </a>
-    </div>
-
-    <!-- FREE AUDIT -->
+    <!-- FREE AUDIT (movido arriba del referido) -->
     <div class="audit-strip">
       <div class="audit-text">
         <strong>¿No sabes si tiene solución?</strong>
         <p>Descríbeme el problema → te digo gratis si lo arreglo, cuánto cuesta y cuánto tarda. Sin compromiso.</p>
       </div>
       <a class="btn-audit"
-         href="https://wa.me/18292776696?text=¡Hola!%20Tengo%20un%20problema%20con%20mi%20dispositivo%20y%20quiero%20saber%20si%20tiene%20solución%20(es%20gratis%20el%20diagnóstico%2C%20verdad%3F)"
+         href="https://wa.me/18292776696?text=Hola!%20Tengo%20un%20problema%20con%20mi%20dispositivo%20y%20quiero%20el%20diagnóstico%20gratis"
          target="_blank" rel="noopener">
         🔍 Diagnóstico gratis
       </a>
     </div>
 
-    <!-- PC GAMING -->
+    <!-- ══ ACADÉMICO (primero — mayor urgencia en temporada de exámenes) ══ -->
     <div class="service-section">
       <div class="sec-head">
-        <h2><i class="fas fa-desktop" style="color:var(--accent2)"></i> Tu PC para jugar</h2>
+        <h2>🎓 Para pasar los exámenes</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="cards-grid cols-2">
+
+        <div class="card">
+          <div class="card-stripe"></div>
+          <div class="card-icon">📚</div>
+          <div class="card-head">
+            <h3 class="card-title">Apuntes digitales</h3>
+            <div class="price-block">
+              <span class="price-was">RD$300</span>
+              <span class="price-now">RD$170</span>
+              <span class="price-off">Desde</span>
+            </div>
+          </div>
+          <p class="card-desc">Tus cuadernos → PDF buscable. Repasa en el celular cuando quieras, incluso en clase.</p>
+          <div class="card-benefit"><span class="check-icon">✓</span> Exámenes sin estrés</div>
+          <div class="card-guarantee">✓ Listo antes del examen</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20digitalizar%20mis%20apuntes" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-stripe"></div>
+          <span class="hot-label">⭐ Favorita</span>
+          <div class="card-icon">✨</div>
+          <div class="card-head">
+            <h3 class="card-title">Presentaciones profesionales</h3>
+            <div class="price-block">
+              <span class="price-was">RD$280</span>
+              <span class="price-now">RD$130</span>
+              <span class="price-off">Desde</span>
+            </div>
+          </div>
+          <p class="card-desc">Te hago la presentación de tu exposición. Diseño moderno, animaciones y todo.</p>
+          <div class="card-benefit"><span class="check-icon">✓</span> Llega a tu expo con la presentación que te va a hacer quedar bien</div>
+          <div class="card-guarantee">✓ Revisiones gratis hasta quedar bien</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20una%20presentación%20profesional" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ PC GAMING ══ -->
+    <div class="service-section">
+      <div class="sec-head">
+        <h2>🖥️ Tu PC para jugar</h2>
         <div class="sec-line"></div>
       </div>
       <div class="cards-grid cols-3">
@@ -913,11 +984,12 @@
             </div>
           </div>
           <p class="card-desc">Windows optimizado + juegos ligeros sin lag. Incluso si tu PC tiene 5 años.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Free Fire/Roblox/Minecraft sin lag garantizado</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Free Fire/Roblox/Minecraft sin lag garantizado</div>
           <div class="card-guarantee">✓ Garantía 48h o dinero de vuelta</div>
           <div style="font-size:.78rem;color:var(--muted);margin-top:-4px;">💡 Combo con instalación de juego: <strong style="color:var(--accent2);">RD$50 menos</strong></div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20PC%20para%20gaming" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20optimizar%20mi%20PC%20para%20gaming" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -933,10 +1005,11 @@
             </div>
           </div>
           <p class="card-desc">Free Fire, COD Mobile, Stumble Guys, lo que quieras. Lo busco, instalo y listo para jugar.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Dentro de 24h jugando</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Dentro de 24h jugando</div>
           <div class="card-guarantee">✓ Funciona perfecto o gratis</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20instalar%20un%20juego" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20instalar%20un%20juego" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -952,20 +1025,21 @@
             </div>
           </div>
           <p class="card-desc">PC como nueva. Sin virus, sin lag, listo para lo que sea. En 2 horas.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> PC vuela nuevamente</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> PC vuela nuevamente</div>
           <div class="card-guarantee">✓ Funciona sin problemas</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20Windows%20nuevo" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20Windows%20nuevo" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
       </div>
     </div>
 
-    <!-- CELULAR -->
+    <!-- ══ CELULAR ══ -->
     <div class="service-section">
       <div class="sec-head">
-        <h2><i class="fas fa-mobile-alt" style="color:var(--accent2)"></i> Tu celular seguro</h2>
+        <h2>📱 Tu celular seguro</h2>
         <div class="sec-line"></div>
       </div>
       <div class="cards-grid cols-3">
@@ -983,10 +1057,11 @@
             </div>
           </div>
           <p class="card-desc">YouTube, Spotify, todo premium sin anuncios. Desbloqueado pa'siempre.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Streaming sin interrupciones</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Streaming sin interrupciones</div>
           <div class="card-guarantee">✓ Funciona de por vida</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20apps%20premium" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20YouTube%20sin%20anuncios" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -1002,11 +1077,12 @@
             </div>
           </div>
           <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Celular como nuevo</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Celular como nuevo</div>
           <div class="card-guarantee">✓ 20 min máximo</div>
           <div style="font-size:.78rem;color:var(--muted);margin-top:-4px;">💡 Combo con YouTube sin anuncios: <strong style="color:var(--accent2);">+RD$60 solamente</strong></div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20limpiar%20apps" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20limpiar%20las%20apps%20de%20mi%20celular" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -1022,70 +1098,21 @@
             </div>
           </div>
           <p class="card-desc">VPN + contraseñas fuertes + cero rastreo. TikTok/Instagram dejan de perseguirte.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Tus datos son tuyos</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Tus datos son tuyos</div>
           <div class="card-guarantee">✓ 30 días garantizados</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20privacidad%20en%20Android" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20privacidad%20en%20mi%20Android" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
       </div>
     </div>
 
-    <!-- ACADÉMICO -->
+    <!-- ══ ENTRETENIMIENTO ══ -->
     <div class="service-section">
       <div class="sec-head">
-        <h2><i class="fas fa-graduation-cap" style="color:var(--accent2)"></i> Para pasar los exámenes</h2>
-        <div class="sec-line"></div>
-      </div>
-      <div class="cards-grid cols-2">
-
-        <div class="card">
-          <div class="card-stripe"></div>
-          <div class="card-icon">📚</div>
-          <div class="card-head">
-            <h3 class="card-title">Apuntes digitales</h3>
-            <div class="price-block">
-              <span class="price-was">RD$300</span>
-              <span class="price-now">RD$170</span>
-              <span class="price-off">Desde</span>
-            </div>
-          </div>
-          <p class="card-desc">Tus cuadernos → PDF buscable. Repasa en el celular cuando quieras, incluso en clase.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Exámenes sin estrés</div>
-          <div class="card-guarantee">✓ Listo antes del examen</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20digitalizar%20apuntes" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
-          </a>
-        </div>
-
-        <div class="card">
-          <div class="card-stripe"></div>
-          <span class="hot-label">⭐ Favorita</span>
-          <div class="card-icon">✨</div>
-          <div class="card-head">
-            <h3 class="card-title">Presentaciones profesionales</h3>
-            <div class="price-block">
-              <span class="price-was">RD$280</span>
-              <span class="price-now">RD$130</span>
-              <span class="price-off">Desde</span>
-            </div>
-          </div>
-          <p class="card-desc">Te hago la presentación de tu exposición. Diseño moderno, animaciones y todo.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Sacas nota sin hacer nada (jeje)</div>
-          <div class="card-guarantee">✓ Revisiones gratis hasta quedar bien</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20una%20presentación%20profesional" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ENTRETENIMIENTO -->
-    <div class="service-section">
-      <div class="sec-head">
-        <h2><i class="fas fa-film" style="color:var(--accent2)"></i> Tu entretenimiento</h2>
+        <h2>🎬 Tu entretenimiento</h2>
         <div class="sec-line"></div>
       </div>
       <div class="cards-grid cols-4">
@@ -1102,10 +1129,11 @@
             </div>
           </div>
           <p class="card-desc">Me dices qué quieres. Te la bajo sin Internet, sin anuncios, listo para ver.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Mira lo que quieras sin conexión</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Mira lo que quieras sin conexión</div>
           <div class="card-guarantee">✓ Catálogo actualizado siempre</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20películas%20y%20anime" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20películas%20y%20anime" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -1121,10 +1149,11 @@
             </div>
           </div>
           <p class="card-desc">Ebooks, audiolibros, novelas, manga. Lo que necesites leer o escuchar.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Lees en cualquier lado sin peso</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Lees en cualquier lado sin peso</div>
           <div class="card-guarantee">✓ Actualizaciones gratis 2 semanas</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20libros%20y%20audiolibros" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20libros%20y%20audiolibros" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -1140,10 +1169,11 @@
             </div>
           </div>
           <p class="card-desc">Pokémon, Super Mario, Final Fantasy en tu celular/PC. Clásicos que no envejecen.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Juega clásicos cuando quieras</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Juega clásicos cuando quieras</div>
           <div class="card-guarantee">✓ Funciona de por vida</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20emuladores%20y%20juegos" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Escribeme ahora
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Quiero%20emuladores%20y%20juegos%20clásicos" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribeme ahora
           </a>
         </div>
 
@@ -1154,14 +1184,30 @@
             <h3 class="card-title">¿No ves lo que buscas?</h3>
           </div>
           <p class="card-desc" style="margin-top:6px;">Dime qué necesitas. Si está en mis manos, te lo consigo. Sin compromiso.</p>
-          <div class="card-benefit"><i class="fas fa-check-circle"></i> Respuesta en minutos</div>
+          <div class="card-benefit"><span class="check-icon">✓</span> Respuesta en minutos</div>
           <div class="card-guarantee">✓ Sin costo por consultar</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=¡Hola!%20Tengo%20una%20consulta" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Preguntame
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Tengo%20una%20consulta" target="_blank" rel="noopener">
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Preguntame
           </a>
         </div>
 
       </div>
+    </div>
+
+    <!-- REFERIDO BANNER — movido aquí: el usuario ya vio los servicios y precios -->
+    <div class="referido-banner">
+      <div class="referido-icon">👥</div>
+      <div class="referido-body">
+        <div class="referido-title">Tráeme un amigo → <span>RD$50 menos para los dos</span></div>
+        <div class="referido-desc">Dile que me escriba y mencione tu nombre. Automático, sin vueltas. Aplica a cualquier servicio.</div>
+      </div>
+      <a class="referido-cta"
+         href="https://wa.me/18292776696?text=Hola!%20Quiero%20referir%20a%20un%20amigo%20para%20que%20los%20dos%20tengamos%20RD%2450%20de%20descuento"
+         target="_blank" rel="noopener">
+        <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Referir amigo
+      </a>
     </div>
 
   </div>
@@ -1190,7 +1236,8 @@
            href="https://wa.me/18292776696?text=Hola,%20soy%20profesor%20y%20quiero%20información%20sobre%20servicios%20técnicos"
            target="_blank" rel="noopener"
            onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-          <i class="fab fa-whatsapp"></i> Escribeme como profesor
+          <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribeme como profesor
         </a>
       </div>
       <div style="background:var(--surface2);border:1px solid var(--border2);border-left:4px solid var(--accent2);border-radius:var(--r);padding:22px 24px;">
@@ -1211,16 +1258,11 @@
 <div class="guide-wrap">
   <section id="guia">
     <div class="container">
-
       <div class="sec-head">
         <h2>📚 Guía para las Pruebas Nacionales</h2>
         <div class="sec-line"></div>
       </div>
-
-      <!-- HERO CARD -->
       <div class="guide-hero-card">
-
-        <!-- LEFT: Info -->
         <div>
           <div class="guide-badge-new">🆕 Nuevo · Exclusivo</div>
           <h2 class="guide-title">
@@ -1232,66 +1274,37 @@
             Mate, Sociales, Naturales y Español. Todo en un PDF.
           </p>
           <div class="guide-includes">
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> <strong>Temas oficiales</strong> de las Pruebas Nacionales MINERD</div>
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> <strong>4 materias</strong> × 3 grados = 12 módulos de contenido</div>
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Organizada por materia y grado — cero tiempo perdido</div>
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> PDF buscable — encuentra cualquier tema en segundos</div>
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Funciona sin Internet una vez descargada</div>
-            <div class="guide-inc-row"><i class="fas fa-check-circle"></i> Te la paso en persona en la escuela — pago en efectivo</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>Temas oficiales</strong> de las Pruebas Nacionales MINERD</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>4 materias</strong> × 3 grados = 12 módulos de contenido</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> Organizada por materia y grado — cero tiempo perdido</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> PDF buscable — encuentra cualquier tema en segundos</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> Funciona sin Internet una vez descargada</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> Te la paso en persona en la escuela — pago en efectivo</div>
           </div>
         </div>
-
-        <!-- RIGHT: Price + CTA -->
         <div class="guide-price-area">
           <div class="guide-value-label">Valor real</div>
           <div class="guide-value-cross">RD$1,200+</div>
           <div class="guide-price-big">RD$320</div>
           <div class="guide-price-sub">Pago en efectivo · Te la paso en persona</div>
           <div class="guide-guarantee-row">
-            <div class="guide-gtag"><i class="fas fa-shield-alt"></i> La lees o te devuelvo</div>
-            <div class="guide-gtag"><i class="fas fa-school"></i> En la escuela</div>
+            <div class="guide-gtag">🛡️ La lees o te devuelvo</div>
+            <div class="guide-gtag">🏫 En la escuela</div>
           </div>
           <a class="btn-guide-wa"
-             href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20la%20Guía%20para%20las%20Pruebas%20Nacionales%20(4to-6to).%20¿Cuándo%20nos%20vemos%20en%20la%20escuela?"
+             href="https://wa.me/18292776696?text=Hola!%20Quiero%20la%20Guía%20para%20las%20Pruebas%20Nacionales%20(4to-6to).%20¿Cuándo%20nos%20vemos%20en%20la%20escuela?"
              target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Coordinar en la escuela — RD$320
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Coordinar en la escuela — RD$320
           </a>
         </div>
-
       </div>
-
-      <!-- SUBJECT GRID -->
       <div class="guide-subjects">
-        <div class="subject-pill">
-          <span class="sp-icon">🔢</span>
-          <div class="sp-info">
-            <span class="sp-name">Matemáticas</span>
-            <span class="sp-grades">4to · 5to · 6to</span>
-          </div>
-        </div>
-        <div class="subject-pill">
-          <span class="sp-icon">🌍</span>
-          <div class="sp-info">
-            <span class="sp-name">Sociales</span>
-            <span class="sp-grades">4to · 5to · 6to</span>
-          </div>
-        </div>
-        <div class="subject-pill">
-          <span class="sp-icon">🔬</span>
-          <div class="sp-info">
-            <span class="sp-name">Naturales</span>
-            <span class="sp-grades">4to · 5to · 6to</span>
-          </div>
-        </div>
-        <div class="subject-pill">
-          <span class="sp-icon">📖</span>
-          <div class="sp-info">
-            <span class="sp-name">Español</span>
-            <span class="sp-grades">4to · 5to · 6to</span>
-          </div>
-        </div>
+        <div class="subject-pill"><span class="sp-icon">🔢</span><div class="sp-info"><span class="sp-name">Matemáticas</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">🌍</span><div class="sp-info"><span class="sp-name">Sociales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">🔬</span><div class="sp-info"><span class="sp-name">Naturales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">📖</span><div class="sp-info"><span class="sp-name">Español</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
       </div>
-
     </div>
   </section>
 </div>
@@ -1325,6 +1338,88 @@
   </section>
 </div>
 
+<!-- TESTIMONIOS -->
+<!--
+  ⚠️ INSTRUCCIÓN PARA EL DUEÑO:
+  Reemplaza estas tarjetas con capturas de pantalla REALES de WhatsApp.
+  Pide permiso a tus clientes. Con nombre de pila y qué servicio fue es suficiente.
+  Formato de captura funciona mejor que texto formateado para tu audiencia.
+  Actualiza los números de stats-strip al mismo tiempo.
+-->
+<section style="background:var(--surface);border-top:1px solid var(--border2);">
+  <div class="container">
+    <div class="sec-head">
+      <h2>💬 Lo que dicen</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="testimonios-grid">
+
+      <div class="testi-card">
+        <div class="testi-header">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Juan, 4to B</div>
+            <div class="testi-role">Estudiante</div>
+          </div>
+        </div>
+        <span class="testi-service">PC para gaming</span>
+        <p class="testi-body">"Tenía el Free Fire en 20fps y ahora va suave. Lo arregló en clase misma. Pagué solo cuando lo vi funcionando."</p>
+        <div class="testi-footer">
+          <span class="testi-stars">★★★★★</span>
+          <span>· Hace 2 semanas</span>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-header">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">María, 5to A</div>
+            <div class="testi-role">Estudiante</div>
+          </div>
+        </div>
+        <span class="testi-service">Presentación profesional</span>
+        <p class="testi-body">"Me hizo la presentación de Sociales esa misma tarde. La profe preguntó quién me la hizo. Quedé bárbara."</p>
+        <div class="testi-footer">
+          <span class="testi-stars">★★★★★</span>
+          <span>· Hace 1 semana</span>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-header">
+          <div class="testi-avatar">C</div>
+          <div>
+            <div class="testi-name">Carlos, 6to</div>
+            <div class="testi-role">Estudiante</div>
+          </div>
+        </div>
+        <span class="testi-service">YouTube sin anuncios</span>
+        <p class="testi-body">"YouTube sin publicidad y Spotify gratis. Vale la pena. Ya se lo recomendé a tres panas y todos quedaron contentos."</p>
+        <div class="testi-footer">
+          <span class="testi-stars">★★★★★</span>
+          <span>· Hace 3 días</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="testi-placeholder-note">
+      📌 <strong>Para el dueño:</strong> Estas son tarjetas de ejemplo. Reemplázalas con capturas de pantalla reales de tus chats de WhatsApp. Son más creíbles que cualquier texto formateado.
+    </div>
+  </div>
+</section>
+
+<!-- SHARE STRIP — movido aquí: el usuario ya está convencido -->
+<div class="share-strip">
+  <div class="container">
+    <p><strong>¿Te parece útil?</strong> Compártelo en el grupo de tu clase. Si tu amigo contrata, los dos ahorran RD$50.</p>
+    <button class="btn-share" id="shareBtn" onclick="shareLink()">
+      <span class="copied-msg">¡Copiado!</span>
+      📤 Compartir en grupo
+    </button>
+  </div>
+</div>
+
 <!-- LISTA DE DIFUSIÓN NUDGE -->
 <div style="background:var(--surface2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:22px 18px;text-align:center;">
   <div class="container" style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
@@ -1336,7 +1431,8 @@
     <a href="https://wa.me/18292776696?text=LISTA"
        target="_blank" rel="noopener"
        style="background:var(--green);color:#000;font-weight:800;font-size:.85rem;padding:10px 18px;border-radius:30px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
-      <i class="fab fa-whatsapp"></i> Unirme a la lista
+      <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Unirme a la lista
     </a>
   </div>
 </div>
@@ -1370,35 +1466,35 @@
     </div>
     <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q"><span>¿Cómo sé que no me vas a dañar o robar el celular/PC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Cómo sé que no me vas a dañar o robar el celular/PC?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Legítima. Primero: soy estudiante de la misma escuela — si te daño algo, me ves todos los días. Segundo: <strong>nunca toco el dispositivo sin que tú estés presente o des permiso explícito por WhatsApp</strong>. Tercero: el diagnóstico es gratis, así que puedes ver qué voy a hacer antes de decidir. Cuarto: si algo sale mal, lo arreglo o te devuelvo el dinero. Todo queda por escrito en el chat.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Cómo pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Cómo pago?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">En efectivo. Te lo entrego en la escuela y pagas cuando ves que funciona. Si no funciona, no pagas.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Qué pasa si algo sale mal?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Qué pasa si algo sale mal?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Cada servicio tiene garantía. Me avisas, lo arreglo sin costo extra. Si sigo sin arreglarlo = dinero de vuelta.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Atiendes fines de semana?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Atiendes fines de semana?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Depende. Escribime por WhatsApp y coordinamos. Preferiblemente lunes a viernes en la escuela.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Haces servicios a domicilio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Haces servicios a domicilio?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Sí, pero prefiero en la escuela. A domicilio es más caro o debes venir a buscar luego. Coordinamos.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Cuánto tiempo demora cada servicio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Cuánto tiempo demora cada servicio?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Limpiar apps: 20 min · YouTube sin anuncios: 15 min · Windows: 2-3h · PC gaming: 3-4h · Películas: 30-45 min · Libros: 25-40 min · Emuladores: 45-90 min · Presentaciones: 1-2h · Apuntes: depende del volumen.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Qué película, anime o juego puedo pedir?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Qué película, anime o juego puedo pedir?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Lo que quieras. Avatar, Dune, Marvel, anime completo (Dragon Ball, Naruto, Jujutsu Kaisen). Para emuladores: Pokémon, Super Mario, Final Fantasy. Me dices y yo lo consigo.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span>¿Los libros y películas caben en mi celular?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-q"><span>¿Los libros y películas caben en mi celular?</span><span class="faq-icon">▾</span></div>
         <div class="faq-a">Sí. Las películas las comprimo si es necesario. Los libros pesan casi nada y caben tranquilo.</div>
       </div>
     </div>
@@ -1408,22 +1504,24 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-tagline"><span class="hl">Funciona o no pagas.</span> Sin vueltas. De verdá.</div>
-  <p class="footer-sub">Lo que funciona, de verdá. Sin vaina rara.</p>
   <div class="footer-meta">
-    <span><i class="fas fa-map-marker-alt"></i> Tu escuela · RD</span>
-    <span><i class="far fa-clock"></i> Lunes a Viernes</span>
+    <span>📍 Tu escuela · RD</span>
+    <span>🕐 Lunes a Viernes</span>
   </div>
   <a class="btn-primary"
      href="https://wa.me/18292776696?text=¡Hola!%20Quiero%20un%20servicio"
      target="_blank" rel="noopener"
      style="display:inline-flex;margin-bottom:22px;">
-    <i class="fab fa-whatsapp"></i> Escribeme por WhatsApp
+    <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Escribeme por WhatsApp
   </a>
-  <div class="footer-copy">© 2026 Servicios Técnicos Express · Un estudiante de RD como tú</div>
+  <div class="footer-copy">© 2026 ServiciosGG · República Dominicana</div>
 </footer>
 
 <script>
-  /* FAQ */
+  /* ══════════════════════════════════════════
+     FAQ TOGGLE
+  ══════════════════════════════════════════ */
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -1433,20 +1531,30 @@
     });
   });
 
-  /* DISPONIBLE INDICATOR */
+  /* ══════════════════════════════════════════
+     DISPONIBLE INDICATOR + H1 DINÁMICO
+     Resuelve contradicción "hoy" vs "Respondo el lunes"
+  ══════════════════════════════════════════ */
   (function() {
     const day = new Date().getDay(); // 0=Dom, 6=Sab
-    const badge = document.getElementById('availBadge');
-    const dot   = document.getElementById('availDot');
-    const text  = document.getElementById('availText');
+    const badge   = document.getElementById('availBadge');
+    const dot     = document.getElementById('availDot');
+    const text    = document.getElementById('availText');
+    const heroTime = document.getElementById('heroTime');
     if (!badge) return;
     const isWeekday = day >= 1 && day <= 5;
     badge.classList.add(isWeekday ? 'online' : 'offline');
     dot.classList.add(isWeekday ? 'online' : 'offline');
     text.textContent = isWeekday ? 'Disponible hoy' : 'Respondo el lunes';
+    // Sincroniza el H1 con la disponibilidad real
+    if (heroTime) {
+      heroTime.textContent = isWeekday ? 'hoy.' : 'esta semana.';
+    }
   })();
 
-  /* SHARE BUTTON */
+  /* ══════════════════════════════════════════
+     SHARE BUTTON
+  ══════════════════════════════════════════ */
   function shareLink() {
     const url = window.location.href;
     const msg = `🔧 *ServiciosGG* — El chamo que arregla PCs y celulares en la escuela\n✅ Pagas solo si funciona | Desde RD$110\n👉 ${url}`;
@@ -1461,20 +1569,20 @@
     }
   }
 
-
+  /* ══════════════════════════════════════════
+     COUNTDOWN — fecha real hardcodeada
+     ACTUALIZA "deadline" cada lunes manualmente
+     Todos los usuarios ven el mismo número = sin dark pattern
+  ══════════════════════════════════════════ */
   (function tick() {
-    const KEY = 'sgg_deadline';
-    let deadline = localStorage.getItem(KEY);
-    if (!deadline) {
-      deadline = Date.now() + 48 * 3_600_000;
-      localStorage.setItem(KEY, deadline);
-    }
-    const diff = parseInt(deadline) - Date.now();
+    // ⚠️ Actualiza esta fecha cada lunes (formato ISO con zona -04:00 = RD)
+    const deadline = new Date('2026-03-14T23:59:59-04:00');
+    const diff = deadline - Date.now();
     const el  = document.getElementById('countdown');
     const rib = document.getElementById('ribbonCountdown');
     if (diff <= 0) {
-      if (el)  el.textContent  = '⚡ Oferta activa — escríbeme hoy';
-      if (rib) rib.textContent = 'Oferta activa hoy';
+      if (el)  el.textContent  = '⚡ Precio especial activo hoy';
+      if (rib) rib.textContent = 'Precio especial activo hoy';
       return;
     }
     const h = Math.floor(diff / 3_600_000);
@@ -1485,7 +1593,9 @@
     setTimeout(tick, 30_000);
   })();
 
-  /* Toda la card es clickeable */
+  /* ══════════════════════════════════════════
+     CARD CLICK — toda la card es clickeable
+  ══════════════════════════════════════════ */
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', e => {
       if (e.target.closest('.btn-wa')) return;
