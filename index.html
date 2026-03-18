@@ -82,13 +82,14 @@
 
     /* NAVBAR — sin backdrop-filter, fondo sólido */
     .navbar { position:sticky; top:0; z-index:100; background:rgba(7,7,14,.97); border-bottom:1px solid var(--border2); padding:12px 18px; }
-    .navbar-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
-    .logo { font-weight:900; font-size:1rem; display:flex; align-items:center; gap:8px; }
+    .navbar-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .logo { font-weight:900; font-size:1rem; display:flex; align-items:center; gap:8px; min-width:0; flex-shrink:1; overflow:hidden; }
     .logo-accent { color:var(--accent2); }
-    .logo-badge { background:rgba(var(--aRGB),.12); border:1px solid rgba(var(--aRGB),.3); color:var(--accent2); font-size:.6rem; font-weight:800; padding:2px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:.5px; }
-    .nav-cta { background:var(--green); color:#000; font-weight:800; font-size:.83rem; padding:9px 18px; border-radius:30px; display:flex; align-items:center; gap:7px; transition:transform .18s,box-shadow .18s; white-space:nowrap; }
+    .logo-badge { background:rgba(var(--aRGB),.12); border:1px solid rgba(var(--aRGB),.3); color:var(--accent2); font-size:.6rem; font-weight:800; padding:2px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+    .nav-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+    .nav-cta { background:var(--green); color:#000; font-weight:800; font-size:.83rem; padding:9px 18px; border-radius:30px; display:flex; align-items:center; gap:7px; transition:transform .18s,box-shadow .18s; white-space:nowrap; flex-shrink:0; }
     .nav-cta:hover { transform:translateY(-2px); box-shadow:0 6px 22px rgba(var(--gRGB),.4); }
-    .nav-pruebas { font-size:.82rem; font-weight:800; color:var(--accent2); padding:8px 14px; border:1px solid rgba(124,58,237,.35); border-radius:30px; white-space:nowrap; }
+    .nav-pruebas { font-size:.82rem; font-weight:800; color:var(--accent2); padding:8px 14px; border:1px solid rgba(124,58,237,.35); border-radius:30px; white-space:nowrap; flex-shrink:0; }
     @keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
     .avail-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
     .avail-dot.online  { background:var(--green); animation:dotBlink 1.5s ease-in-out infinite; }
@@ -197,14 +198,14 @@
 
     /* GUIDE */
     .guide-wrap { background:var(--surface); border-top:1px solid var(--border2); border-bottom:1px solid var(--border2); }
-    .guide-hero-card { position:relative; overflow:hidden; background:var(--surface2); border:1px solid rgba(var(--aRGB),.4); border-radius:var(--r); padding:32px 26px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
-    @media(max-width:680px){ .guide-hero-card { grid-template-columns:1fr; } }
+    .guide-hero-card { position:relative; overflow:hidden; background:var(--surface2); border:1px solid rgba(var(--aRGB),.4); border-radius:var(--r); padding:28px 20px; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center; }
+    @media(max-width:680px){ .guide-hero-card { grid-template-columns:1fr; padding:22px 16px; } }
     .guide-hero-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(var(--aRGB),.1) 0%,rgba(236,72,153,.07) 60%,transparent 100%); pointer-events:none; }
     .guide-hero-card::after  { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--pink),var(--amber)); }
-    .guide-badge-new { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--amber),var(--red)); color:#fff; font-size:.63rem; font-weight:900; padding:3px 11px; border-radius:20px; text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px; }
-    .guide-title { font-size:clamp(1.25rem,3.5vw,1.9rem); font-weight:900; line-height:1.1; margin-bottom:10px; position:relative; }
+    .guide-badge-new { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--amber),var(--red)); color:#fff; font-size:.63rem; font-weight:900; padding:3px 11px; border-radius:20px; text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px; white-space:nowrap; }
+    .guide-title { font-size:clamp(1.15rem,3.5vw,1.9rem); font-weight:900; line-height:1.1; margin-bottom:10px; position:relative; word-break:break-word; }
     .guide-title .ggrad { background:linear-gradient(135deg,#fff 0%,var(--accent2) 55%,var(--pink) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .guide-subtitle { color:var(--gray); font-size:.9rem; margin-bottom:16px; position:relative; }
+    .guide-subtitle { color:var(--gray); font-size:.88rem; margin-bottom:16px; position:relative; line-height:1.55; }
     .guide-includes { display:flex; flex-direction:column; gap:7px; position:relative; margin-bottom:20px; }
     .guide-inc-row { display:flex; align-items:center; gap:9px; font-size:.86rem; color:var(--text); }
     .guide-inc-row strong { color:var(--accent2); }
@@ -285,6 +286,7 @@
       .steps-grid { grid-template-columns:repeat(2,1fr); }
       .tips-grid { grid-template-columns:1fr; }
       .nav-pruebas { display:none; }
+      .logo-badge { display:none; }
       body { padding-bottom:env(safe-area-inset-bottom,72px); }
     }
     @media (min-width:481px) and (max-width:768px) {
@@ -318,7 +320,7 @@
       <span class="logo-badge">Tu escuela · RD</span>
       <span class="avail-badge" id="availBadge"><span class="avail-dot" id="availDot"></span><span id="availText"></span></span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;">
+    <div class="nav-right">
       <a href="#guia" class="nav-pruebas">📚 Pruebas Nacionales</a>
       <a class="nav-cta" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20¿Qué%20servicios%20tienes?" target="_blank" rel="noopener">
         <svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>WhatsApp
@@ -371,7 +373,7 @@
         <div>
           <div class="guide-badge-new">🆕 Nuevo · Exclusivo</div>
           <h2 class="guide-title"><span class="ggrad">Guía Pruebas Nacionales</span><br>4to · 5to · 6to</h2>
-          <p class="guide-subtitle">Preparada con los temas exactos que caen en las Pruebas.<br>Mate, Sociales, Naturales y Español. Todo en un PDF.</p>
+          <p class="guide-subtitle">Preparada con los temas exactos que caen en las Pruebas. Mate, Sociales, Naturales y Español. Todo en un PDF.</p>
           <div class="guide-includes">
             <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>Temas oficiales</strong> MINERD</div>
             <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>4 materias</strong> × 3 grados = 12 módulos</div>
