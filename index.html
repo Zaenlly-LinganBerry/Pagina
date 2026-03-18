@@ -73,21 +73,14 @@
       55%      { box-shadow:0 4px 24px rgba(var(--gRGB),.4),0 0 0 18px rgba(var(--gRGB),0); }
     }
 
-    /* RIBBON */
+    /* RIBBON — sin animación, texto estático */
     .ribbon {
       background:linear-gradient(90deg,var(--accent),#6d28d9,var(--pink));
       padding:9px 18px; text-align:center; font-size:.8rem; font-weight:800; color:#fff;
-      position:relative; overflow:hidden;
     }
-    .ribbon::after {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 50%,transparent 100%);
-      animation:ribbonSheen 3s ease-in-out infinite;
-    }
-    @keyframes ribbonSheen { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
 
-    /* NAVBAR */
-    .navbar { position:sticky; top:0; z-index:100; background:rgba(7,7,14,.93); backdrop-filter:blur(18px); border-bottom:1px solid var(--border2); padding:12px 18px; }
+    /* NAVBAR — sin backdrop-filter, fondo sólido */
+    .navbar { position:sticky; top:0; z-index:100; background:rgba(7,7,14,.97); border-bottom:1px solid var(--border2); padding:12px 18px; }
     .navbar-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
     .logo { font-weight:900; font-size:1rem; display:flex; align-items:center; gap:8px; }
     .logo-accent { color:var(--accent2); }
@@ -108,22 +101,28 @@
     .hero-pill { display:inline-flex; align-items:center; gap:7px; background:rgba(var(--aRGB),.1); border:1px solid rgba(var(--aRGB),.35); color:var(--accent2); font-size:.74rem; font-weight:800; padding:5px 14px; border-radius:30px; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; }
     h1 { font-size:clamp(1.95rem,6vw,3.4rem); font-weight:900; line-height:1.07; margin-bottom:16px; letter-spacing:-.02em; }
     .h1-grad { background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--pink) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .hero-sub { color:var(--gray); font-size:1rem; max-width:460px; margin:0 auto 32px; }
+    .hero-sub { color:var(--gray); font-size:1rem; max-width:460px; margin:0 auto 16px; }
     .hero-sub strong { color:var(--text); }
 
-    /* SPLIT CTA */
-    .hero-split { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:520px; margin:0 auto 14px; }
-    .btn-split { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:18px 16px; border-radius:var(--r); font-weight:800; cursor:pointer; transition:transform .18s,box-shadow .18s; border:none; position:relative; overflow:hidden; }
-    .btn-split::before { content:''; position:absolute; inset:0; background:rgba(255,255,255,.08); opacity:0; transition:opacity .18s; }
-    .btn-split:hover::before { opacity:1; }
-    .btn-split:hover { transform:translateY(-3px); }
-    .btn-split-phone { background:var(--green); color:#000; box-shadow:0 6px 28px rgba(var(--gRGB),.35); }
-    .btn-split-phone:hover { box-shadow:0 12px 36px rgba(var(--gRGB),.5); }
-    .btn-split-pc { background:var(--surface2); color:var(--text); border:1px solid var(--border2); box-shadow:0 6px 28px rgba(0,0,0,.4); }
-    .btn-split-pc:hover { border-color:rgba(var(--aRGB),.5); box-shadow:0 12px 36px rgba(var(--aRGB),.2); }
-    .btn-split-emoji { font-size:1.8rem; line-height:1; }
-    .btn-split-label { font-size:.88rem; font-weight:900; }
-    .btn-split-sub   { font-size:.72rem; font-weight:600; opacity:.75; }
+    /* TRUST LINE — accountability social arriba en el hero */
+    .hero-trust {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(var(--gRGB),.08); border:1px solid rgba(var(--gRGB),.2);
+      color:#4ade80; font-size:.82rem; font-weight:700;
+      padding:7px 16px; border-radius:30px; margin:0 auto 28px;
+    }
+
+    /* CTA ÚNICO — un botón, una acción */
+    .hero-cta-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; max-width:420px; margin:0 auto; }
+    .btn-hero-main {
+      width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+      background:var(--green); color:#000; font-weight:900; font-size:1.05rem;
+      padding:18px 28px; border-radius:var(--r); border:none; cursor:pointer;
+      box-shadow:0 8px 32px rgba(var(--gRGB),.4);
+      transition:transform .18s,box-shadow .18s;
+    }
+    .btn-hero-main:hover { transform:translateY(-3px); box-shadow:0 16px 44px rgba(var(--gRGB),.55); }
+    .btn-hero-hint { font-size:.78rem; color:var(--muted); font-weight:600; }
     .hero-diag-link { display:inline-flex; align-items:center; gap:6px; font-size:.83rem; color:var(--muted); font-weight:700; transition:color .18s; }
     .hero-diag-link:hover { color:var(--accent2); }
 
@@ -133,7 +132,8 @@
     .stat:last-child { border-right:none; }
     .stat:hover { background:var(--surface2); }
     .stat-n { font-size:1.45rem; font-weight:900; color:var(--accent2); }
-    .stat-l { font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:2px; }
+    /* FIX: .65rem era ilegible en gama baja */
+    .stat-l { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:2px; }
 
     /* SHARE STRIP */
     .share-strip { background:rgba(var(--gRGB),.05); border-top:1px solid rgba(var(--gRGB),.12); border-bottom:1px solid rgba(var(--gRGB),.12); padding:18px; text-align:center; }
@@ -149,15 +149,6 @@
     .sec-head h2 { font-size:clamp(1.1rem,2.5vw,1.5rem); font-weight:800; white-space:nowrap; display:flex; align-items:center; gap:9px; }
     .sec-line { flex:1; height:1px; background:var(--border2); }
 
-    /* PROMO BOX */
-    .promo-box { position:relative; overflow:hidden; background:var(--surface2); border:1px solid var(--border2); border-radius:var(--r); padding:26px 22px; text-align:center; margin-bottom:32px; }
-    .promo-box::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(var(--aRGB),.07) 0%,rgba(236,72,153,.06) 50%,rgba(245,158,11,.04) 100%); pointer-events:none; }
-    .promo-box::after  { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--pink),var(--amber)); }
-    .promo-title { font-size:clamp(1.05rem,3vw,1.4rem); font-weight:900; margin:8px 0 5px; position:relative; }
-    .promo-title .hot { background:linear-gradient(135deg,var(--amber),var(--red)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .promo-sub { color:var(--muted); font-size:.86rem; position:relative; }
-    .promo-countdown { display:inline-flex; align-items:center; gap:8px; margin-top:12px; position:relative; background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.3); color:#fbbf24; font-weight:800; font-size:.82rem; padding:7px 18px; border-radius:30px; }
-
     /* GRIDS */
     .service-section { margin-bottom:52px; }
     .cards-grid { display:grid; gap:13px; }
@@ -166,7 +157,7 @@
     .cols-4 { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
 
     /* CARD */
-    .card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:12px; position:relative; overflow:hidden; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; cursor:pointer; }
+    .card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:12px; position:relative; overflow:hidden; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
     .card-stripe { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent2),var(--pink)); opacity:0; transition:opacity .22s; }
     .card:hover { transform:translateY(-5px); box-shadow:0 16px 44px rgba(var(--aRGB),.2); border-color:rgba(var(--aRGB),.45); }
     .card:hover .card-stripe { opacity:1; }
@@ -177,7 +168,8 @@
     .price-block { display:flex; flex-direction:column; align-items:flex-end; gap:3px; flex-shrink:0; }
     .price-was { font-size:.75rem; color:var(--muted); text-decoration:line-through; line-height:1; }
     .price-now { background:var(--accent2); color:var(--bg); padding:5px 11px; border-radius:var(--r2); font-weight:900; font-size:.93rem; white-space:nowrap; line-height:1.2; }
-    .price-off { font-size:.61rem; font-weight:900; background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.3); color:#fca5a5; padding:2px 7px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
+    /* FIX: .61rem era ilegible — nadie veía los descuentos */
+    .price-off { font-size:.75rem; font-weight:900; background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.3); color:#fca5a5; padding:2px 7px; border-radius:20px; text-transform:uppercase; white-space:nowrap; }
     .card-desc { color:var(--gray); font-size:.89rem; line-height:1.5; }
     .card-benefit { display:flex; align-items:center; gap:7px; color:var(--accent2); font-size:.86rem; font-weight:700; }
     .card-guarantee { background:rgba(var(--gRGB),.09); border-left:3px solid var(--green); padding:8px 12px; border-radius:4px; font-size:.8rem; color:#4ade80; font-weight:600; }
@@ -277,10 +269,7 @@
       .hero { padding:44px 0 38px; }
       h1 { font-size:1.85rem; letter-spacing:-.01em; }
       .hero-sub { font-size:.94rem; }
-      .hero-split { gap:9px; max-width:100%; }
-      .btn-split { padding:14px 10px; }
-      .btn-split-emoji { font-size:1.5rem; }
-      .btn-split-sub { display:none; }
+      .btn-hero-main { font-size:.97rem; padding:16px 20px; }
       .stat { padding:14px 8px; }
       .stat-n { font-size:1.2rem; }
       .card-head { flex-direction:column; gap:9px; }
@@ -301,7 +290,7 @@
       .price-was { display:inline !important; }
     }
     @media (prefers-reduced-motion:reduce) {
-      .wa-float, .ribbon::after, .avail-dot { animation:none; }
+      .wa-float, .avail-dot { animation:none; }
     }
   </style>
 </head>
@@ -317,7 +306,8 @@
   <svg class="wa-icon-lg" fill="#fff" aria-hidden="true"><use href="#ico-wa"/></svg>
 </a>
 
-<div class="ribbon">🔥&nbsp;<span id="ribbonCountdown">Precio especial por tiempo limitado</span>&nbsp;🔥</div>
+<!-- RIBBON: estático, sin countdown falso -->
+<div class="ribbon">📍 En tu escuela · Desde RD$110 · Pagas solo si funciona ✅</div>
 
 <nav class="navbar">
   <div class="navbar-inner">
@@ -344,24 +334,22 @@
     <h1>PC lenta, celular lleno de basura,<br><span class="h1-grad">yo te lo arreglo <span id="heroTime">hoy.</span></span></h1>
     <p class="hero-sub">
       Free Fire con lag, WhatsApp lleno, anuncios en todo.<br>
-      <strong>Nos vemos en la escuela. Lo arreglo. Ves que funciona. Entonces pagas.</strong><br>
-      <span style="color:var(--green);font-weight:900;">✓ Desde RD$110 · Sin riesgo</span>
+      <strong>Nos vemos en la escuela. Lo arreglo. Ves que funciona. Entonces pagas.</strong>
     </p>
-    <div class="hero-split">
-      <a class="btn-split btn-split-phone" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Tengo%20problemas%20con%20mi%20CELULAR%20(lento%2C%20lleno%2C%20anuncios).%20¿Cuánto%20cuesta?" target="_blank" rel="noopener">
-        <span class="btn-split-emoji">📱</span>
-        <span class="btn-split-label">Mi celular</span>
-        <span class="btn-split-sub">Lento, lleno, anuncios</span>
-      </a>
-      <a class="btn-split btn-split-pc" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Tengo%20problemas%20con%20mi%20PC%20(lag%2C%20lenta%2C%20virus).%20¿Cuánto%20cuesta?" target="_blank" rel="noopener">
-        <span class="btn-split-emoji">💻</span>
-        <span class="btn-split-label">Mi PC</span>
-        <span class="btn-split-sub">Lag, virus, Windows</span>
-      </a>
+
+    <!-- TRUST LINE: el argumento más fuerte, arriba — no enterrado en el FAQ -->
+    <div class="hero-trust">
+      🏫 Soy de tu misma escuela — me ves todos los días si algo falla
     </div>
-    <a class="hero-diag-link" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20No%20sé%20qué%20tengo%2C%20¿me%20haces%20un%20diagnóstico%20gratis?" target="_blank" rel="noopener">
-      🔍 ¿No sabes qué tienes? → Diagnóstico gratis
-    </a>
+
+    <!-- CTA ÚNICO: una decisión, un click -->
+    <div class="hero-cta-wrap">
+      <a class="btn-hero-main" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela%20y%20quiero%20un%20servicio.%20¿Qué%20arreglas?" target="_blank" rel="noopener">
+        <svg class="wa-icon-lg" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
+        Escribeme por WhatsApp →
+      </a>
+      <span class="btn-hero-hint">¿Celular o PC? Me dices allá · Diagnóstico gratis</span>
+    </div>
   </div>
 </section>
 
@@ -372,21 +360,50 @@
   <div class="stat"><div class="stat-n">48h</div><div class="stat-l">Garantía mínima</div></div>
 </div>
 
-<div class="share-strip">
-  <p><strong>¿Te sirvió?</strong> Compártelo con alguien que lo necesite 👇</p>
-  <button class="btn-share" id="shareBtn" onclick="shareLink()">
-    <span class="copied-msg">¡Link copiado!</span>📤 Compartir
-  </button>
+<!-- PRUEBAS NACIONALES: movido al scroll 2 — mayor urgencia real para el 100% del público -->
+<div class="guide-wrap" id="guia">
+  <section>
+    <div class="container">
+      <div class="sec-head"><h2>📚 Para pasar las Pruebas Nacionales sin morir en el intento</h2><div class="sec-line"></div></div>
+      <div class="guide-hero-card">
+        <div>
+          <div class="guide-badge-new">🆕 Nuevo · Exclusivo</div>
+          <h2 class="guide-title"><span class="ggrad">Guía Pruebas Nacionales</span><br>4to · 5to · 6to</h2>
+          <p class="guide-subtitle">Preparada con los temas exactos que caen en las Pruebas.<br>Mate, Sociales, Naturales y Español. Todo en un PDF.</p>
+          <div class="guide-includes">
+            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>Temas oficiales</strong> MINERD</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>4 materias</strong> × 3 grados = 12 módulos</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> PDF buscable — cualquier tema en segundos</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> Funciona sin Internet una vez descargada</div>
+            <div class="guide-inc-row"><span class="check-icon">✓</span> Pago en efectivo · Te la paso en la escuela</div>
+          </div>
+        </div>
+        <div class="guide-price-area">
+          <div class="guide-value-label">Valor real</div>
+          <div class="guide-value-cross">RD$1,200+</div>
+          <div class="guide-price-big">RD$320</div>
+          <div class="guide-price-sub">Pago en efectivo · En persona</div>
+          <div class="guide-guarantee-row">
+            <div class="guide-gtag">🛡️ La lees o te devuelvo</div>
+            <div class="guide-gtag">🏫 En la escuela</div>
+          </div>
+          <a class="btn-guide-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20la%20Guía%20Pruebas%20Nacionales%20(4to-6to)%20por%20RD%24320.%20¿Cuándo%20nos%20vemos?" target="_blank" rel="noopener">
+            <svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Coordinar en la escuela — RD$320
+          </a>
+        </div>
+      </div>
+      <div class="guide-subjects">
+        <div class="subject-pill"><span class="sp-icon">🔢</span><div class="sp-info"><span class="sp-name">Matemáticas</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">🌍</span><div class="sp-info"><span class="sp-name">Sociales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">🔬</span><div class="sp-info"><span class="sp-name">Naturales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+        <div class="subject-pill"><span class="sp-icon">📖</span><div class="sp-info"><span class="sp-name">Español</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <section id="servicios">
   <div class="container">
-
-    <div class="promo-box">
-      <div class="promo-title">Precio especial <span class="hot">esta semana</span></div>
-      <div class="promo-sub">Solo pa' estudiantes de la escuela · Sube la próxima semana</div>
-      <div class="promo-countdown" id="countdown">⏰ Calculando...</div>
-    </div>
 
     <div class="audit-strip">
       <div class="audit-text">
@@ -394,12 +411,56 @@
         <p>Descríbeme el problema → te digo gratis si lo arreglo, cuánto cuesta y cuánto tarda.</p>
       </div>
       <a class="btn-audit" href="https://wa.me/18292776696?text=Hola!%20Tengo%20un%20problema%20y%20quiero%20el%20diagnóstico%20gratis" target="_blank" rel="noopener">
-        🔍 Revísame el celular (gratis)
+        🔍 Diagnóstico gratis
       </a>
     </div>
 
     <div class="service-section">
-      <div class="sec-head"><h2>🎓 Para pasar los exámenes</h2><div class="sec-line"></div></div>
+      <div class="sec-head"><h2>📱 Tu celular seguro y rápido</h2><div class="sec-line"></div></div>
+      <div class="cards-grid cols-3">
+        <div class="card">
+          <div class="card-stripe"></div>
+          <span class="hot-label">⚡ Top semana</span>
+          <div class="card-icon">▶️</div>
+          <div class="card-head">
+            <h3 class="card-title">YouTube sin anuncios</h3>
+            <div class="price-block"><span class="price-was">RD$280</span><span class="price-now">RD$170</span><span class="price-off">-39%</span></div>
+          </div>
+          <p class="card-desc">YouTube, Spotify, todo sin anuncios. Desbloqueado pa'siempre.</p>
+          <div class="card-benefit"><span class="check-icon">✓</span> Streaming sin interrupciones</div>
+          <div class="card-guarantee">✓ Funciona de por vida</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20YouTube%20sin%20anuncios%20(RD%24170)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
+        </div>
+        <div class="card">
+          <div class="card-stripe"></div>
+          <div class="card-icon">🧹</div>
+          <div class="card-head">
+            <h3 class="card-title">Limpiar apps basura</h3>
+            <div class="price-block"><span class="price-was">RD$180</span><span class="price-now">RD$110</span><span class="price-off">-39%</span></div>
+          </div>
+          <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
+          <div class="card-benefit"><span class="check-icon">✓</span> Celular como nuevo en 20 min</div>
+          <div class="card-guarantee">✓ 20 minutos máximo</div>
+          <div style="font-size:.76rem;color:var(--muted);margin-top:-4px;">💡 Combo con YouTube: <strong style="color:var(--accent2);">+RD$60 solamente</strong></div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20limpiar%20mi%20celular%20(RD%24110)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
+        </div>
+        <div class="card">
+          <div class="card-stripe"></div>
+          <div class="card-icon">🛡️</div>
+          <div class="card-head">
+            <h3 class="card-title">Privacidad Android</h3>
+            <div class="price-block"><span class="price-was">RD$330</span><span class="price-now">RD$210</span><span class="price-off">-36%</span></div>
+          </div>
+          <p class="card-desc">VPN + contraseñas fuertes + cero rastreo. TikTok/Instagram dejan de perseguirte.</p>
+          <div class="card-benefit"><span class="check-icon">✓</span> Tus datos son tuyos</div>
+          <div class="card-guarantee">✓ 30 días garantizados</div>
+          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20privacidad%20en%20mi%20Android%20(RD%24210)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-section">
+      <div class="sec-head"><h2>🎓 Para quedar bien en los exámenes</h2><div class="sec-line"></div></div>
       <div class="cards-grid cols-2">
         <div class="card">
           <div class="card-stripe"></div>
@@ -474,50 +535,6 @@
     </div>
 
     <div class="service-section">
-      <div class="sec-head"><h2>📱 Tu celular seguro</h2><div class="sec-line"></div></div>
-      <div class="cards-grid cols-3">
-        <div class="card">
-          <div class="card-stripe"></div>
-          <span class="hot-label">⚡ Top semana</span>
-          <div class="card-icon">▶️</div>
-          <div class="card-head">
-            <h3 class="card-title">YouTube sin anuncios</h3>
-            <div class="price-block"><span class="price-was">RD$280</span><span class="price-now">RD$170</span><span class="price-off">-39%</span></div>
-          </div>
-          <p class="card-desc">YouTube, Spotify, todo sin anuncios. Desbloqueado pa'siempre.</p>
-          <div class="card-benefit"><span class="check-icon">✓</span> Streaming sin interrupciones</div>
-          <div class="card-guarantee">✓ Funciona de por vida</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20YouTube%20sin%20anuncios%20(RD%24170)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
-        </div>
-        <div class="card">
-          <div class="card-stripe"></div>
-          <div class="card-icon">🧹</div>
-          <div class="card-head">
-            <h3 class="card-title">Limpiar apps basura</h3>
-            <div class="price-block"><span class="price-was">RD$180</span><span class="price-now">RD$110</span><span class="price-off">-39%</span></div>
-          </div>
-          <p class="card-desc">Bloatware que no usas = celular lento de muerte. Lo quito. Anda como nuevo.</p>
-          <div class="card-benefit"><span class="check-icon">✓</span> Celular como nuevo en 20 min</div>
-          <div class="card-guarantee">✓ 20 minutos máximo</div>
-          <div style="font-size:.76rem;color:var(--muted);margin-top:-4px;">💡 Combo con YouTube: <strong style="color:var(--accent2);">+RD$60 solamente</strong></div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20limpiar%20mi%20celular%20(RD%24110)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
-        </div>
-        <div class="card">
-          <div class="card-stripe"></div>
-          <div class="card-icon">🛡️</div>
-          <div class="card-head">
-            <h3 class="card-title">Privacidad Android</h3>
-            <div class="price-block"><span class="price-was">RD$330</span><span class="price-now">RD$210</span><span class="price-off">-36%</span></div>
-          </div>
-          <p class="card-desc">VPN + contraseñas fuertes + cero rastreo. TikTok/Instagram dejan de perseguirte.</p>
-          <div class="card-benefit"><span class="check-icon">✓</span> Tus datos son tuyos</div>
-          <div class="card-guarantee">✓ 30 días garantizados</div>
-          <a class="btn-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20privacidad%20en%20mi%20Android%20(RD%24210)." target="_blank" rel="noopener"><svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme ahora</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-section">
       <div class="sec-head"><h2>🎬 Tu entretenimiento</h2><div class="sec-line"></div></div>
       <div class="cards-grid cols-4">
         <div class="card">
@@ -582,77 +599,6 @@
   </div>
 </section>
 
-<div style="background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:44px 0;">
-  <div class="container">
-    <div class="sec-head"><h2>👨‍🏫 ¿Eres profesor?</h2><div class="sec-line"></div></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:center;">
-      <div>
-        <p style="color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:14px;">Los mismos problemas que los estudiantes — PC lenta, presentaciones para clase, Windows con virus — pero con <strong style="color:var(--text);">más presupuesto y más confianza</strong>.<br><br>Servicio a domicilio disponible. Sin vueltas.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
-          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:20px;">🖥️ PC optimizada</span>
-          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:20px;">📊 Presentaciones</span>
-          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:20px;">🪟 Windows nuevo</span>
-          <span style="background:rgba(var(--aRGB),.1);border:1px solid rgba(var(--aRGB),.25);color:var(--accent2);font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:20px;">🏠 A domicilio</span>
-        </div>
-        <a style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:800;font-size:.88rem;padding:12px 22px;border-radius:30px;" href="https://wa.me/18292776696?text=Hola,%20soy%20profesor%20y%20quiero%20información%20sobre%20servicios%20técnicos" target="_blank" rel="noopener">
-          <svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Escribeme como profesor
-        </a>
-      </div>
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-left:4px solid var(--accent2);border-radius:var(--r);padding:20px 22px;">
-        <div style="font-size:1.4rem;margin-bottom:9px;">💡</div>
-        <div style="font-weight:900;font-size:.97rem;margin-bottom:7px;color:var(--accent2);">¿Por qué yo y no un técnico adulto?</div>
-        <ul style="color:var(--gray);font-size:.86rem;line-height:1.8;list-style:none;padding:0;">
-          <li>✓ Precio justo sin sobrecargar</li>
-          <li>✓ Pagas cuando ves que funciona</li>
-          <li>✓ Disponible en tu mismo centro</li>
-          <li>✓ Garantía escrita por WhatsApp</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="guide-wrap">
-  <section id="guia">
-    <div class="container">
-      <div class="sec-head"><h2>📚 Para pasar las Pruebas Nacionales sin morir en el intento</h2><div class="sec-line"></div></div>
-      <div class="guide-hero-card">
-        <div>
-          <div class="guide-badge-new">🆕 Nuevo · Exclusivo</div>
-          <h2 class="guide-title"><span class="ggrad">Guía Pruebas Nacionales</span><br>4to · 5to · 6to</h2>
-          <p class="guide-subtitle">Preparada con los temas exactos que caen en las Pruebas.<br>Mate, Sociales, Naturales y Español. Todo en un PDF.</p>
-          <div class="guide-includes">
-            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>Temas oficiales</strong> MINERD</div>
-            <div class="guide-inc-row"><span class="check-icon">✓</span> <strong>4 materias</strong> × 3 grados = 12 módulos</div>
-            <div class="guide-inc-row"><span class="check-icon">✓</span> PDF buscable — cualquier tema en segundos</div>
-            <div class="guide-inc-row"><span class="check-icon">✓</span> Funciona sin Internet una vez descargada</div>
-            <div class="guide-inc-row"><span class="check-icon">✓</span> Pago en efectivo · Te la paso en la escuela</div>
-          </div>
-        </div>
-        <div class="guide-price-area">
-          <div class="guide-value-label">Valor real</div>
-          <div class="guide-value-cross">RD$1,200+</div>
-          <div class="guide-price-big">RD$320</div>
-          <div class="guide-price-sub">Pago en efectivo · En persona</div>
-          <div class="guide-guarantee-row">
-            <div class="guide-gtag">🛡️ La lees o te devuelvo</div>
-            <div class="guide-gtag">🏫 En la escuela</div>
-          </div>
-          <a class="btn-guide-wa" href="https://wa.me/18292776696?text=Hola!%20Vi%20el%20QR%20en%20la%20escuela.%20Quiero%20la%20Guía%20Pruebas%20Nacionales%20(4to-6to)%20por%20RD%24320.%20¿Cuándo%20nos%20vemos?" target="_blank" rel="noopener">
-            <svg class="wa-icon" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>Coordinar en la escuela — RD$320
-          </a>
-        </div>
-      </div>
-      <div class="guide-subjects">
-        <div class="subject-pill"><span class="sp-icon">🔢</span><div class="sp-info"><span class="sp-name">Matemáticas</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
-        <div class="subject-pill"><span class="sp-icon">🌍</span><div class="sp-info"><span class="sp-name">Sociales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
-        <div class="subject-pill"><span class="sp-icon">🔬</span><div class="sp-info"><span class="sp-name">Naturales</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
-        <div class="subject-pill"><span class="sp-icon">📖</span><div class="sp-info"><span class="sp-name">Español</span><span class="sp-grades">4to · 5to · 6to</span></div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
 <div class="steps-wrap">
   <section>
     <div class="container">
@@ -664,6 +610,13 @@
       </div>
     </div>
   </section>
+</div>
+
+<div class="share-strip">
+  <p><strong>¿Te sirvió?</strong> Compártelo con alguien que lo necesite 👇</p>
+  <button class="btn-share" id="shareBtn" onclick="shareLink()">
+    <span class="copied-msg">¡Link copiado!</span>📤 Compartir
+  </button>
 </div>
 
 <section style="background:var(--surface2);border-top:1px solid var(--border2);">
@@ -728,6 +681,7 @@
 </footer>
 
 <script>
+  // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -737,6 +691,7 @@
     });
   });
 
+  // Badge disponibilidad
   (function() {
     const day = new Date().getDay();
     const badge = document.getElementById('availBadge');
@@ -751,43 +706,13 @@
     if (ht) ht.textContent = ok ? 'hoy.' : 'esta semana.';
   })();
 
+  // Compartir
   function shareLink() {
     const url = window.location.href;
     const msg = `🔧 *ServiciosGG* — El chamo que arregla PCs y celulares en la escuela\n✅ Pagas solo si funciona | Desde RD$110\n👉 ${url}`;
     if (navigator.share) { navigator.share({ title:'ServiciosGG', text:msg, url }); }
     else { navigator.clipboard.writeText(msg).then(() => { const b=document.getElementById('shareBtn'); b.classList.add('copied'); setTimeout(()=>b.classList.remove('copied'),2000); }); }
   }
-
-  (function tick() {
-    const now = new Date();
-    const d   = now.getDay();
-    const daysUntilSat = d === 6 ? 7 : (6 - d);
-    const deadline = new Date(now);
-    deadline.setDate(now.getDate() + daysUntilSat);
-    deadline.setHours(23,59,59,0);
-    const diff = deadline - Date.now();
-    const el  = document.getElementById('countdown');
-    const rib = document.getElementById('ribbonCountdown');
-    if (diff <= 0) {
-      if (el)  el.textContent  = '⚡ Precio especial activo hoy';
-      if (rib) rib.textContent = 'Precio especial activo hoy';
-      return;
-    }
-    const h = Math.floor(diff/3_600_000);
-    const m = Math.floor((diff%3_600_000)/60_000);
-    const t = `Precio especial caduca en ${h}h ${m}m`;
-    if (el)  el.textContent  = `⏰ ${t}`;
-    if (rib) rib.textContent = t;
-    setTimeout(tick,30_000);
-  })();
-
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', e => {
-      if (e.target.closest('.btn-wa')) return;
-      const btn = card.querySelector('.btn-wa');
-      if (btn) btn.click();
-    });
-  });
 </script>
 </body>
 </html>
