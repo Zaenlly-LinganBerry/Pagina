@@ -41,7 +41,8 @@
       --r2:       10px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* overflow-x en html+body — en Android body solo no es suficiente */
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
@@ -50,7 +51,7 @@
         linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
       background-size: 100% 100%, 40px 40px, 40px 40px;
-      color: var(--text); line-height: 1.6; overflow-x: hidden;
+      color: var(--text); line-height: 1.6; overflow-x: hidden; max-width: 100%;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
@@ -178,7 +179,7 @@
 
     /* AUDIT */
     .audit-strip { background:linear-gradient(135deg,rgba(var(--aRGB),.07),rgba(236,72,153,.05)); border:1px solid rgba(var(--aRGB),.18); border-radius:var(--r); padding:18px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:30px; }
-    .audit-text { flex:1; min-width:200px; }
+    .audit-text { flex:1; min-width:0; }
     .audit-text strong { color:var(--accent2); }
     .audit-text p { color:var(--gray); font-size:.85rem; margin-top:3px; }
     .btn-audit { background:transparent; border:1px solid rgba(var(--aRGB),.45); color:var(--accent2); font-weight:800; font-size:.86rem; padding:11px 20px; border-radius:30px; white-space:nowrap; flex-shrink:0; display:inline-flex; align-items:center; gap:7px; transition:background .18s,transform .18s; }
@@ -187,7 +188,7 @@
     /* REFERIDO */
     .referido-banner { background:var(--surface2); border:1px solid var(--border2); border-left:4px solid var(--accent2); border-radius:var(--r); padding:20px 22px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:48px; }
     .referido-icon { font-size:2.1rem; flex-shrink:0; }
-    .referido-body { flex:1; min-width:200px; }
+    .referido-body { flex:1; min-width:0; }
     .referido-title { font-size:1rem; font-weight:900; margin-bottom:4px; }
     .referido-title span { color:var(--accent2); }
     .referido-desc { color:var(--gray); font-size:.86rem; line-height:1.5; }
@@ -251,10 +252,11 @@
     .faq-item:hover { border-color:rgba(var(--aRGB),.3); }
     .faq-q { padding:16px 18px; font-weight:700; font-size:.94rem; cursor:pointer; user-select:none; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--accent2); transition:background .2s; }
     .faq-q:hover { background:rgba(var(--aRGB),.06); }
-    .faq-icon { font-size:.88rem; color:var(--muted); transition:transform .25s; flex-shrink:0; display:inline-block; }
+    .faq-icon { font-size:.88rem; color:var(--muted); transition:transform .2s; flex-shrink:0; display:inline-block; }
     .faq-item.open .faq-icon { transform:rotate(180deg); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .38s ease,padding .38s ease; color:var(--gray); font-size:.89rem; line-height:1.65; padding:0 18px; }
-    .faq-item.open .faq-a { max-height:400px; padding:0 18px 16px; }
+    /* Sin max-height animation — causa jank en GPU de gama baja */
+    .faq-a { display:none; color:var(--gray); font-size:.89rem; line-height:1.65; padding:0 18px 16px; }
+    .faq-item.open .faq-a { display:block; }
 
     /* FOOTER */
     footer { background:var(--surface); border-top:1px solid var(--border2); padding:44px 18px 28px; text-align:center; position:relative; }
@@ -354,7 +356,7 @@
 </section>
 
 <div class="stats-strip">
-  <div class="stat"><div class="stat-n">47+</div><div class="stat-l">Estudiantes atendidos</div></div>
+  <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Estudiantes atendidos</div></div>
   <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Pagan al ver que funciona</div></div>
   <div class="stat"><div class="stat-n">RD$110</div><div class="stat-l">Precio desde</div></div>
   <div class="stat"><div class="stat-n">48h</div><div class="stat-l">Garantía mínima</div></div>
